@@ -2,6 +2,7 @@ import PageHero from "@/components/PageHero";
 import ProseBlock from "@/components/ProseBlock";
 import MenuSection from "@/components/MenuSection";
 import Reveal from "@/components/Reveal";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
 import styles from "./page.module.css";
 
@@ -71,6 +72,8 @@ export default function KahvaltiPage() {
         image="/images/avlu-hasir-koltuk.jpg"
         imageAlt="Vesta House Bademli'nin kahvaltı servisi yapılan avlusu"
       />
+
+      <Breadcrumbs items={[{ label: "Kahvaltı", href: "/kahvalti" }]} />
 
       <ProseBlock
         lead="Kahvaltı burada bir servis değil, güne başlama biçimidir."

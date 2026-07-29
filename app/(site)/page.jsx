@@ -2,6 +2,7 @@ import Hero from "@/components/home/Hero";
 import Intro from "@/components/home/Intro";
 import Pillars from "@/components/home/Pillars";
 import FeatureSplit from "@/components/FeatureSplit";
+import BlogTeaser from "@/components/home/BlogTeaser";
 import ClosingCta from "@/components/home/ClosingCta";
 
 export default function HomePage() {
@@ -30,6 +31,7 @@ export default function HomePage() {
         reverse
         tone="dark"
       />
+      <BlogTeaser />
       <ClosingCta />
     </>
   );

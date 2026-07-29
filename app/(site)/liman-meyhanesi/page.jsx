@@ -1,6 +1,7 @@
 import PageHero from "@/components/PageHero";
 import ProseBlock from "@/components/ProseBlock";
 import FeatureSplit from "@/components/FeatureSplit";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
 
 export const metadata = {
@@ -20,6 +21,8 @@ export default function LimanMeyhanesiPage() {
         image="/images/liman-meyhanesi-mekan.jpg"
         imageAlt="Liman Meyhanesi'nin taş ve tuğla duvarlı sofra alanı"
       />
+
+      <Breadcrumbs items={[{ label: "Liman Meyhanesi", href: "/liman-meyhanesi" }]} />
 
       <ProseBlock
         eyebrow="Akşam Ritüeli"

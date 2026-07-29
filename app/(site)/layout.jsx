@@ -36,6 +36,11 @@ export const metadata = {
     "Dikili konaklama",
   ],
   authors: [{ name: siteConfig.name }],
+  alternates: {
+    types: {
+      "application/rss+xml": `${siteConfig.url}/feed.xml`,
+    },
+  },
   openGraph: {
     type: "website",
     locale: siteConfig.locale,

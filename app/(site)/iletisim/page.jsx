@@ -1,5 +1,6 @@
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { IconPin, IconPhone, IconMail } from "@/components/icons";
 import { siteConfig } from "@/lib/site";
 import styles from "./page.module.css";
@@ -26,6 +27,8 @@ export default function IletisimPage() {
         imageAlt="Vesta House Bademli'nin oyma ahşap kapısı"
         height="46vh"
       />
+
+      <Breadcrumbs items={[{ label: "İletişim", href: "/iletisim" }]} />
 
       <section className="section">
         <div className="container">

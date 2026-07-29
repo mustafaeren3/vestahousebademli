@@ -1,6 +1,7 @@
 import PageHero from "@/components/PageHero";
 import ProseBlock from "@/components/ProseBlock";
 import Gallery from "@/components/Gallery";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
 
 export const metadata = {
@@ -78,6 +79,8 @@ export default function GaleriPage() {
         imageAlt="Vesta House Bademli'de kilim ve ahşap sandalyelerin bulunduğu bir oda köşesi"
         height="46vh"
       />
+
+      <Breadcrumbs items={[{ label: "Galeri", href: "/galeri" }]} />
 
       <ProseBlock
         body="Aşağıdaki kareler, stüdyo ışığı olmadan, evin kendi gerçek hâliyle çekildi. Herhangi bir görsele tıklayarak büyütebilirsiniz."

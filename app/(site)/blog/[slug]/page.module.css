@@ -1,0 +1,74 @@
+.header {
+  position: relative;
+  height: 52vh;
+  min-height: 420px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 18, 14, 0.35) 0%,
+    rgba(20, 18, 14, 0.25) 40%,
+    rgba(20, 18, 14, 0.72) 100%
+  );
+}
+
+.headerContent {
+  position: relative;
+  padding-bottom: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  color: #fff;
+  max-width: 24ch;
+}
+
+.eyebrowOnDark {
+  color: #d9d5b8;
+}
+.eyebrowOnDark::before {
+  background: #d9d5b8;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.9rem;
+}
+
+.dot {
+  opacity: 0.7;
+}
+
+.tags {
+  max-width: 720px;
+  margin: 48px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  color: var(--color-olive);
+  border: 1px solid var(--color-line);
+  padding: 6px 14px;
+  border-radius: 2px;
+  transition: all 0.3s var(--ease-soft);
+}
+
+.tag:hover {
+  border-color: var(--color-olive);
+  background: var(--color-cream-deep);
+}

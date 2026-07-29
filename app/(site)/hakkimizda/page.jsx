@@ -3,6 +3,7 @@ import PageHero from "@/components/PageHero";
 import ProseBlock from "@/components/ProseBlock";
 import FeatureSplit from "@/components/FeatureSplit";
 import Reveal from "@/components/Reveal";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
 import styles from "./page.module.css";
 
@@ -24,9 +25,11 @@ export default function HakkimizdaPage() {
         imageAlt="Vesta House Bademli'nin oyma ahşap giriş kapısı"
       />
 
+      <Breadcrumbs items={[{ label: "Hakkımızda", href: "/hakkimizda" }]} />
+
       <ProseBlock
         lead="Bu ev, yıkılıp yeniden yapılmadı — yalnızca dinlendirildi."
-        body="Bademli'nin köy içinde, dar bir sokakta duran bu taş ev, onlarca yıl aynı ailenin elinde kaldı. Vesta House, evi bir otele çevirirken tek bir kuralı vardı: Aslına en az müdahaleyle. Taş duvarlar sıvanmadı, yalnızca temizlendi. Ahşap kapılar değiştirilmedi, yalnızca onarıldı."
+        body="Bademli'nin köy içinde, dar bir sokakta duran bu taş ev, onlarca yıl aynı ailenin elinde kaldı. Vesta House, evi bugünkü yaşam alanına dönüştürürken tek bir kuralı vardı: Aslına en az müdahaleyle. Taş duvarlar sıvanmadı, yalnızca temizlendi. Ahşap kapılar değiştirilmedi, yalnızca onarıldı."
       />
 
       <FeatureSplit

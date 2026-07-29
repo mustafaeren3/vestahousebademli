@@ -1,0 +1,11 @@
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.grid {
+  margin-top: 48px;
+}

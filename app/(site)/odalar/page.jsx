@@ -2,6 +2,7 @@ import PageHero from "@/components/PageHero";
 import ProseBlock from "@/components/ProseBlock";
 import RoomCard from "@/components/RoomCard";
 import FeatureSplit from "@/components/FeatureSplit";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
 import styles from "@/components/RoomsGrid.module.css";
 
@@ -49,6 +50,8 @@ export default function OdalarPage() {
         image="/images/oda-yatak-detay.jpg"
         imageAlt="Vesta House Bademli'de bir odanın taş duvarı ve beyaz keten yatağı"
       />
+
+      <Breadcrumbs items={[{ label: "Odalar", href: "/odalar" }]} />
 
       <ProseBlock
         lead="Oda numarası yok; her biri kendi karakteriyle anılır."

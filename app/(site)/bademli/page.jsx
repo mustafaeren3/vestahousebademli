@@ -3,6 +3,7 @@ import PageHero from "@/components/PageHero";
 import ProseBlock from "@/components/ProseBlock";
 import FeatureSplit from "@/components/FeatureSplit";
 import Reveal from "@/components/Reveal";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
 
 export const metadata = {
@@ -22,6 +23,8 @@ export default function BademliPage() {
         image="/images/hero-tas-ev-aksam.jpg"
         imageAlt="Bademli'nin dar sokağında Vesta House'un taş cephesi"
       />
+
+      <Breadcrumbs items={[{ label: "Bademli", href: "/bademli" }]} />
 
       <ProseBlock
         lead="Bademli, aceleyle tanışmamış bir yer."
