@@ -1,18 +1,18 @@
 ---
 title: "Bademli'de Gezilecek Yerler: Dikili'nin Sakin Köyünde Bir Gün"
 date: "2026-03-04"
-excerpt: "Zeytinlikler, dar taş sokaklar ve küçük bir liman — Bademli'de bir günü nasıl geçirmeli, hangi köşelere uğramalı? Kısa bir rehber."
+excerpt: "Zeytinlikler, dar taş sokaklar ve denize yakınlığı — Bademli'de bir günü nasıl geçirmeli, hangi köşelere uğramalı? Kısa bir rehber."
 category: "Bölge Rehberi"
 tags: ["Bademli", "Dikili", "Gezi Rehberi"]
 coverImage: "/images/hero-tas-ev-aksam.jpg"
 coverImageAlt: "Bademli'nin dar sokağında taş cephe ve akşam ışığı"
 seoTitle: "Bademli'de Gezilecek Yerler | Dikili Tatil Rehberi"
-seoDescription: "Dikili Bademli'de gezilecek yerler, zeytinlikler, taş sokaklar ve liman kenarı için kısa bir tatil rehberi. Dikili'de konaklama planlıyorsanız okuyun."
+seoDescription: "Dikili Bademli'de gezilecek yerler, zeytinlikler, taş sokaklar ve denize yakınlığı için kısa bir tatil rehberi. Dikili'de konaklama planlıyorsanız okuyun."
 faq:
   - q: "Bademli, Dikili'nin neresinde ve merkeze uzaklığı ne kadar?"
     a: "Bademli, İzmir'in Dikili ilçesine bağlı bir köydür ve ilçe merkezine araçla yaklaşık 15-20 dakika mesafededir."
   - q: "Bademli'de bir gün için en iyi program nedir?"
-    a: "Sabah köyün taş sokaklarında yürüyüş, öğleye doğru zeytinlik manzaralı bir kahvaltı, öğleden sonra liman kenarında vakit ve akşam yerel bir sofra iyi bir gün planı olur."
+    a: "Sabah köyün taş sokaklarında yürüyüş, öğleye doğru zeytinlik manzaralı bir kahvaltı, öğleden sonra dinlenme ve akşam yerel bir sofra iyi bir gün planı olur."
 ---
 
 Bademli, kalabalık turizm rotalarının biraz dışında kalmayı başarmış küçük bir Ege köyü. Burada gezilecek yerler; büyük müzeler ya da kalabalık plajlar değil, köyün kendi ritmine bırakılmış küçük detaylerdir.
@@ -25,9 +25,9 @@ Köyün eski mahallesinde, dar taş sokaklar arasında yürümek Bademli'yi tan�
 
 Bademli'nin çevresini saran zeytinlikler, köyün hem ekonomisinin hem manzarasının değişmeyen unsuru. Özellikle sonbahar aylarında hasat hareketliliği köye ayrı bir canlılık katar. Zeytinlik yollarında kısa bir yürüyüş ya da bisiklet turu, günün en sakin saatlerinden biri olabilir.
 
-## Liman kenarında öğleden sonra
+## Öğleden sonra bir mola
 
-Köyün küçük limanı, günün ilerleyen saatlerinde oturup denizi izlemek için iyi bir durak. Balıkçı tekneleri, sakin bir iskele ve uzaktan görünen Ayvalık adaları — burada geçirilen yarım saat bile güne yetiyor.
+Bademli, denize yakın konumuyla öğleden sonraları için de uygun bir durak. Günün en sıcak saatlerinde bir avluda ya da zeytin ağacının gölgesinde dinlenmek, köyün sunduğu en basit ama en değerli şeylerden biri.
 
 ## Akşam sofrası
 

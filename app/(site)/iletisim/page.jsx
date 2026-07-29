@@ -22,7 +22,7 @@ export default function IletisimPage() {
       <PageHero
         eyebrow="İletişim"
         title="Bize Ulaşın"
-        subtitle="Bademli'nin sessizliğine davetlisiniz. Sorularınız için doğrudan yazabilir ya da arayabilirsiniz."
+        subtitle="Bademli'ye hoş geldiniz. Sorularınız için doğrudan yazabilir ya da arayabilirsiniz."
         image="/images/oyma-kapi-detay.jpg"
         imageAlt="Vesta House Bademli'nin oyma ahşap kapısı"
         height="46vh"

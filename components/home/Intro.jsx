@@ -9,15 +9,13 @@ export default function Intro() {
           <span className="eyebrow">Hoş geldiniz</span>
         </Reveal>
         <Reveal delay={1} as="p" className={styles.lead}>
-          Bademli&apos;nin dar sokaklarında, yaşını taşlarında taşıyan bir ev var.
-          Vesta House, o evi olduğu gibi bırakıp yalnızca{" "}
-          <span className="italic-display">nefes almasına izin verdi.</span>
+          Bademli&apos;nin dar bir sokağında duran bu taş ev,{" "}
+          <span className="italic-display">aslına sadık kalınarak</span> onarıldı.
         </Reveal>
         <Reveal delay={2} as="p" className={`${styles.body} body-lg`}>
-          Burada oda numaraları yerine sessizlik, hizmet listeleri yerine zaman
-          var. Zeytin ağacının gölgesi, taş duvarın serinliği ve limandan gelen
-          akşam rüzgârı — Vesta House Bademli, hiçbir şeyin eklenmediği,
-          yalnızca gürültünün çıkarıldığı bir yer.
+          Vesta House Bademli, taş duvarları ve sade bir avlusu olan küçük bir
+          evdir. Deniz ve zeytinliklere yakın, Bademli&apos;nin sakin
+          sokaklarında yer alır. Üç oda, özenle hazırlanmıştır.
         </Reveal>
       </div>
     </section>

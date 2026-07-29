@@ -17,7 +17,7 @@ const rooms = [
   {
     index: "I",
     name: "Taş Oda",
-    text: "Evin en eski duvarına yaslanan oda. Çıplak taş, ahşap tavan kirişleri ve toprak tonlarında dokularla sade bir sükûnet sunar.",
+    text: "Evin taş duvarlarından birine bitişik oda. Çıplak taş duvarlar, ahşap tavan kirişleri ve toprak tonlarında dokular.",
     tags: ["Taş Duvar", "Ahşap Tavan"],
     image: "/images/oda-genis.jpg",
     imageAlt: "Vesta House'ta taş duvarlı, ahşap kapılı bir oda",
@@ -25,7 +25,7 @@ const rooms = [
   {
     index: "II",
     name: "Zeytin Odası",
-    text: "Kilim dokuları ve eski ahşap mobilyalarla şekillenen, evin hafızasını taşıyan bir köşe. Pencereden avludaki zeytin ağacı görünür.",
+    text: "Kilim dokuları ve eski ahşap mobilyalarla döşenmiş bir oda. Pencereden avludaki zeytin ağacı görünür.",
     tags: ["Kilim", "Ahşap Mobilya"],
     image: "/images/oda-kilim-sandalye.jpg",
     imageAlt: "Vesta House'ta kilim ve ahşap sandalyelerin bulunduğu oda",
@@ -33,7 +33,7 @@ const rooms = [
   {
     index: "III",
     name: "Avlu Odası",
-    text: "Taş terasa açılan, hasır koltuklarıyla dinginleşen bir oda. Sabahları kahve, akşamları sessizlik için.",
+    text: "Taş terasa açılan, hasır koltuklu bir oda. Sabah kahvesi için uygun bir köşe.",
     tags: ["Teras Erişimi", "Doğal Işık"],
     image: "/images/oda-yatak-detay.jpg",
     imageAlt: "Vesta House'ta beyaz keten örtülü bir yatak ve katlanmış havlular",
@@ -45,8 +45,8 @@ export default function OdalarPage() {
     <>
       <PageHero
         eyebrow="Odalar"
-        title="Üç Oda, Tek Bir Ritim"
-        subtitle="Toplam üç oda, altı yatak — her biri taş evin farklı bir köşesinde, kendi ışığını ve sessizliğini taşır."
+        title="Sade Odalar"
+        subtitle="Taş evin farklı köşelerinde, kendine özgü üç oda."
         image="/images/oda-yatak-detay.jpg"
         imageAlt="Vesta House Bademli'de bir odanın taş duvarı ve beyaz keten yatağı"
       />
@@ -54,8 +54,8 @@ export default function OdalarPage() {
       <Breadcrumbs items={[{ label: "Odalar", href: "/odalar" }]} />
 
       <ProseBlock
-        lead="Oda numarası yok; her biri kendi karakteriyle anılır."
-        body="Vesta House'ta odalar standart değildir — her biri evin farklı bir döneminden ya da köşesinden izler taşır. Ortak olan tek şey: taş duvarlar, sade bir dokunuş ve dışarıdan gelen zeytin ve deniz kokusu."
+        lead="Her odanın kendine özgü bir görünümü vardır."
+        body="Odalar birbirinin aynısı değildir; taş duvarlar, sade bir döşeme ve dışarıdan gelen zeytin ve deniz kokusu ortaktır."
       />
 
       <section className="section section--tight">
@@ -71,7 +71,7 @@ export default function OdalarPage() {
       <FeatureSplit
         eyebrow="Ortak Alan"
         title="Zeytin ağacının altında bir avlu"
-        text="Odaların dışında, misafirleri bekleyen bir avlu var: hasır koltuklar, taş zemin ve günün her saatinde değişen bir gölge. Kahvaltı da, akşamüstü sohbeti de burada, ağacın altında geçer."
+        text="Odaların dışında bir avlu var: hasır koltuklar, taş zemin ve günün her saatinde değişen bir gölge. Kahvaltı da, akşamüstü sohbeti de burada, ağacın altında geçer."
         image="/images/avlu-hasir-koltuk.jpg"
         imageAlt="Vesta House Bademli'nin zeytin ağacı gölgesindeki hasır koltuklu avlusu"
         reverse

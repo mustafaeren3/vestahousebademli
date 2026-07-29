@@ -27,8 +27,8 @@ export default function BademliPage() {
       <Breadcrumbs items={[{ label: "Bademli", href: "/bademli" }]} />
 
       <ProseBlock
-        lead="Bademli, aceleyle tanışmamış bir yer."
-        body="Kalabalık turizm rotalarının dışında kalan bu küçük Ege köyü, zeytinlikleri, dar taş sokakları ve komşuluk kültürüyle tanınır. Vesta House, tam da bu sessizliğin içinde, köyün dokusuna sadık kalarak var oldu."
+        lead="Bademli, kalabalık turizm rotalarının dışında kalan sakin bir köydür."
+        body="Zeytinlikleri, dar taş sokakları ve komşuluk kültürüyle bilinir. Vesta House, köyün bu dokusuna sadık kalarak var oldu."
       />
 
       <FeatureSplit

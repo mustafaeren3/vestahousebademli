@@ -68,7 +68,7 @@ export default function KahvaltiPage() {
       <PageHero
         eyebrow="Kahvaltı"
         title="Serpme Köy Kahvaltısı"
-        subtitle="Zeytin ağacının gölgesinde, ağır ağır uzayan bir Ege sabahı."
+        subtitle="Zeytin ağacının gölgesinde bir Ege kahvaltısı."
         image="/images/avlu-hasir-koltuk.jpg"
         imageAlt="Vesta House Bademli'nin kahvaltı servisi yapılan avlusu"
       />
@@ -76,8 +76,8 @@ export default function KahvaltiPage() {
       <Breadcrumbs items={[{ label: "Kahvaltı", href: "/kahvalti" }]} />
 
       <ProseBlock
-        lead="Kahvaltı burada bir servis değil, güne başlama biçimidir."
-        body="Bademli'nin yerel peynirleri, ev yapımı reçelleri ve mevsiminde toplanan sebzeleriyle hazırlanan serpme sofra, en az iki kişilik olarak servis edilir. İçerik mevsime göre küçük farklılıklar gösterebilir."
+        lead="Sabahlar, avluda serpme bir sofrayla başlar."
+        body="Kahvaltı en az iki kişilik hazırlanır. İçerik mevsime göre değişebilir."
       />
 
       <section className="section section--tight">

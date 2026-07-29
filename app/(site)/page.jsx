@@ -13,8 +13,8 @@ export default function HomePage() {
       <Pillars />
       <FeatureSplit
         eyebrow="Odalar"
-        title="Üç oda, altı yatak, tek bir sükûnet"
-        text="Her oda, taş duvarların arasında kendi karakterini korur: ahşap kirişler, keten dokular, toprak tonları. Vesta House'ta odalar numaralandırılmaz, hissedilir."
+        title="Küçük bir evde, özenle hazırlanmış odalar"
+        text="Her oda, taş duvarların arasında kendi karakterini korur: ahşap kirişler, keten dokular, toprak tonları. Sayıları azdır; her biri ayrı ayrı hazırlanmıştır."
         ctaHref="/odalar"
         ctaLabel="Odaları Keşfedin"
         image="/images/oda-genis.jpg"
@@ -23,11 +23,11 @@ export default function HomePage() {
       <FeatureSplit
         eyebrow="Alt Marka"
         title="Liman Meyhanesi"
-        text="Gün batımıyla birlikte avlu bir meyhaneye dönüşür. Günün balığı, Ege mezeleri ve ağır ağır uzayan bir sofra — Vesta House'un misafirlerini karşılayan diğer yüzü."
+        text="Gün batımıyla birlikte avlu bir meyhaneye dönüşür. Günün balığı, Ege mezeleri ve uzun bir akşam sofrası."
         ctaHref="/liman-meyhanesi"
         ctaLabel="Liman Meyhanesi'ni Tanıyın"
-        image="/images/liman-meyhanesi-mekan.jpg"
-        imageAlt="Liman Meyhanesi'nin taş ve tuğla duvarlı sofra alanı"
+        image="/images/tas-duvar-oyma-pencere.jpg"
+        imageAlt="Vesta House Bademli'nin taş duvarı ve oyma ahşap penceresi"
         reverse
         tone="dark"
       />

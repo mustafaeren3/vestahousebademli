@@ -20,7 +20,7 @@ export default function ClosingCta() {
           <span className={`eyebrow ${styles.eyebrowOnDark}`}>Bademli, Dikili</span>
         </Reveal>
         <Reveal delay={1} as="p" className={`${styles.quote} italic-display`}>
-          &ldquo;Aceleye yer olmayan bir sokakta, sizi bekleyen bir kapı.&rdquo;
+          Bademli&apos;de taş bir ev, sizi bekliyor.
         </Reveal>
         <Reveal delay={2}>
           <Link href="/iletisim" className="btn btn--on-dark">

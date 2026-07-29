@@ -16,12 +16,12 @@ const pillars = [
   {
     icon: IconMinimal,
     title: "Ege Minimalizmi",
-    text: "Fazlalıktan arındırılmış bir sadelik. Her nesnenin bir nedeni, her boşluğun bir anlamı var.",
+    text: "Gereksiz dekorasyon yok. Kullanılan her eşya, günlük kullanım için seçildi.",
   },
   {
     icon: IconWarmth,
     title: "İçtenlik",
-    text: "Küçük bir ev ölçeğinde, gösterişsiz ama özenli bir ağırlama. Konfor, sessizce sunulur.",
+    text: "Küçük bir ev ölçeğinde, sade ve özenli bir ağırlama.",
   },
 ];
 

@@ -4,8 +4,8 @@ date: "2026-04-20"
 excerpt: "Gün batımıyla birlikte bir avlu meyhaneye dönüşüyor. Liman Meyhanesi'nde tipik bir akşamın anatomisi."
 category: "Lezzet"
 tags: ["Liman Meyhanesi", "Dikili", "Ege"]
-coverImage: "/images/liman-meyhanesi-mekan.jpg"
-coverImageAlt: "Liman Meyhanesi'nin taş ve tuğla duvarlı sofra alanı"
+coverImage: "/images/avlu-hasir-koltuk.jpg"
+coverImageAlt: "Vesta House Bademli'nin zeytin ağacı gölgesindeki avlusu"
 seoTitle: "Liman Meyhanesi'nde Bir Akşam | Dikili Balık Restoranı Deneyimi"
 seoDescription: "Dikili Bademli'de Liman Meyhanesi'nin akşam sofrası: günün balığı, Ege mezeleri ve rakı eşliğinde uzayan bir akşam yemeği."
 faq:

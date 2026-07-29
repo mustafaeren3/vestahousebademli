@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata = {
   title: "Liman Meyhanesi",
   description:
-    "Liman Meyhanesi, Vesta House Bademli'nin taş avlusunda akşamları açılan Ege meyhanesi. Günün balığı, mezeler ve ağır ağır uzayan bir sofra.",
+    "Liman Meyhanesi, Vesta House Bademli'nin taş avlusunda akşamları açılan Ege meyhanesi. Günün balığı, mezeler ve uzun bir akşam sofrası.",
   alternates: { canonical: `${siteConfig.url}/liman-meyhanesi` },
 };
 
@@ -18,8 +18,8 @@ export default function LimanMeyhanesiPage() {
         eyebrow="Alt Marka"
         title="Liman Meyhanesi"
         subtitle="Gün batımıyla birlikte, Vesta House'un taş avlusu bir meyhaneye dönüşür."
-        image="/images/liman-meyhanesi-mekan.jpg"
-        imageAlt="Liman Meyhanesi'nin taş ve tuğla duvarlı sofra alanı"
+        image="/images/avlu-hasir-koltuk.jpg"
+        imageAlt="Vesta House Bademli'nin zeytin ağacı gölgesindeki avlusu"
       />
 
       <Breadcrumbs items={[{ label: "Liman Meyhanesi", href: "/liman-meyhanesi" }]} />
@@ -27,7 +27,7 @@ export default function LimanMeyhanesiPage() {
       <ProseBlock
         eyebrow="Akşam Ritüeli"
         lead="Vesta House'un misafiri olmasanız da, Liman Meyhanesi'nin kapısı size açık."
-        body="Bademli'nin balıkçılarından gelen günün balığı, Ege usulü mezeler ve ızgaradan sofraya taşınanlar — Liman Meyhanesi, aceleye yer bırakmayan uzun bir akşam yemeği anlayışıyla kuruldu. Menü mevsime göre değişir; sabit olan tek şey masanın etrafında geçen zaman."
+        body="Günün balığı, Ege usulü mezeler ve ızgaradan sofraya taşınanlar — Liman Meyhanesi, uzun bir akşam yemeği anlayışıyla kuruldu. Menü mevsime göre değişir."
       />
 
       <FeatureSplit
@@ -41,7 +41,7 @@ export default function LimanMeyhanesiPage() {
       <FeatureSplit
         eyebrow="Mekân"
         title="Taş duvarlar arasında bir avlu sofrası"
-        text="Masalar, evin taş cephesine ve zeytin ağacına bakar. Gündüz sessiz bir avlu, gece bir meyhane — Liman Meyhanesi, Vesta House'un gündüz ile gece arasındaki geçişini taşıyor."
+        text="Masalar, evin taş cephesine ve zeytin ağacına bakar. Gündüz sakin bir avlu, akşamları bir meyhane."
         image="/images/hero-tas-ev-aksam.jpg"
         imageAlt="Vesta House Bademli'nin akşam ışığında taş cephesi"
         reverse

@@ -49,12 +49,6 @@ const images = [
     height: 2200,
   },
   {
-    src: "/images/liman-meyhanesi-mekan.jpg",
-    alt: "Liman Meyhanesi'nin taş ve tuğla duvarlı sofra alanı",
-    width: 736,
-    height: 1600,
-  },
-  {
     src: "/images/tas-duvar-oyma-pencere.jpg",
     alt: "Taş duvar ve oyma ahşap pencere detayı",
     width: 1650,
