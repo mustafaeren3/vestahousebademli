@@ -1,0 +1,45 @@
+.hero {
+  position: relative;
+  height: var(--hero-h);
+  min-height: 420px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 18, 14, 0.35) 0%,
+    rgba(20, 18, 14, 0.25) 40%,
+    rgba(20, 18, 14, 0.72) 100%
+  );
+}
+
+.content {
+  position: relative;
+  padding-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.title {
+  color: #fff;
+  max-width: 16ch;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 56ch;
+  font-size: 1.05rem;
+}
+
+.eyebrowOnDark {
+  color: #d9d5b8;
+}
+.eyebrowOnDark::before {
+  background: #d9d5b8;
+}

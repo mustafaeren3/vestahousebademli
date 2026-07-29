@@ -1,0 +1,1135 @@
+{
+  "updatedAt": "2026-07-29",
+  "categories": [
+    {
+      "id": "soguk-mezeler",
+      "name": "Kalte Vorspeisen",
+      "items": [
+        {
+          "id": "haydari",
+          "name": "Haydari",
+          "description": "Griechischer Joghurt, Knoblauch, Minze.",
+          "price": 300,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": true,
+            "spicy": false
+          }
+        },
+        {
+          "id": "atom",
+          "name": "Atom",
+          "description": "Scharfe Paste aus gerösteter Paprika, Tomate und Walnuss.",
+          "price": 300,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": true,
+            "spicy": true
+          }
+        },
+        {
+          "id": "saksuka",
+          "name": "Şakşuka",
+          "description": "Gebratene Aubergine und Paprika in Tomatensauce.",
+          "price": 300,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": true,
+            "spicy": false
+          }
+        },
+        {
+          "id": "havuc-tarator",
+          "name": "Karotten-Tarator",
+          "description": "Karotten mit Joghurt und Knoblauch.",
+          "price": 300,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": true,
+            "spicy": false
+          }
+        },
+        {
+          "id": "tekmil-fava",
+          "name": "Fava-Püree",
+          "description": "Saubohnenpüree mit karamellisierten Zwiebeln und Olivenöl.",
+          "price": 300,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": true,
+            "spicy": false
+          }
+        },
+        {
+          "id": "vesta-rus",
+          "name": "Vesta Russischer Salat",
+          "description": "Hauseigener russischer Salat.",
+          "price": 300,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": true,
+            "spicy": false
+          }
+        },
+        {
+          "id": "biberli-midye",
+          "name": "Gefüllte Muscheln (scharf)",
+          "description": "Gefüllte Muscheln mit Chili.",
+          "price": 700,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": true
+          }
+        },
+        {
+          "id": "ahtapot-salatasi",
+          "name": "Oktopussalat",
+          "description": "Gegrillter Oktopus mit Olivenöl und Zitrone.",
+          "price": 800,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "levrek-marin",
+          "name": "Marinierter Wolfsbarsch",
+          "description": "Marinierter Wolfsbarsch mit frischen Kräutern.",
+          "price": 700,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "karides-soguk",
+          "name": "Garnelen, kalt",
+          "description": "Gekochte Garnelen, kalt serviert.",
+          "price": 800,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "peynir-soguk",
+          "name": "Käseplatte",
+          "description": "Auswahl an saisonalen Käsesorten.",
+          "price": 300,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": true,
+            "spicy": false
+          }
+        },
+        {
+          "id": "zeytinyagli-mezeler",
+          "name": "Gerichte in Olivenöl",
+          "description": "Auswahl des Tages an Gerichten in Olivenöl.",
+          "price": 350,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": true,
+            "spicy": false
+          }
+        },
+        {
+          "id": "roka-salatasi",
+          "name": "Rucolasalat",
+          "description": "Rucola, Parmesan und Granatapfelsirup.",
+          "price": 350,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": true,
+            "spicy": false
+          }
+        },
+        {
+          "id": "mevsim-salata",
+          "name": "Saisonsalat",
+          "description": "Saisonales Blattgrün.",
+          "price": 350,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": true,
+            "spicy": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "ara-sicaklar",
+      "name": "Warme Vorspeisen",
+      "items": [
+        {
+          "id": "pacanga-boregi",
+          "name": "Paçanga-Börek",
+          "description": "Knuspriges Gebäck mit Pastırma und Käse.",
+          "price": 400,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "patates-tava",
+          "name": "Bratkartoffeln",
+          "description": "Knusprig gebratene Kartoffeln.",
+          "price": 250,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": true,
+            "spicy": false
+          }
+        },
+        {
+          "id": "koz-biberli-sucuk",
+          "name": "Gegrillte Sucuk mit gerösteter Paprika",
+          "description": "Gegrillte Metzger-Sucuk mit gerösteter Paprika.",
+          "price": 450,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "kasarli-mantar",
+          "name": "Pilze mit Käse",
+          "description": "Im Ofen gebackene Pilze mit Kaşar-Käse.",
+          "price": 400,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": true,
+            "spicy": false
+          }
+        },
+        {
+          "id": "yaprak-ciger",
+          "name": "Gebratene Leber",
+          "description": "Dünn geschnittene gebratene Leber.",
+          "price": 750,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "tereyagli-karides",
+          "name": "Butter-Garnelen",
+          "description": "In Butter geschwenkte Garnelen.",
+          "price": 850,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "ana-yemekler",
+      "name": "Hauptgerichte",
+      "items": [
+        {
+          "id": "coban-kavurma",
+          "name": "Hirten-Pfanne",
+          "description": "Geschnetzeltes Fleisch mit Gemüse gebraten.",
+          "price": 1100,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "tavuk-kavurma",
+          "name": "Hähnchenpfanne",
+          "description": "In der Pfanne gebratenes Hähnchen mit Gemüse.",
+          "price": 800,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "gunun-baligi",
+          "name": "Fisch des Tages",
+          "description": "Sardine, Sardelle, Wittling oder Meerbarbe — je nach Saison.",
+          "price": 850,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "izgaralar",
+      "name": "Vom Grill",
+      "items": [
+        {
+          "id": "kasap-kofte",
+          "name": "Metzger-Köfte",
+          "description": "Handgemachte gegrillte Fleischbällchen.",
+          "price": 700,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "pirzola",
+          "name": "Lammkoteletts",
+          "description": "Gegrillte Lammkoteletts.",
+          "price": 1100,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "antrikot",
+          "name": "Entrecôte",
+          "description": "Gegrilltes Rinder-Entrecôte.",
+          "price": 1100,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "tavuk-kanat",
+          "name": "Hähnchenflügel",
+          "description": "Gegrillte Hähnchenflügel.",
+          "price": 650,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "tavuk-kalca",
+          "name": "Hähnchenschenkel",
+          "description": "Gegrillter Hähnchenschenkel.",
+          "price": 650,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "cupra",
+          "name": "Dorade",
+          "description": "Gegrillte Dorade.",
+          "price": 900,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "levrek",
+          "name": "Wolfsbarsch",
+          "description": "Gegrillter Wolfsbarsch.",
+          "price": 900,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "tatlilar",
+      "name": "Desserts",
+      "items": []
+    },
+    {
+      "id": "kahvalti",
+      "name": "Frühstück",
+      "items": [
+        {
+          "id": "serpme-koy-kahvaltisi",
+          "name": "Dorf-Frühstücksplatte (pro Person)",
+          "description": "Käseteller, Gemüseteller, Oliventeller, Eier, hausgemachte Saucen und Marmeladen. Mindestens für zwei Personen, Inhalt je nach Saison.",
+          "price": 750,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": true,
+            "vegetarian": true,
+            "spicy": false
+          }
+        },
+        {
+          "id": "menemen",
+          "name": "Menemen",
+          "description": "Tomate, Paprika und Ei.",
+          "price": 300,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": true,
+            "spicy": false
+          }
+        },
+        {
+          "id": "sucuklu-yumurta",
+          "name": "Eier mit Sucuk",
+          "description": "In der Pfanne gebratene Eier mit Sucuk.",
+          "price": 250,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "espresso",
+          "name": "Espresso",
+          "description": "",
+          "price": 200,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "americano",
+          "name": "Americano",
+          "description": "",
+          "price": 250,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "turk-kahvesi",
+          "name": "Türkischer Kaffee",
+          "description": "",
+          "price": 150,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "cay",
+          "name": "Tee",
+          "description": "",
+          "price": 70,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kokteyller",
+      "name": "Cocktails & Spirituosen",
+      "items": [
+        {
+          "id": "espresso-martini",
+          "name": "Espresso Martini",
+          "description": "",
+          "price": 650,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "margarita",
+          "name": "Margarita",
+          "description": "",
+          "price": 650,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "mojito",
+          "name": "Mojito",
+          "description": "",
+          "price": 650,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "cosmopolitan",
+          "name": "Cosmopolitan",
+          "description": "",
+          "price": 650,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "viski",
+          "name": "Whisky (5 cl)",
+          "description": "",
+          "price": 500,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "votka",
+          "name": "Wodka (5 cl)",
+          "description": "",
+          "price": 500,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "cin",
+          "name": "Gin (5 cl)",
+          "description": "",
+          "price": 500,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "sarap",
+      "name": "Wein",
+      "items": [
+        {
+          "id": "sarap-isabey",
+          "name": "Wein (İsabey, 75 cl)",
+          "description": "Flaschenservice.",
+          "price": 1600,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "kadeh-sarap",
+          "name": "Glas Wein (15 cl)",
+          "description": "",
+          "price": 400,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "raki",
+      "name": "Raki",
+      "items": [
+        {
+          "id": "yeni-raki-35",
+          "name": "Yeni Rakı (35 cl)",
+          "description": "",
+          "price": 1100,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "yeni-raki-50",
+          "name": "Yeni Rakı (50 cl)",
+          "description": "",
+          "price": 1600,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "yeni-raki-70",
+          "name": "Yeni Rakı (70 cl)",
+          "description": "",
+          "price": 2050,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "yeni-raki-100",
+          "name": "Yeni Rakı (100 cl)",
+          "description": "",
+          "price": 2600,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "tekirdag-gold-35",
+          "name": "Tekirdağ Gold (35 cl)",
+          "description": "",
+          "price": 1400,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "tekirdag-gold-50",
+          "name": "Tekirdağ Gold (50 cl)",
+          "description": "",
+          "price": 1900,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "tekirdag-gold-70",
+          "name": "Tekirdağ Gold (70 cl)",
+          "description": "",
+          "price": 2350,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "tekirdag-gold-100",
+          "name": "Tekirdağ Gold (100 cl)",
+          "description": "",
+          "price": 2900,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "beylerbeyi-mavi-35",
+          "name": "Beylerbeyi Mavi (35 cl)",
+          "description": "",
+          "price": 1300,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "beylerbeyi-mavi-50",
+          "name": "Beylerbeyi Mavi (50 cl)",
+          "description": "",
+          "price": 1800,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "beylerbeyi-mavi-70",
+          "name": "Beylerbeyi Mavi (70 cl)",
+          "description": "",
+          "price": 2250,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "beylerbeyi-mavi-100",
+          "name": "Beylerbeyi Mavi (100 cl)",
+          "description": "",
+          "price": 2900,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "beylerbeyi-gobek-35",
+          "name": "Beylerbeyi Göbek (35 cl)",
+          "description": "",
+          "price": 1725,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "beylerbeyi-gobek-50",
+          "name": "Beylerbeyi Göbek (50 cl)",
+          "description": "",
+          "price": 2360,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "beylerbeyi-gobek-70",
+          "name": "Beylerbeyi Göbek (70 cl)",
+          "description": "",
+          "price": 2950,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "beylerbeyi-gobek-100",
+          "name": "Beylerbeyi Göbek (100 cl)",
+          "description": "",
+          "price": 3750,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "bira",
+      "name": "Bier",
+      "items": [
+        {
+          "id": "bira-50",
+          "name": "Bier (50 cl)",
+          "description": "",
+          "price": 350,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "soft-drinks",
+      "name": "Softdrinks",
+      "items": [
+        {
+          "id": "coca-cola",
+          "name": "Coca-Cola",
+          "description": "",
+          "price": 200,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "fanta",
+          "name": "Fanta",
+          "description": "",
+          "price": 200,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "sprite",
+          "name": "Sprite",
+          "description": "",
+          "price": 200,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "ice-tea",
+          "name": "Ice Tea",
+          "description": "",
+          "price": 200,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "frappe",
+          "name": "Frappé",
+          "description": "",
+          "price": 300,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "frozen",
+          "name": "Frozen",
+          "description": "",
+          "price": 350,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "soda",
+          "name": "Soda",
+          "description": "",
+          "price": 100,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        },
+        {
+          "id": "su",
+          "name": "Wasser",
+          "description": "",
+          "price": 60,
+          "currency": "₺",
+          "image": null,
+          "active": true,
+          "tags": {
+            "new": false,
+            "bestseller": false,
+            "vegetarian": false,
+            "spicy": false
+          }
+        }
+      ]
+    }
+  ]
+}

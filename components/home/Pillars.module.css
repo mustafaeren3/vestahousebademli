@@ -1,0 +1,47 @@
+.head {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.pillar {
+  text-align: center;
+  padding: 0 12px;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  color: var(--color-earth);
+  margin: 0 auto 22px;
+}
+
+.title {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+.text {
+  font-size: 0.94rem;
+  color: var(--color-ink-soft);
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 44px 28px;
+  }
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}

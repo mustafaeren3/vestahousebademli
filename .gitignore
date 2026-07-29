@@ -1,0 +1,20 @@
+node_modules
+.next
+out
+*.log
+.DS_Store
+
+# Raw source photos/logos dropped at the project root for asset extraction.
+# The processed, in-use versions already live under public/images and public/menu.
+Ekran görüntüsü*.png
+Gemini_Generated_Image*.png
+WhatsApp Image*.jpeg
+image0*.jpeg
+instagramlogo.png
+normal logo.png
+sadecesembollogo.png
+limanmeyhanesimenüsü.png
+vestagündüzmenüsü.png
+taşevinönündekiağaç.png
+vestarahibesi.png
+*.pdf

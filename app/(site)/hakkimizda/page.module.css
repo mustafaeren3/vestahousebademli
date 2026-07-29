@@ -1,0 +1,27 @@
+.nameWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 64px;
+}
+
+.nameMark {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.nameText {
+  max-width: 480px;
+}
+
+@media (max-width: 760px) {
+  .nameWrap {
+    flex-direction: column;
+    text-align: center;
+    gap: 32px;
+  }
+  .nameMark img {
+    width: 140px;
+    height: 140px;
+  }
+}

@@ -1,0 +1,104 @@
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 18, 14, 0.42) 0%,
+    rgba(20, 18, 14, 0.18) 32%,
+    rgba(20, 18, 14, 0.55) 100%
+  );
+}
+
+.content {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.eyebrowDark {
+  color: #e7e3c8;
+}
+.eyebrowDark::before {
+  background: #e7e3c8;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: #fff;
+  font-size: clamp(3rem, 8vw, 6.4rem);
+  line-height: 1;
+  margin-top: 22px;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.25);
+}
+
+.titleSub {
+  display: block;
+  font-style: italic;
+  font-weight: 400;
+  color: #f1ecd8;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  margin-top: 6px;
+}
+
+.tagline {
+  margin-top: 26px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  letter-spacing: 0.02em;
+}
+
+.cueWrap {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cue {
+  width: 1px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.cue span {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  animation: cueDrop 2.2s ease-in-out infinite;
+}
+
+@keyframes cueDrop {
+  0% {
+    top: -100%;
+  }
+  60% {
+    top: 100%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cue span {
+    animation: none;
+    top: 0;
+  }
+}

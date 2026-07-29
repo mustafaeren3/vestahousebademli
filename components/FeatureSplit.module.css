@@ -1,0 +1,65 @@
+.splitDark {
+  background: var(--color-earth-dark);
+  color: var(--color-cream);
+}
+
+.splitDark :global(h2) {
+  color: var(--color-cream);
+}
+
+.splitDark :global(.body-lg) {
+  color: rgba(247, 243, 235, 0.82);
+}
+
+.splitDark :global(.eyebrow) {
+  color: #e3d9b8;
+}
+.splitDark :global(.eyebrow::before) {
+  background: #e3d9b8;
+}
+
+.splitDark :global(.divider) {
+  background: #e3d9b8;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.reverse {
+  direction: rtl;
+}
+
+.reverse > :global(*) {
+  direction: ltr;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.text {
+  max-width: 480px;
+}
+
+.reverse .text {
+  margin-left: auto;
+}
+
+@media (max-width: 860px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    direction: ltr;
+  }
+  .text {
+    max-width: none;
+  }
+}

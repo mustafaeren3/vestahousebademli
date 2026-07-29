@@ -1,0 +1,39 @@
+.inclusions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 48px;
+  margin-top: 8px;
+}
+
+.item {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.itemName {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--color-ink);
+}
+
+.itemNote {
+  margin-top: 6px;
+  font-size: 0.88rem;
+  color: var(--color-ink-soft);
+  line-height: 1.6;
+}
+
+.footnote {
+  margin-top: 32px;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--color-ink-soft);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .inclusions {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}

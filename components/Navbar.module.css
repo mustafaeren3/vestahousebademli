@@ -1,0 +1,227 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 30px 0;
+  transition: background 0.5s var(--ease-soft), padding 0.5s var(--ease-soft),
+    box-shadow 0.5s var(--ease-soft), border-color 0.5s var(--ease-soft);
+  border-bottom: 1px solid transparent;
+}
+
+.navSolid {
+  background: rgba(247, 243, 235, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 18px 0;
+  border-color: var(--color-line);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  position: relative;
+  z-index: 102;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandMark {
+  display: inline-flex;
+}
+
+.nav:not(.navSolid) .brandMark {
+  filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+.brandText {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+  color: var(--color-ink);
+  transition: color 0.5s var(--ease-soft);
+}
+
+.nav:not(.navSolid) .brandText {
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+}
+
+.brandText em {
+  font-style: italic;
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.link {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.4s var(--ease-soft);
+  white-space: nowrap;
+}
+
+.nav:not(.navSolid) .link {
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.4s var(--ease-soft);
+}
+
+.link:hover::after,
+.linkActive::after {
+  width: 100%;
+}
+
+.toggle {
+  display: none;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  width: 34px;
+  height: 34px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 103;
+}
+
+.toggle span {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--color-ink);
+  transition: background 0.4s var(--ease-soft), transform 0.45s var(--ease-soft),
+    opacity 0.3s var(--ease-soft);
+}
+
+.nav:not(.navSolid) .toggle span {
+  background: #fff;
+}
+
+.toggleTopOpen {
+  transform: translateY(4px) rotate(45deg);
+  background: var(--color-ink) !important;
+}
+
+.toggleBottomOpen {
+  transform: translateY(-4px) rotate(-45deg);
+  background: var(--color-ink) !important;
+}
+
+.mobile {
+  position: fixed;
+  inset: 0;
+  z-index: 98;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 8vw;
+  overflow: hidden;
+}
+
+.mobileBackdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--color-cream);
+  z-index: -1;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mobileLink {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 8vw, 3.4rem);
+  font-weight: 500;
+  color: var(--color-ink);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-line);
+  transition: color 0.4s var(--ease-soft), padding-left 0.4s var(--ease-soft);
+}
+
+.mobileLink:hover {
+  padding-left: 12px;
+  color: var(--color-olive);
+}
+
+.mobileLinkIndex {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  color: var(--color-earth);
+  opacity: 0.7;
+}
+
+.mobileLinkActive {
+  color: var(--color-olive);
+  font-style: italic;
+}
+
+.mobileFooter {
+  display: flex;
+  gap: 28px;
+  margin-top: 40px;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+.mobileFooter a {
+  transition: color 0.3s var(--ease-soft);
+}
+
+.mobileFooter a:hover {
+  color: var(--color-olive);
+}
+
+@media (max-width: 1140px) {
+  .links {
+    display: none;
+  }
+  .toggle {
+    display: flex;
+  }
+}

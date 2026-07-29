@@ -1,0 +1,76 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.infoRow {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.infoIcon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: var(--color-earth);
+  margin-top: 2px;
+}
+
+.infoLabel {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-olive);
+  margin-bottom: 4px;
+}
+
+.infoValue {
+  font-size: 1.05rem;
+  color: var(--color-ink);
+}
+
+.infoValue a:hover {
+  color: var(--color-earth);
+}
+
+.socials {
+  display: flex;
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.mapFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+}
+
+.mapFrame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(0.15) sepia(0.08);
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .mapFrame {
+    aspect-ratio: 4 / 3;
+  }
+}

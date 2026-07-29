@@ -1,0 +1,228 @@
+.app {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(247, 243, 235, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px 10px;
+}
+
+.mark {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  flex: 1;
+  min-width: 0;
+}
+
+.langSwitch {
+  display: flex;
+  gap: 4px;
+}
+
+.langBtn {
+  background: none;
+  border: 1px solid var(--color-line);
+  color: var(--color-ink-soft);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 5px 9px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.langBtnActive {
+  background: var(--color-olive);
+  border-color: var(--color-olive);
+  color: #fff;
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 0 16px 12px;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tabBtn {
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid var(--color-line);
+  color: var(--color-ink);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.tabBtnActive {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-cream);
+}
+
+.main {
+  flex: 1;
+  padding: 8px 16px 48px;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.category {
+  padding-top: 22px;
+  scroll-margin-top: 118px;
+}
+
+.categoryTitle {
+  font-size: 1.35rem;
+  margin-bottom: 4px;
+}
+
+.categoryDivider {
+  width: 32px;
+  height: 1px;
+  background: var(--color-earth);
+  margin: 8px 0 18px;
+}
+
+.itemList {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.itemImage {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  object-fit: cover;
+  background: var(--color-cream-deep, #efe8d8);
+}
+
+.itemBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemTopRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.itemName {
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.itemPrice {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-earth);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.itemDesc {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  line-height: 1.5;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.tag {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.tagNew {
+  background: #e7e9dd;
+  color: var(--color-olive-dark, #565a3e);
+}
+
+.tagBestseller {
+  background: #f0e2d3;
+  color: var(--color-earth);
+}
+
+.tagVegetarian {
+  background: #dfe9d8;
+  color: #3f5c33;
+}
+
+.tagSpicy {
+  background: #f3dcd6;
+  color: #a13d2c;
+}
+
+.state {
+  padding: 60px 0;
+  text-align: center;
+  color: var(--color-ink-soft);
+  font-size: 0.92rem;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px 16px 32px;
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+  border-top: 1px solid var(--color-line);
+}
+
+.footer a {
+  color: var(--color-olive);
+  text-decoration: none;
+  font-weight: 500;
+}

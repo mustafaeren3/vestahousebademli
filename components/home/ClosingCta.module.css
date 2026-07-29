@@ -1,0 +1,38 @@
+.closing {
+  position: relative;
+  min-height: 62vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 18, 14, 0.55);
+}
+
+.content {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  padding: 90px 0;
+}
+
+.eyebrowOnDark {
+  color: #e7e3c8;
+}
+.eyebrowOnDark::before {
+  background: #e7e3c8;
+}
+
+.quote {
+  color: #fff;
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+  max-width: 22ch;
+  line-height: 1.35;
+}

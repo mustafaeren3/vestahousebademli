@@ -1,0 +1,89 @@
+.footer {
+  background: var(--color-cream-deep);
+  color: var(--color-ink-soft);
+  padding: 88px 0 28px;
+  border-top: 1px solid var(--color-line);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 52px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+}
+
+.tagline {
+  font-size: 1.1rem;
+  color: var(--color-ink-soft);
+  max-width: 30ch;
+}
+
+.heading {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-olive);
+  margin-bottom: 6px;
+}
+
+.navCol,
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  font-size: 0.92rem;
+  color: var(--color-ink);
+}
+
+.link {
+  width: fit-content;
+  transition: color 0.3s var(--ease-soft);
+}
+
+.link:hover {
+  color: var(--color-olive);
+}
+
+.contact a {
+  transition: color 0.3s var(--ease-soft);
+}
+
+.contact a:hover {
+  color: var(--color-olive);
+}
+
+.bottom {
+  padding-top: 26px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-soft);
+  opacity: 0.7;
+}
+
+.sub {
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+@media (max-width: 760px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+}
