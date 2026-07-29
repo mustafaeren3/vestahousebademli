@@ -55,6 +55,27 @@ tekrarlamaz, sessizce atlar).
 Barındırma için Vercel'in ücretsiz (Hobby) planı yeterlidir; Next.js App
 Router, Server Actions ve Route Handler'ları native destekler.
 
+## Güvenlik: yapılması gereken tek manuel adım
+
+Production denetimi sırasında kritik bir açık bulundu ve koddan
+düzeltildi: yazma politikaları herhangi bir "authenticated" Supabase
+kullanıcısına güveniyordu, ama Supabase projelerinde e-posta ile kayıt
+varsayılan olarak **açık** — yani teorik olarak biri kendi hesabını
+oluşturup menüyü değiştirebilirdi. Bunu gerçek bir saldırı simülasyonuyla
+doğruladık ve RLS politikalarını `app_metadata.role = 'admin'` kontrolüne
+geçirdik (bkz. `supabase/migrations/0002_admin_role_lockdown.sql`) — artık
+sadece gerçek admin hesabı yazabiliyor, kayıt açık kalsa bile.
+
+Yine de savunmanın ikinci katmanı olarak, Supabase Dashboard'dan bunu da
+kapatmanızı öneririz (tek seferlik, ~10 saniye):
+
+**Authentication → Sign In / Providers → Email → "Allow new users to
+sign up" seçeneğini kapatın.**
+
+Bunu CLI üzerinden otomatik yapmadık çünkü ilgili config push işlemi
+SMTP/redirect gibi başka ayarları da etkileyebilir; dashboard'dan tek
+tıkla yapmak daha güvenli.
+
 ## Admin paneli
 
 - **Adres:** `https://<domain>/admin`
