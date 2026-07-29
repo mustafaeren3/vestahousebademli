@@ -3,6 +3,10 @@ node_modules
 out
 *.log
 .DS_Store
+.env
+.env.local
+.env*.local
+supabase/.temp
 
 # Raw source photos/logos dropped at the project root for asset extraction.
 # The processed, in-use versions already live under public/images and public/menu.

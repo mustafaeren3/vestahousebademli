@@ -77,7 +77,7 @@ export default function MenuApp() {
 
   const loadMenu = useCallback((currentLang) => {
     setStatus((s) => (s === "ready" ? "revalidating" : "loading"));
-    fetch(`/menu/data/${currentLang}.json`, { cache: "no-store" })
+    fetch(`/menu/api/${currentLang}`, { cache: "no-store" })
       .then((res) => {
         if (!res.ok) throw new Error("bad response");
         return res.json();

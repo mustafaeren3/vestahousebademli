@@ -1,4 +1,4 @@
-const CACHE_VERSION = "vesta-menu-v1";
+const CACHE_VERSION = "vesta-menu-v2";
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
 self.addEventListener("install", (event) => {
@@ -26,7 +26,7 @@ self.addEventListener("activate", (event) => {
 });
 
 function isMenuData(url) {
-  return url.pathname.startsWith("/menu/data/");
+  return url.pathname.startsWith("/menu/api/");
 }
 
 function isStaticAsset(url) {

@@ -1,0 +1,120 @@
+.shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  height: 60px;
+  background: #fff;
+  border-bottom: 1px solid var(--color-line);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.menuToggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.menuToggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--color-ink);
+  border-radius: 2px;
+}
+
+.brand {
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbarRight {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.email {
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background: #fff;
+  border-right: 1px solid var(--color-line);
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  padding: 32px;
+}
+
+.backdrop {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .menuToggle {
+    display: flex;
+  }
+
+  .email {
+    display: none;
+  }
+
+  .content {
+    padding: 20px 16px;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    z-index: 90;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    overflow-y: auto;
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 60px 0 0 0;
+    background: rgba(20, 18, 14, 0.35);
+    z-index: 80;
+  }
+}

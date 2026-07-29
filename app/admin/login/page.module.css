@@ -1,0 +1,37 @@
+.wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 380px;
+  padding: 40px 34px;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--color-ink-soft);
+  font-size: 0.85rem;
+  margin-bottom: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 6px;
+}

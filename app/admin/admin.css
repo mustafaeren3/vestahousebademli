@@ -1,0 +1,233 @@
+.admin-body {
+  margin: 0;
+  background: var(--color-cream-deep);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+.admin-body * {
+  box-sizing: border-box;
+}
+
+.admin-body input,
+.admin-body select,
+.admin-body textarea,
+.admin-body button {
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.admin-field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-soft);
+}
+
+.admin-field input[type="text"],
+.admin-field input[type="email"],
+.admin-field input[type="password"],
+.admin-field input[type="number"],
+.admin-field select,
+.admin-field textarea {
+  padding: 11px 14px;
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--color-ink);
+  transition: border-color 0.2s ease;
+}
+
+.admin-field input:focus,
+.admin-field select:focus,
+.admin-field textarea:focus {
+  outline: none;
+  border-color: var(--color-olive);
+}
+
+.admin-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.admin-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.admin-btn--primary {
+  background: var(--color-olive);
+  color: #fff;
+  border-color: var(--color-olive);
+}
+
+.admin-btn--primary:hover:not(:disabled) {
+  background: var(--color-olive-dark);
+}
+
+.admin-btn--ghost {
+  background: #fff;
+  color: var(--color-ink);
+  border-color: var(--color-line);
+}
+
+.admin-btn--ghost:hover:not(:disabled) {
+  border-color: var(--color-ink);
+}
+
+.admin-btn--danger {
+  background: #fff;
+  color: #b3432b;
+  border-color: #e3c3b8;
+}
+
+.admin-btn--danger:hover:not(:disabled) {
+  background: #b3432b;
+  color: #fff;
+  border-color: #b3432b;
+}
+
+.admin-btn--sm {
+  padding: 6px 12px;
+  font-size: 0.76rem;
+}
+
+.admin-card {
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+}
+
+.admin-error {
+  color: #b3432b;
+  font-size: 0.85rem;
+  background: #fbeae5;
+  border: 1px solid #e3c3b8;
+  border-radius: 4px;
+  padding: 10px 14px;
+}
+
+.admin-success {
+  color: var(--color-olive-dark);
+  font-size: 0.85rem;
+  background: #eef0e5;
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  padding: 10px 14px;
+}
+
+.admin-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--color-line);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.admin-toggle[data-on="true"] {
+  background: var(--color-olive);
+}
+
+.admin-toggle span {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.admin-toggle[data-on="true"] span {
+  transform: translateX(18px);
+}
+
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 18, 14, 0.45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 16px;
+  overflow-y: auto;
+  z-index: 200;
+}
+
+.admin-modal {
+  background: #fff;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 640px;
+  padding: 30px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+@media (max-width: 640px) {
+  .admin-modal-overlay {
+    padding: 0;
+  }
+  .admin-modal {
+    max-width: none;
+    min-height: 100vh;
+    border-radius: 0;
+  }
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--color-line);
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.admin-tab {
+  padding: 9px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+
+.admin-tab[data-active="true"] {
+  color: var(--color-olive);
+  border-bottom-color: var(--color-olive);
+}
