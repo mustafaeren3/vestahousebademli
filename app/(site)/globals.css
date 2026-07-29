@@ -78,6 +78,24 @@ button {
   color: var(--color-cream);
 }
 
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 12px;
+  z-index: 200;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  padding: 12px 20px;
+  border-radius: 2px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
 .container {
   width: 100%;
   max-width: var(--container-w);

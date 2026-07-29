@@ -1,6 +1,7 @@
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./menu.css";
 import ServiceWorkerRegister from "@/components/menu/ServiceWorkerRegister";
+import { siteConfig } from "@/lib/site";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -34,6 +35,15 @@ export const metadata = {
   robots: {
     index: true,
     follow: true,
+  },
+  alternates: {
+    canonical: `${siteConfig.url}/menu`,
+    languages: {
+      tr: `${siteConfig.url}/menu?lang=tr`,
+      en: `${siteConfig.url}/menu?lang=en`,
+      de: `${siteConfig.url}/menu?lang=de`,
+      el: `${siteConfig.url}/menu?lang=el`,
+    },
   },
 };
 

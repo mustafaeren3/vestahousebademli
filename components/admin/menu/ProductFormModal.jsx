@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { LOCALES, LOCALE_LABELS, ALLERGENS } from "@/lib/menu/constants";
 import { slugify } from "@/lib/menu/slug";
+import { useEscapeToClose } from "@/components/admin/useEscapeToClose";
 import ImageUploader from "./ImageUploader";
 import styles from "./ProductFormModal.module.css";
 
@@ -22,6 +23,7 @@ export default function ProductFormModal({
   onClose,
 }) {
   const isNew = !product;
+  useEscapeToClose(onClose);
   const [activeLocale, setActiveLocale] = useState("tr");
   const [categoryId, setCategoryId] = useState(product?.category_id || defaultCategoryId || "");
   const [price, setPrice] = useState(product?.price ?? "");
@@ -100,8 +102,17 @@ export default function ProductFormModal({
 
   return (
     <div className="admin-modal-overlay" onClick={onClose}>
-      <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
-        <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem", marginBottom: 20 }}>
+      <div
+        className="admin-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="product-modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h3
+          id="product-modal-title"
+          style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem", marginBottom: 20 }}
+        >
           {isNew ? "Yeni Ürün" : "Ürünü Düzenle"}
         </h3>
 
@@ -185,16 +196,22 @@ export default function ProductFormModal({
           {LOCALES.map((locale) => (
             <div key={locale} style={{ display: activeLocale === locale ? "block" : "none" }}>
               <div className="admin-field">
-                <label>Ürün Adı ({LOCALE_LABELS[locale]})</label>
+                <label htmlFor={`product-name-${locale}`}>
+                  Ürün Adı ({LOCALE_LABELS[locale]})
+                </label>
                 <input
+                  id={`product-name-${locale}`}
                   type="text"
                   value={translations[locale].name}
                   onChange={(e) => updateTranslationField(locale, "name", e.target.value)}
                 />
               </div>
               <div className="admin-field">
-                <label>Açıklama ({LOCALE_LABELS[locale]})</label>
+                <label htmlFor={`product-description-${locale}`}>
+                  Açıklama ({LOCALE_LABELS[locale]})
+                </label>
                 <textarea
+                  id={`product-description-${locale}`}
                   value={translations[locale].description}
                   onChange={(e) => updateTranslationField(locale, "description", e.target.value)}
                 />
@@ -202,39 +219,47 @@ export default function ProductFormModal({
             </div>
           ))}
 
-          <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "var(--color-ink-soft)" }}>
-            Alerjenler
-          </label>
-          <div className={styles.checkGrid} style={{ marginTop: 8 }}>
-            {ALLERGENS.map((allergen) => (
-              <label key={allergen.code} className={styles.checkItem}>
-                <input
-                  type="checkbox"
-                  checked={allergens.includes(allergen.code)}
-                  onChange={() => toggleAllergen(allergen.code)}
-                />
-                {allergen.tr}
-              </label>
-            ))}
-          </div>
+          <fieldset style={{ border: "none", padding: 0, margin: 0 }}>
+            <legend
+              style={{ fontSize: "0.78rem", fontWeight: 600, color: "var(--color-ink-soft)", padding: 0 }}
+            >
+              Alerjenler
+            </legend>
+            <div className={styles.checkGrid} style={{ marginTop: 8 }}>
+              {ALLERGENS.map((allergen) => (
+                <label key={allergen.code} className={styles.checkItem}>
+                  <input
+                    type="checkbox"
+                    checked={allergens.includes(allergen.code)}
+                    onChange={() => toggleAllergen(allergen.code)}
+                  />
+                  {allergen.tr}
+                </label>
+              ))}
+            </div>
+          </fieldset>
 
-          <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "var(--color-ink-soft)" }}>
-            Etiketler
-          </label>
-          <div className={styles.checkGrid} style={{ marginTop: 8 }}>
-            {TAG_FIELDS.map((tag) => (
-              <label key={tag.key} className={styles.checkItem}>
-                <input
-                  type="checkbox"
-                  checked={tags[tag.key]}
-                  onChange={() =>
-                    setTags((prev) => ({ ...prev, [tag.key]: !prev[tag.key] }))
-                  }
-                />
-                {tag.label}
-              </label>
-            ))}
-          </div>
+          <fieldset style={{ border: "none", padding: 0, margin: "20px 0 0" }}>
+            <legend
+              style={{ fontSize: "0.78rem", fontWeight: 600, color: "var(--color-ink-soft)", padding: 0 }}
+            >
+              Etiketler
+            </legend>
+            <div className={styles.checkGrid} style={{ marginTop: 8 }}>
+              {TAG_FIELDS.map((tag) => (
+                <label key={tag.key} className={styles.checkItem}>
+                  <input
+                    type="checkbox"
+                    checked={tags[tag.key]}
+                    onChange={() =>
+                      setTags((prev) => ({ ...prev, [tag.key]: !prev[tag.key] }))
+                    }
+                  />
+                  {tag.label}
+                </label>
+              ))}
+            </div>
+          </fieldset>
 
           <div className={styles.toggleRow}>
             <button

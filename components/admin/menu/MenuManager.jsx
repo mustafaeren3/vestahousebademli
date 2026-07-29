@@ -40,6 +40,7 @@ export default function MenuManager({ initialCategories }) {
   const [productModal, setProductModal] = useState(null); // { mode: "new"|"edit", productId } | null
   const [confirmTarget, setConfirmTarget] = useState(null); // { type, id, label }
   const [confirmPending, setConfirmPending] = useState(false);
+  const [actionError, setActionError] = useState(null);
   const [, startTransition] = useTransition();
 
   useEffect(() => {
@@ -65,17 +66,24 @@ export default function MenuManager({ initialCategories }) {
   async function handleCategoryDragEnd(event) {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
+    const previous = categories;
     const oldIndex = categories.findIndex((c) => c.id === active.id);
     const newIndex = categories.findIndex((c) => c.id === over.id);
     const reordered = arrayMove(categories, oldIndex, newIndex);
     setCategories(reordered);
-    await reorderCategories(reordered.map((c) => c.id));
-    refresh();
+    try {
+      await reorderCategories(reordered.map((c) => c.id));
+      refresh();
+    } catch (err) {
+      setCategories(previous);
+      setActionError("Sıralama kaydedilemedi. Lütfen tekrar deneyin.");
+    }
   }
 
   async function handleProductDragEnd(event) {
     const { active, over } = event;
     if (!over || active.id === over.id || !selectedCategory) return;
+    const previous = categories;
     const items = selectedCategory.products;
     const oldIndex = items.findIndex((p) => p.id === active.id);
     const newIndex = items.findIndex((p) => p.id === over.id);
@@ -83,8 +91,63 @@ export default function MenuManager({ initialCategories }) {
     setCategories((prev) =>
       prev.map((c) => (c.id === selectedCategory.id ? { ...c, products: reordered } : c))
     );
-    await reorderProducts(selectedCategory.id, reordered.map((p) => p.id));
-    refresh();
+    try {
+      await reorderProducts(selectedCategory.id, reordered.map((p) => p.id));
+      refresh();
+    } catch (err) {
+      setCategories(previous);
+      setActionError("Sıralama kaydedilemedi. Lütfen tekrar deneyin.");
+    }
+  }
+
+  async function handleToggleCategory(cat) {
+    setActionError(null);
+    setCategories((prev) =>
+      prev.map((c) => (c.id === cat.id ? { ...c, active: !c.active } : c))
+    );
+    try {
+      await updateCategory(cat.id, { active: !cat.active });
+      refresh();
+    } catch (err) {
+      setCategories((prev) =>
+        prev.map((c) => (c.id === cat.id ? { ...c, active: cat.active } : c))
+      );
+      setActionError("Kategori güncellenemedi. Lütfen tekrar deneyin.");
+    }
+  }
+
+  async function handleToggleProduct(product, categoryId) {
+    setActionError(null);
+    setCategories((prev) =>
+      prev.map((c) =>
+        c.id !== categoryId
+          ? c
+          : {
+              ...c,
+              products: c.products.map((p) =>
+                p.id === product.id ? { ...p, active: !p.active } : p
+              ),
+            }
+      )
+    );
+    try {
+      await updateProduct(product.id, { active: !product.active });
+      refresh();
+    } catch (err) {
+      setCategories((prev) =>
+        prev.map((c) =>
+          c.id !== categoryId
+            ? c
+            : {
+                ...c,
+                products: c.products.map((p) =>
+                  p.id === product.id ? { ...p, active: product.active } : p
+                ),
+              }
+        )
+      );
+      setActionError("Ürün güncellenemedi. Lütfen tekrar deneyin.");
+    }
   }
 
   async function handleSaveCategory(payload) {
@@ -125,6 +188,7 @@ export default function MenuManager({ initialCategories }) {
   async function handleConfirmDelete() {
     if (!confirmTarget) return;
     setConfirmPending(true);
+    setActionError(null);
     try {
       if (confirmTarget.type === "category") {
         await deleteCategory(confirmTarget.id);
@@ -134,6 +198,8 @@ export default function MenuManager({ initialCategories }) {
       }
       setConfirmTarget(null);
       refresh();
+    } catch (err) {
+      setActionError("Silinemedi. Lütfen tekrar deneyin.");
     } finally {
       setConfirmPending(false);
     }
@@ -147,6 +213,11 @@ export default function MenuManager({ initialCategories }) {
 
   return (
     <div>
+      {actionError && (
+        <div className="admin-error" style={{ marginBottom: 20 }}>
+          {actionError}
+        </div>
+      )}
       <div className={styles.layout}>
         <div className={styles.panel}>
           <div className={styles.panelHead}>
@@ -187,12 +258,7 @@ export default function MenuManager({ initialCategories }) {
                         label: `"${cat.translations.tr?.name || cat.slug}" kategorisi ve içindeki tüm ürünler silinecek.`,
                       })
                     }
-                    onToggleActive={() => {
-                      setCategories((prev) =>
-                        prev.map((c) => (c.id === cat.id ? { ...c, active: !c.active } : c))
-                      );
-                      updateCategory(cat.id, { active: !cat.active }).then(refresh);
-                    }}
+                    onToggleActive={() => handleToggleCategory(cat)}
                   />
                 ))}
               </SortableContext>
@@ -245,21 +311,7 @@ export default function MenuManager({ initialCategories }) {
                         label: `"${product.translations.tr?.name || product.slug}" silinecek.`,
                       })
                     }
-                    onToggleActive={() => {
-                      setCategories((prev) =>
-                        prev.map((c) =>
-                          c.id !== selectedCategory.id
-                            ? c
-                            : {
-                                ...c,
-                                products: c.products.map((p) =>
-                                  p.id === product.id ? { ...p, active: !p.active } : p
-                                ),
-                              }
-                        )
-                      );
-                      updateProduct(product.id, { active: !product.active }).then(refresh);
-                    }}
+                    onToggleActive={() => handleToggleProduct(product, selectedCategory.id)}
                   />
                 ))}
               </SortableContext>

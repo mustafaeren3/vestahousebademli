@@ -50,28 +50,33 @@ function formatPrice(price, currency) {
   return `${new Intl.NumberFormat("tr-TR").format(price)} ${currency}`;
 }
 
-function resolveInitialLang(searchParams) {
-  const fromQuery = searchParams.get("lang");
-  if (fromQuery && LANGS.includes(fromQuery)) return fromQuery;
-  try {
-    const stored = window.localStorage.getItem("vesta-menu-lang");
-    if (stored && LANGS.includes(stored)) return stored;
-  } catch (e) {
-    /* localStorage unavailable */
-  }
-  return "tr";
-}
-
-export default function MenuApp() {
+export default function MenuApp({ initialMenu = null, initialLang = "tr" }) {
   const searchParams = useSearchParams();
-  const [lang, setLang] = useState(null);
-  const [menu, setMenu] = useState(null);
-  const [status, setStatus] = useState("loading");
+  const [lang, setLang] = useState(initialLang);
+  const [menu, setMenu] = useState(initialMenu);
+  const [status, setStatus] = useState(initialMenu ? "ready" : "error");
   const sectionRefs = useRef({});
   const [activeCategory, setActiveCategory] = useState(null);
+  const skipNextLoad = useRef(Boolean(initialMenu));
+
+  // Keeps <html lang> in sync with the selected menu language — screen
+  // readers rely on this, and it also stops the browser's CSS uppercase
+  // transform from using Turkish case-folding on non-Turkish tag labels.
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   useEffect(() => {
-    setLang(resolveInitialLang(searchParams));
+    const fromQuery = searchParams.get("lang");
+    if (fromQuery && LANGS.includes(fromQuery)) return;
+    try {
+      const stored = window.localStorage.getItem("vesta-menu-lang");
+      if (stored && LANGS.includes(stored) && stored !== lang) {
+        setLang(stored);
+      }
+    } catch (e) {
+      /* localStorage unavailable */
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -92,12 +97,14 @@ export default function MenuApp() {
   }, []);
 
   useEffect(() => {
-    if (!lang) return;
+    if (skipNextLoad.current) {
+      skipNextLoad.current = false;
+      return;
+    }
     loadMenu(lang);
   }, [lang, loadMenu]);
 
   useEffect(() => {
-    if (!lang) return;
     const onVisible = () => {
       if (document.visibilityState === "visible") loadMenu(lang);
     };

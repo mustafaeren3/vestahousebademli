@@ -14,6 +14,12 @@ export default function ImageUploader({ productId, imageUrl, onChanged }) {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Görsel çok büyük. En fazla 5 MB yükleyebilirsiniz.");
+      if (inputRef.current) inputRef.current.value = "";
+      return;
+    }
+
     setBusy(true);
     setError(null);
     try {

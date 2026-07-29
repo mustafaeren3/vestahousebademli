@@ -10,6 +10,9 @@ export default function AdminShell({ email, children }) {
 
   return (
     <div className={styles.shell}>
+      <a href="#admin-main-content" className={styles.skipLink}>
+        Ana içeriğe geç
+      </a>
       <header className={styles.topbar}>
         <button
           type="button"
@@ -42,7 +45,9 @@ export default function AdminShell({ email, children }) {
           />
         )}
 
-        <main className={styles.content}>{children}</main>
+        <main id="admin-main-content" className={styles.content}>
+          {children}
+        </main>
       </div>
     </div>
   );

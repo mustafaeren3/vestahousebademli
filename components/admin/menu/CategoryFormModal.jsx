@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { LOCALES, LOCALE_LABELS } from "@/lib/menu/constants";
 import { slugify } from "@/lib/menu/slug";
+import { useEscapeToClose } from "@/components/admin/useEscapeToClose";
 
 export default function CategoryFormModal({ category, onSave, onClose }) {
   const isNew = !category;
+  useEscapeToClose(onClose);
   const [activeLocale, setActiveLocale] = useState("tr");
   const [names, setNames] = useState(() => {
     const initial = {};
@@ -40,8 +42,17 @@ export default function CategoryFormModal({ category, onSave, onClose }) {
 
   return (
     <div className="admin-modal-overlay" onClick={onClose}>
-      <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
-        <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem", marginBottom: 20 }}>
+      <div
+        className="admin-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="category-modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h3
+          id="category-modal-title"
+          style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem", marginBottom: 20 }}
+        >
           {isNew ? "Yeni Kategori" : "Kategoriyi Düzenle"}
         </h3>
 
@@ -73,8 +84,11 @@ export default function CategoryFormModal({ category, onSave, onClose }) {
               className="admin-field"
               style={{ display: activeLocale === locale ? "flex" : "none" }}
             >
-              <label>Kategori Adı ({LOCALE_LABELS[locale]})</label>
+              <label htmlFor={`category-name-${locale}`}>
+                Kategori Adı ({LOCALE_LABELS[locale]})
+              </label>
               <input
+                id={`category-name-${locale}`}
                 type="text"
                 value={names[locale]}
                 onChange={(e) => setNames((prev) => ({ ...prev, [locale]: e.target.value }))}
