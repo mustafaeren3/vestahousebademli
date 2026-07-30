@@ -62,7 +62,7 @@ export default function BademliPage() {
           </Reveal>
           <Reveal delay={1}>
             <Link href="/iletisim" className="btn btn--primary" style={{ marginTop: 34 }}>
-              Yol Tarifi Alın
+              İletişime Geçin
             </Link>
           </Reveal>
         </div>

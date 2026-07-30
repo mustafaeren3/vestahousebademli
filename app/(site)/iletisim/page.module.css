@@ -1,15 +1,43 @@
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 64px;
-  align-items: start;
+.location {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.locationText {
+  margin-top: 18px;
+  max-width: 52ch;
+}
+
+.address {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.locationNote {
+  margin-top: 22px;
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+  font-style: italic;
+}
+
+.contact {
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .infoList {
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  margin-top: 40px;
+  gap: 24px;
+  margin-top: 36px;
+  text-align: left;
 }
 
 .infoRow {
@@ -45,32 +73,7 @@
 
 .socials {
   display: flex;
+  justify-content: center;
   gap: 18px;
-  margin-top: 12px;
-}
-
-.mapFrame {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  border-radius: 2px;
-  overflow: hidden;
-  border: 1px solid var(--color-line);
-}
-
-.mapFrame iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  filter: grayscale(0.15) sepia(0.08);
-}
-
-@media (max-width: 860px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
-  .mapFrame {
-    aspect-ratio: 4 / 3;
-  }
+  margin-top: 32px;
 }
