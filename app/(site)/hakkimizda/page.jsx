@@ -41,9 +41,9 @@ export default function HakkimizdaPage() {
       />
 
       <FeatureSplit
-        eyebrow="Malzeme ve Zaman"
-        title="Zeytin, taş ve tuz"
-        text="Zeytin ağacının gölgesi, taş duvarların serinliği ve denizden esen rüzgâr — evin çevresinde hissedilen üç unsur."
+        eyebrow="Evin Karakteri"
+        title="Taş, ahşap ve sadelik"
+        text="Taş duvarlar, ahşap kapılar ve sade bir avlu. Vesta House Bademli, küçük ölçekli ve gösterişsiz bir yapıdır."
         image="/images/oda-kilim-sandalye.jpg"
         imageAlt="Vesta House Bademli'de kilim ve ahşap sandalyelerin bulunduğu bir oda köşesi"
         reverse

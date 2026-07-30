@@ -6,7 +6,7 @@ export default function Intro() {
     <section className="section section--tight">
       <div className={`container ${styles.inner}`}>
         <Reveal>
-          <span className="eyebrow">Hoş geldiniz</span>
+          <span className="eyebrow">Vesta House</span>
         </Reveal>
         <Reveal delay={1} as="p" className={styles.lead}>
           Bademli&apos;nin dar bir sokağında duran bu taş ev,{" "}

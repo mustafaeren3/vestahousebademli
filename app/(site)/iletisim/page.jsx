@@ -45,12 +45,6 @@ export default function IletisimPage() {
                 {siteConfig.address.district}
               </p>
             </Reveal>
-
-            <Reveal delay={2}>
-              <p className={styles.locationNote}>
-                Konum bilgisi rezervasyon sonrasında misafirlerimizle paylaşılır.
-              </p>
-            </Reveal>
           </div>
         </div>
       </section>

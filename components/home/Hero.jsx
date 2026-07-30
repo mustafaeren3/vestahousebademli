@@ -26,7 +26,7 @@ export default function Hero() {
           </h1>
         </Reveal>
         <Reveal delay={2}>
-          <p className={styles.tagline}>Bademli&apos;de, deniz ve zeytinliklere yakın bir taş ev.</p>
+          <p className={styles.tagline}>Ege&apos;deki evinize hoş geldiniz.</p>
         </Reveal>
       </div>
 

@@ -19,13 +19,6 @@
   color: var(--color-ink);
 }
 
-.locationNote {
-  margin-top: 22px;
-  font-size: 0.82rem;
-  color: var(--color-ink-soft);
-  font-style: italic;
-}
-
 .contact {
   max-width: 420px;
   margin: 0 auto;
