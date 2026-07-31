@@ -1,4 +1,4 @@
-const CACHE_VERSION = "vesta-menu-v2";
+const CACHE_VERSION = "vesta-menu-v3";
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
 self.addEventListener("install", (event) => {
