@@ -161,6 +161,16 @@
   z-index: 98;
   display: flex;
   flex-direction: column;
+  /* Background lives here, not only on .mobileBackdrop. .mobileBackdrop
+     is position:absolute *inside* this scrolling container, so its
+     inset:0 box is anchored to the container's unscrolled content
+     flow — once the 10-item list overflows and the user scrolls, the
+     backdrop scrolls away with it and the hero image behind the drawer
+     becomes visible under the lower items. A background-color on this
+     element (fixed, non-scrolling, 100dvh) paints its own border box
+     and is unaffected by the internal overflow-y:auto scroll, so it
+     stays solid top-to-bottom regardless of scroll position. */
+  background: var(--color-cream);
   /* Not centered: with the current 10 nav items at this font size the
      list is taller than most phone viewports (~730px of content vs.
      ~660-930px of screen). Centering an over-height block makes it
