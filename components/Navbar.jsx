@@ -10,7 +10,7 @@ import styles from "./Navbar.module.css";
 
 const EASE = [0.22, 1, 0.36, 1];
 
-export default function Navbar() {
+export default function Navbar({ settings }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -38,9 +38,9 @@ export default function Navbar() {
   return (
     <header className={`${styles.nav} ${solid ? styles.navSolid : ""}`}>
       <div className={`container ${styles.inner}`}>
-        <Link href="/" className={styles.brand} aria-label={siteConfig.name}>
+        <Link href="/" className={styles.brand} aria-label={settings.name}>
           <span className={styles.brandMark}>
-            <Image src="/images/vesta-mark.png" alt="" width={30} height={30} aria-hidden="true" />
+            <Image src={settings.favicon_path} alt="" width={30} height={30} aria-hidden="true" />
           </span>
           <span className={styles.brandText}>
             Vesta House
@@ -114,10 +114,10 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4, ease: EASE }}
             >
-              <a href={siteConfig.contact.whatsapp} target="_blank" rel="noreferrer noopener">
+              <a href={settings.whatsapp} target="_blank" rel="noreferrer noopener">
                 WhatsApp
               </a>
-              <a href={siteConfig.contact.instagram} target="_blank" rel="noreferrer noopener">
+              <a href={settings.instagram} target="_blank" rel="noreferrer noopener">
                 Instagram
               </a>
             </motion.div>

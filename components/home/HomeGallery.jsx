@@ -1,15 +1,10 @@
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import PostGrid from "@/components/blog/PostGrid";
-import { getAllPosts } from "@/lib/blog";
-import styles from "./BlogTeaser.module.css";
+import Gallery from "@/components/Gallery";
+import styles from "./HomeGallery.module.css";
 
-export default function BlogTeaser({ section }) {
-  const posts = getAllPosts()
-    .slice(0, 3)
-    .map(({ html, faq, seoTitle, seoDescription, ...rest }) => rest);
-
-  if (posts.length === 0) return null;
+export default function HomeGallery({ section, images }) {
+  if (images.length === 0) return null;
 
   return (
     <section className="section">
@@ -29,7 +24,14 @@ export default function BlogTeaser({ section }) {
         </div>
 
         <div className={styles.grid}>
-          <PostGrid posts={posts} />
+          <Gallery
+            images={images.map((img) => ({
+              src: img.image_path,
+              alt: img.alt,
+              width: img.width,
+              height: img.height,
+            }))}
+          />
         </div>
       </div>
     </section>

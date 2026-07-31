@@ -3,19 +3,19 @@ import Image from "next/image";
 import { siteConfig } from "@/lib/site";
 import styles from "./Footer.module.css";
 
-export default function Footer() {
+export default function Footer({ settings }) {
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         <div className={styles.brand}>
           <Image
-            src="/images/vesta-logo-full.png"
-            alt={siteConfig.name}
+            src={settings.logo_path}
+            alt={settings.name}
             width={240}
             height={240}
             className={styles.logo}
           />
-          <p className={`${styles.tagline} italic-display`}>{siteConfig.tagline}</p>
+          <p className={`${styles.tagline} italic-display`}>{settings.tagline}</p>
         </div>
 
         <nav className={styles.navCol} aria-label="Alt menü">
@@ -29,19 +29,17 @@ export default function Footer() {
 
         <div className={styles.contact}>
           <span className={styles.heading}>İletişim</span>
-          <p>{siteConfig.address.line1}</p>
-          <p>{siteConfig.address.district}</p>
+          <p>{settings.address_line1}</p>
+          <p>{settings.address_district}</p>
           <p>
-            <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}>
-              {siteConfig.contact.phone}
-            </a>
+            <a href={`tel:${settings.phone.replace(/\s/g, "")}`}>{settings.phone}</a>
           </p>
           <p>
-            <a href={siteConfig.contact.instagram} target="_blank" rel="noreferrer noopener">
+            <a href={settings.instagram} target="_blank" rel="noreferrer noopener">
               Instagram
             </a>
             {" · "}
-            <a href={siteConfig.contact.whatsapp} target="_blank" rel="noreferrer noopener">
+            <a href={settings.whatsapp} target="_blank" rel="noreferrer noopener">
               WhatsApp
             </a>
           </p>
@@ -50,9 +48,9 @@ export default function Footer() {
 
       <div className={`container ${styles.bottom}`}>
         <span>
-          © {new Date().getFullYear()} {siteConfig.name}. Tüm hakları saklıdır.
+          © {new Date().getFullYear()} {settings.name}. {settings.copyright_text}
         </span>
-        <span className={styles.sub}>{siteConfig.subBrand}</span>
+        <span className={styles.sub}>{settings.footer_text}</span>
       </div>
     </footer>
   );

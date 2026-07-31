@@ -3,12 +3,12 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import styles from "./ClosingCta.module.css";
 
-export default function ClosingCta() {
+export default function ClosingCta({ section }) {
   return (
     <section className={styles.closing}>
       <Image
-        src="/images/tas-duvar-oyma-pencere.jpg"
-        alt="Vesta House Bademli'nin taş duvarı ve oyma ahşap detayları"
+        src={section.image_path}
+        alt={section.image_alt}
         fill
         sizes="100vw"
         style={{ objectFit: "cover" }}
@@ -17,14 +17,14 @@ export default function ClosingCta() {
 
       <div className={`container ${styles.content}`}>
         <Reveal>
-          <span className={`eyebrow ${styles.eyebrowOnDark}`}>Bademli, Dikili</span>
+          <span className={`eyebrow ${styles.eyebrowOnDark}`}>{section.eyebrow}</span>
         </Reveal>
         <Reveal delay={1} as="p" className={`${styles.quote} italic-display`}>
-          Bademli&apos;de taş bir ev, sizi bekliyor.
+          {section.body}
         </Reveal>
         <Reveal delay={2}>
-          <Link href="/iletisim" className="btn btn--on-dark">
-            Konumu Görün
+          <Link href={section.cta_href} className="btn btn--on-dark">
+            {section.cta_label}
           </Link>
         </Reveal>
       </div>

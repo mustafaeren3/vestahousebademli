@@ -2,48 +2,35 @@ import Reveal from "@/components/Reveal";
 import { IconStone, IconOlive, IconMinimal, IconWarmth } from "@/components/icons";
 import styles from "./Pillars.module.css";
 
-const pillars = [
-  {
-    icon: IconStone,
-    title: "Taş Ev",
-    text: "Bademli'nin yerel taşından örülmüş duvarlar, orijinal hâliyle korundu. Zaman izlerini saklıyoruz.",
-  },
-  {
-    icon: IconOlive,
-    title: "Zeytin Ağacı",
-    text: "Avludaki yaşlı zeytin, günün her saatinde farklı bir gölge ve farklı bir ışık bırakıyor.",
-  },
-  {
-    icon: IconMinimal,
-    title: "Ege Minimalizmi",
-    text: "Gereksiz dekorasyon yok. Kullanılan her eşya, günlük kullanım için seçildi.",
-  },
-  {
-    icon: IconWarmth,
-    title: "İçtenlik",
-    text: "Küçük bir ev ölçeğinde, sade ve özenli bir ağırlama.",
-  },
-];
+const ICONS = {
+  stone: IconStone,
+  olive: IconOlive,
+  minimal: IconMinimal,
+  warmth: IconWarmth,
+};
 
-export default function Pillars() {
+export default function Pillars({ head, pillars }) {
   return (
     <section className="section">
       <div className="container">
         <Reveal className={styles.head}>
-          <span className="eyebrow">Felsefemiz</span>
+          <span className="eyebrow">{head.eyebrow}</span>
           <h2 className="heading-lg" style={{ marginTop: 18 }}>
-            Dört sade ilke
+            {head.title}
           </h2>
         </Reveal>
 
         <div className={styles.grid}>
-          {pillars.map((p, i) => (
-            <Reveal key={p.title} delay={(i % 4) + 1} className={styles.pillar}>
-              <p.icon className={styles.icon} />
-              <h3 className={styles.title}>{p.title}</h3>
-              <p className={styles.text}>{p.text}</p>
-            </Reveal>
-          ))}
+          {pillars.map((p, i) => {
+            const Icon = ICONS[p.icon] || IconStone;
+            return (
+              <Reveal key={p.id} delay={(i % 4) + 1} className={styles.pillar}>
+                <Icon className={styles.icon} />
+                <h3 className={styles.title}>{p.title}</h3>
+                <p className={styles.text}>{p.text}</p>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

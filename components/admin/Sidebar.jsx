@@ -7,6 +7,8 @@ import styles from "./Sidebar.module.css";
 const LINKS = [
   { href: "/admin", label: "Panel", exact: true },
   { href: "/admin/menu", label: "Menü Yönetimi" },
+  { href: "/admin/homepage", label: "Anasayfa" },
+  { href: "/admin/site-settings", label: "Site Ayarları" },
   { href: "/admin/preview", label: "Canlı Önizleme" },
   { href: "/admin/settings", label: "Ayarlar" },
 ];

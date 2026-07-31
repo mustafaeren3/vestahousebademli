@@ -1,13 +1,14 @@
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import styles from "./Hero.module.css";
 
-export default function Hero() {
+export default function Hero({ section }) {
   return (
     <section className={styles.hero}>
       <Image
-        src="/images/hero-tas-ev-aksam.jpg"
-        alt="Vesta House Bademli'nin akşam ışığında taş cephesi ve zeytin ağacı"
+        src={section.image_path}
+        alt={section.image_alt}
         fill
         priority
         sizes="100vw"
@@ -17,20 +18,27 @@ export default function Hero() {
 
       <div className={`container ${styles.content}`}>
         <Reveal>
-          <span className={`eyebrow ${styles.eyebrowDark}`}>Bademli · Dikili</span>
+          <span className={`eyebrow ${styles.eyebrowDark}`}>{section.eyebrow}</span>
         </Reveal>
         <Reveal delay={1}>
           <h1 className={styles.title}>
-            Vesta House
-            <span className={`${styles.titleSub} italic-display`}>Bademli</span>
+            {section.title}
+            <span className={`${styles.titleSub} italic-display`}>{section.subtitle}</span>
           </h1>
         </Reveal>
         <Reveal delay={2}>
-          <p className={styles.tagline}>Ege&apos;deki evinize hoş geldiniz.</p>
+          <p className={styles.tagline}>{section.body}</p>
         </Reveal>
+        {section.cta_label && section.cta_href && (
+          <Reveal delay={3}>
+            <Link href={section.cta_href} className="btn btn--on-dark" style={{ marginTop: 8 }}>
+              {section.cta_label}
+            </Link>
+          </Reveal>
+        )}
       </div>
 
-      <Reveal delay={3} className={styles.cueWrap}>
+      <Reveal delay={4} className={styles.cueWrap}>
         <div className={styles.cue} aria-hidden="true">
           <span />
         </div>

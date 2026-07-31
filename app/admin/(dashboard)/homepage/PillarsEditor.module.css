@@ -1,0 +1,39 @@
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 6px;
+  background: #fff;
+  border: 1px solid var(--color-line);
+  margin-bottom: 10px;
+}
+
+.dragHandle {
+  cursor: grab;
+  background: none;
+  border: none;
+  color: var(--color-ink-soft);
+  font-size: 1.1rem;
+  padding: 8px 2px;
+  touch-action: none;
+}
+
+.fields {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 10px;
+}
+
+.fields textarea {
+  grid-column: 1 / -1;
+  min-height: 60px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
