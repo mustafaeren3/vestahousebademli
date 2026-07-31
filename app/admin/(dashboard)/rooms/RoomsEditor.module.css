@@ -1,0 +1,70 @@
+.card {
+  display: flex;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid var(--color-line);
+  margin-bottom: 12px;
+}
+
+.dragHandle {
+  cursor: grab;
+  background: none;
+  border: none;
+  color: var(--color-ink-soft);
+  font-size: 1.1rem;
+  padding: 8px 2px;
+  touch-action: none;
+  align-self: flex-start;
+}
+
+.imageCol {
+  flex-shrink: 0;
+  width: 140px;
+}
+
+.fields {
+  flex: 1;
+  min-width: 0;
+}
+
+.topRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.badgeField {
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.titleField {
+  flex: 1;
+}
+
+.fields textarea {
+  min-height: 64px;
+}
+
+.footerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.toggleWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}

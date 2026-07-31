@@ -4,6 +4,7 @@ import RoomCard from "@/components/RoomCard";
 import FeatureSplit from "@/components/FeatureSplit";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
+import { getRooms } from "@/lib/rooms/queries";
 import styles from "@/components/RoomsGrid.module.css";
 
 export const metadata = {
@@ -13,34 +14,9 @@ export const metadata = {
   alternates: { canonical: `${siteConfig.url}/odalar` },
 };
 
-const rooms = [
-  {
-    index: "I",
-    name: "Taş Oda",
-    text: "Evin taş duvarlarından birine bitişik oda. Çıplak taş duvarlar, ahşap tavan kirişleri ve toprak tonlarında dokular.",
-    tags: ["Taş Duvar", "Ahşap Tavan"],
-    image: "/images/oda-genis.jpg",
-    imageAlt: "Vesta House'ta taş duvarlı, ahşap kapılı bir oda",
-  },
-  {
-    index: "II",
-    name: "Zeytin Odası",
-    text: "Kilim dokuları ve eski ahşap mobilyalarla döşenmiş bir oda. Pencereden avludaki zeytin ağacı görünür.",
-    tags: ["Kilim", "Ahşap Mobilya"],
-    image: "/images/oda-kilim-sandalye.jpg",
-    imageAlt: "Vesta House'ta kilim ve ahşap sandalyelerin bulunduğu oda",
-  },
-  {
-    index: "III",
-    name: "Avlu Odası",
-    text: "Taş terasa açılan, hasır koltuklu bir oda. Sabah kahvesi için uygun bir köşe.",
-    tags: ["Teras Erişimi", "Doğal Işık"],
-    image: "/images/oda-yatak-detay.jpg",
-    imageAlt: "Vesta House'ta beyaz keten örtülü bir yatak ve katlanmış havlular",
-  },
-];
+export default async function OdalarPage() {
+  const rooms = await getRooms();
 
-export default function OdalarPage() {
   return (
     <>
       <PageHero
@@ -62,7 +38,16 @@ export default function OdalarPage() {
         <div className="container">
           <div className={styles.grid}>
             {rooms.map((room, i) => (
-              <RoomCard key={room.name} {...room} delay={(i % 4) + 1} />
+              <RoomCard
+                key={room.id}
+                index={room.badge}
+                name={room.title}
+                text={room.description}
+                tags={room.tags}
+                image={room.image_path}
+                imageAlt={room.image_alt}
+                delay={(i % 4) + 1}
+              />
             ))}
           </div>
         </div>
