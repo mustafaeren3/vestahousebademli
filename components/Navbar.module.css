@@ -147,12 +147,33 @@
 .mobile {
   position: fixed;
   inset: 0;
+  /* `.navSolid` (always applied on <header> while the drawer is open)
+     sets `backdrop-filter`, which makes <header> a new containing
+     block for this fixed-position child — so `inset: 0` was resolving
+     against the ~95px-tall header box, not the viewport. This overlay
+     was never actually full-screen. `vh`/`dvh` are defined against the
+     viewport specifically and ignore that containing-block chain, so
+     they force the real full height regardless. (dvh accounts for
+     Safari's dynamic address bar; the plain vh line is the fallback
+     for browsers that don't support dvh.) */
+  height: 100vh;
+  height: 100dvh;
   z-index: 98;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 0 8vw;
-  overflow: hidden;
+  /* Not centered: with the current 10 nav items at this font size the
+     list is taller than most phone viewports (~730px of content vs.
+     ~660-930px of screen). Centering an over-height block makes it
+     spill both above and below the visible area with nothing to
+     scroll it back into view — which is exactly how a link ended up
+     rendered on top of the header. Top-aligned + scrollable is the
+     only layout that stays correct regardless of how many nav items
+     exist. The 104px top padding reserves the header's own height
+     (measured ~95px when the mobile menu is open) plus a clear gap,
+     so no item can ever land in the header's row. */
+  padding: 104px 8vw 32px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobileBackdrop {
