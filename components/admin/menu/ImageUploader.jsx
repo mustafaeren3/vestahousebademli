@@ -3,40 +3,47 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { uploadProductImage, deleteProductImage } from "@/lib/menu/actions";
+import { optimizePhoto, PhotoOptimizeError } from "@/lib/uploads/optimizePhoto";
 import styles from "./ImageUploader.module.css";
 
 export default function ImageUploader({ productId, imageUrl, onChanged }) {
   const inputRef = useRef(null);
-  const [busy, setBusy] = useState(false);
+  const [stage, setStage] = useState("idle"); // idle | preparing | uploading
   const [error, setError] = useState(null);
+  const busy = stage !== "idle";
 
   async function handleFileChange(e) {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (file.size > 5 * 1024 * 1024) {
-      setError("Görsel çok büyük. En fazla 5 MB yükleyebilirsiniz.");
+    setError(null);
+    setStage("preparing");
+    let optimized;
+    try {
+      optimized = await optimizePhoto(file);
+    } catch (err) {
+      setError(err instanceof PhotoOptimizeError ? err.message : "Görsel hazırlanamadı.");
+      setStage("idle");
       if (inputRef.current) inputRef.current.value = "";
       return;
     }
 
-    setBusy(true);
-    setError(null);
+    setStage("uploading");
     try {
       const formData = new FormData();
-      formData.set("image", file);
+      formData.set("image", optimized);
       await uploadProductImage(productId, formData);
       onChanged?.();
     } catch (err) {
       setError("Görsel yüklenemedi.");
     } finally {
-      setBusy(false);
+      setStage("idle");
       if (inputRef.current) inputRef.current.value = "";
     }
   }
 
   async function handleRemove() {
-    setBusy(true);
+    setStage("uploading");
     setError(null);
     try {
       await deleteProductImage(productId);
@@ -44,7 +51,7 @@ export default function ImageUploader({ productId, imageUrl, onChanged }) {
     } catch (err) {
       setError("Görsel silinemedi.");
     } finally {
-      setBusy(false);
+      setStage("idle");
     }
   }
 
@@ -67,7 +74,13 @@ export default function ImageUploader({ productId, imageUrl, onChanged }) {
       )}
 
       <label className={`admin-btn admin-btn--ghost admin-btn--sm ${styles.uploadBtn}`}>
-        {busy ? "Yükleniyor…" : imageUrl ? "Değiştir" : "Görsel Yükle"}
+        {stage === "preparing"
+          ? "Görsel hazırlanıyor…"
+          : stage === "uploading"
+            ? "Yükleniyor…"
+            : imageUrl
+              ? "Değiştir"
+              : "Görsel Yükle"}
         <input
           ref={inputRef}
           type="file"

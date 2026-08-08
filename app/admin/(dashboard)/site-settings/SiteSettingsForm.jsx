@@ -66,11 +66,15 @@ export default function SiteSettingsForm({ initialSettings }) {
       <h3 style={{ fontSize: "1rem", marginBottom: 12 }}>Logo &amp; Favicon</h3>
       <div className="admin-field">
         <label>Logo (Footer&apos;da görünür)</label>
-        <ImageUploader imageUrl={settings.logo_path} onUpload={handleLogoUpload} />
+        <ImageUploader imageUrl={settings.logo_path} onUpload={handleLogoUpload} mode="graphic" />
       </div>
       <div className="admin-field">
         <label>Favicon &amp; Menü Simgesi</label>
-        <ImageUploader imageUrl={settings.favicon_path} onUpload={handleFaviconUpload} />
+        <ImageUploader
+          imageUrl={settings.favicon_path}
+          onUpload={handleFaviconUpload}
+          mode="graphic"
+        />
       </div>
 
       <h3 style={{ fontSize: "1rem", marginTop: 28, marginBottom: 12 }}>Genel</h3>

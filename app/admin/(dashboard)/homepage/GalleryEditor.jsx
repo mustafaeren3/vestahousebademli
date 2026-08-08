@@ -24,6 +24,7 @@ import {
   reorderGalleryImages,
 } from "@/lib/home/actions";
 import ConfirmDialog from "@/components/admin/ConfirmDialog";
+import { optimizePhoto, PhotoOptimizeError } from "@/lib/uploads/optimizePhoto";
 import styles from "./GalleryEditor.module.css";
 
 function readImageDimensions(file) {
@@ -105,8 +106,9 @@ export default function GalleryEditor({ images: initialImages }) {
   const [images, setImages] = useState(initialImages);
   const [confirmTarget, setConfirmTarget] = useState(null);
   const [confirmPending, setConfirmPending] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  const [stage, setStage] = useState("idle"); // idle | preparing | uploading
   const [error, setError] = useState(null);
+  const uploading = stage !== "idle";
 
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
 
@@ -124,18 +126,24 @@ export default function GalleryEditor({ images: initialImages }) {
   async function handleFileChange(e) {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (file.size > 5 * 1024 * 1024) {
-      setError("Görsel çok büyük. En fazla 5 MB yükleyebilirsiniz.");
+
+    setError(null);
+    setStage("preparing");
+    let optimized;
+    try {
+      optimized = await optimizePhoto(file);
+    } catch (err) {
+      setError(err instanceof PhotoOptimizeError ? err.message : "Görsel hazırlanamadı.");
+      setStage("idle");
       if (inputRef.current) inputRef.current.value = "";
       return;
     }
 
-    setUploading(true);
-    setError(null);
+    setStage("uploading");
     try {
-      const { width, height } = await readImageDimensions(file);
+      const { width, height } = await readImageDimensions(optimized);
       const formData = new FormData();
-      formData.set("image", file);
+      formData.set("image", optimized);
       formData.set("width", String(width));
       formData.set("height", String(height));
       formData.set("alt", "");
@@ -144,7 +152,7 @@ export default function GalleryEditor({ images: initialImages }) {
     } catch (err) {
       setError("Görsel yüklenemedi.");
     } finally {
-      setUploading(false);
+      setStage("idle");
       if (inputRef.current) inputRef.current.value = "";
     }
   }
@@ -177,7 +185,11 @@ export default function GalleryEditor({ images: initialImages }) {
             ))}
 
             <label className={styles.uploadCard}>
-              {uploading ? "Yükleniyor…" : "+ Görsel Ekle"}
+              {stage === "preparing"
+                ? "Görsel hazırlanıyor…"
+                : stage === "uploading"
+                  ? "Yükleniyor…"
+                  : "+ Görsel Ekle"}
               <input
                 ref={inputRef}
                 type="file"
