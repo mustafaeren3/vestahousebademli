@@ -43,7 +43,7 @@ export default function Navbar({ settings }) {
             <Image src={settings.favicon_path} alt="" width={30} height={30} aria-hidden="true" />
           </span>
           <span className={styles.brandText}>
-            Vesta House
+            Vesta House{" "}
             <em>Bademli</em>
           </span>
         </Link>

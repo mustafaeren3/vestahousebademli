@@ -96,12 +96,23 @@ export default async function RootLayout({ children }) {
     sameAs: [settings.instagram],
   };
 
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: settings.name,
+    url: siteConfig.url,
+  };
+
   return (
     <html lang="tr" className={`${cormorant.variable} ${inter.variable}`}>
       <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <a href="#main-content" className="skip-link">
           Ana içeriğe geç
