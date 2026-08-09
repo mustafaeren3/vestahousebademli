@@ -1,7 +1,8 @@
 import { getAllPosts, getAllCategories, getAllTags } from "@/lib/blog";
+import { getRooms } from "@/lib/rooms/queries";
 import { siteConfig } from "@/lib/site";
 
-export default function sitemap() {
+export default async function sitemap() {
   const routes = [
     "",
     "/hakkimizda",
@@ -43,5 +44,15 @@ export default function sitemap() {
     priority: 0.4,
   }));
 
-  return [...staticEntries, ...postEntries, ...categoryEntries, ...tagEntries];
+  const rooms = await getRooms();
+  const roomEntries = rooms
+    .filter((room) => room.slug)
+    .map((room) => ({
+      url: `${siteConfig.url}/odalar/${room.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    }));
+
+  return [...staticEntries, ...postEntries, ...categoryEntries, ...tagEntries, ...roomEntries];
 }

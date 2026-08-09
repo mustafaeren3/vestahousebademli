@@ -1,11 +1,14 @@
 .card {
-  display: flex;
-  gap: 14px;
   padding: 16px;
   border-radius: 8px;
   background: #fff;
   border: 1px solid var(--color-line);
   margin-bottom: 12px;
+}
+
+.topArea {
+  display: flex;
+  gap: 14px;
 }
 
 .dragHandle {
@@ -19,14 +22,16 @@
   align-self: flex-start;
 }
 
-.imageCol {
-  flex-shrink: 0;
-  width: 140px;
-}
-
 .fields {
   flex: 1;
   min-width: 0;
+}
+
+.slugHint {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: var(--color-ink-soft);
 }
 
 .topRow {

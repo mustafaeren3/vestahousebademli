@@ -19,12 +19,10 @@ import { CSS } from "@dnd-kit/utilities";
 import {
   createRoom,
   updateRoom,
-  uploadRoomImage,
-  deleteRoomImage,
   deleteRoom,
   reorderRooms,
 } from "@/lib/rooms/actions";
-import ImageUploader from "@/components/admin/ImageUploader";
+import RoomImagesManager from "@/components/admin/RoomImagesManager";
 import ConfirmDialog from "@/components/admin/ConfirmDialog";
 import styles from "./RoomsEditor.module.css";
 
@@ -58,6 +56,7 @@ function RoomCardEditor({ room, onDelete }) {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [galleryBusy, setGalleryBusy] = useState(false);
 
   async function handleSave() {
     setPending(true);
@@ -80,103 +79,93 @@ function RoomCardEditor({ room, onDelete }) {
     }
   }
 
-  async function handleImageUpload(file) {
-    const formData = new FormData();
-    formData.set("image", file);
-    await uploadRoomImage(room.id, formData);
-    router.refresh();
-  }
-
-  async function handleImageRemove() {
-    await deleteRoomImage(room.id);
-    router.refresh();
-  }
-
   return (
     <div ref={setNodeRef} style={style} className={styles.card}>
-      <button type="button" className={styles.dragHandle} {...attributes} {...listeners} aria-label="Sürükle">
-        ⠿
-      </button>
+      <div className={styles.topArea}>
+        <button type="button" className={styles.dragHandle} {...attributes} {...listeners} aria-label="Sürükle">
+          ⠿
+        </button>
 
-      <div className={styles.imageCol}>
-        <ImageUploader
-          imageUrl={room.image_path}
-          onUpload={handleImageUpload}
-          onRemove={handleImageRemove}
-        />
-      </div>
+        <div className={styles.fields}>
+          {error && (
+            <div className="admin-error" style={{ marginBottom: 10 }}>
+              {error}
+            </div>
+          )}
+          {success && (
+            <div className="admin-success" style={{ marginBottom: 10 }}>
+              Kaydedildi.
+            </div>
+          )}
 
-      <div className={styles.fields}>
-        {error && (
-          <div className="admin-error" style={{ marginBottom: 10 }}>
-            {error}
+          <div className={styles.topRow}>
+            <div className={`admin-field ${styles.badgeField}`}>
+              <label>Numara (I, II, III)</label>
+              <input type="text" value={badge} onChange={(e) => setBadge(e.target.value)} />
+            </div>
+            <div className={`admin-field ${styles.titleField}`}>
+              <label>Oda Adı</label>
+              <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+              {room.slug && <span className={styles.slugHint}>/odalar/{room.slug}</span>}
+            </div>
           </div>
-        )}
-        {success && (
-          <div className="admin-success" style={{ marginBottom: 10 }}>
-            Kaydedildi.
+
+          <div className="admin-field">
+            <label>Açıklama</label>
+            <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
           </div>
-        )}
 
-        <div className={styles.topRow}>
-          <div className={`admin-field ${styles.badgeField}`}>
-            <label>Numara (I, II, III)</label>
-            <input type="text" value={badge} onChange={(e) => setBadge(e.target.value)} />
+          <div className="admin-field">
+            <label>Özellik Etiketleri (virgülle ayırın)</label>
+            <input
+              type="text"
+              value={tagsText}
+              onChange={(e) => setTagsText(e.target.value)}
+              placeholder="Taş Duvar, Ahşap Tavan"
+            />
           </div>
-          <div className={`admin-field ${styles.titleField}`}>
-            <label>Oda Adı</label>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-          </div>
-        </div>
 
-        <div className="admin-field">
-          <label>Açıklama</label>
-          <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-        </div>
+          <div className={styles.footerRow}>
+            <label className={styles.toggleWrap}>
+              <button
+                type="button"
+                className="admin-toggle"
+                data-on={enabled}
+                onClick={() => setEnabled((v) => !v)}
+                aria-pressed={enabled}
+              >
+                <span />
+              </button>
+              {enabled ? "Sitede görünüyor" : "Gizli"}
+            </label>
 
-        <div className="admin-field">
-          <label>Özellik Etiketleri (virgülle ayırın)</label>
-          <input
-            type="text"
-            value={tagsText}
-            onChange={(e) => setTagsText(e.target.value)}
-            placeholder="Taş Duvar, Ahşap Tavan"
-          />
-        </div>
-
-        <div className={styles.footerRow}>
-          <label className={styles.toggleWrap}>
-            <button
-              type="button"
-              className="admin-toggle"
-              data-on={enabled}
-              onClick={() => setEnabled((v) => !v)}
-              aria-pressed={enabled}
-            >
-              <span />
-            </button>
-            {enabled ? "Sitede görünüyor" : "Gizli"}
-          </label>
-
-          <div className={styles.actions}>
-            <button
-              type="button"
-              className="admin-btn admin-btn--primary admin-btn--sm"
-              onClick={handleSave}
-              disabled={pending}
-            >
-              {pending ? "Kaydediliyor…" : "Kaydet"}
-            </button>
-            <button
-              type="button"
-              className="admin-btn admin-btn--danger admin-btn--sm"
-              onClick={() => onDelete(room)}
-            >
-              Sil
-            </button>
+            <div className={styles.actions}>
+              <button
+                type="button"
+                className="admin-btn admin-btn--primary admin-btn--sm"
+                onClick={handleSave}
+                disabled={pending || galleryBusy}
+              >
+                {pending ? "Kaydediliyor…" : "Kaydet"}
+              </button>
+              <button
+                type="button"
+                className="admin-btn admin-btn--danger admin-btn--sm"
+                onClick={() => onDelete(room)}
+                disabled={galleryBusy}
+              >
+                Sil
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
+      <RoomImagesManager
+        roomId={room.id}
+        images={room.room_images || []}
+        onBusyChange={setGalleryBusy}
+      />
     </div>
   );
 }

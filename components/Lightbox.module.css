@@ -1,0 +1,95 @@
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 18, 14, 0.92);
+  padding: 40px;
+}
+
+.figure {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 82vh;
+  touch-action: pan-y;
+}
+
+.closeBtn,
+.navBtn {
+  position: fixed;
+  z-index: 201;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.3s var(--ease-soft);
+}
+
+.closeBtn:hover,
+.navBtn:hover {
+  opacity: 1;
+}
+
+.closeBtn {
+  top: 24px;
+  right: 28px;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.counter {
+  position: fixed;
+  z-index: 201;
+  top: 26px;
+  left: 28px;
+  color: #fff;
+  opacity: 0.75;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
+.navBtn {
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  padding: 12px 18px;
+}
+
+.navPrev {
+  left: 8px;
+}
+
+.navNext {
+  right: 8px;
+}
+
+@media (max-width: 760px) {
+  .lightbox {
+    padding: 20px;
+  }
+  .closeBtn {
+    top: 16px;
+    right: 16px;
+  }
+  .counter {
+    top: 18px;
+    left: 16px;
+  }
+  .navBtn {
+    font-size: 1.8rem;
+    padding: 8px 10px;
+  }
+  .navPrev {
+    left: 4px;
+  }
+  .navNext {
+    right: 4px;
+  }
+}

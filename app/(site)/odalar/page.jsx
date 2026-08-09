@@ -4,7 +4,7 @@ import RoomCard from "@/components/RoomCard";
 import FeatureSplit from "@/components/FeatureSplit";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
-import { getRooms } from "@/lib/rooms/queries";
+import { getRooms, getRoomCover } from "@/lib/rooms/queries";
 import styles from "@/components/RoomsGrid.module.css";
 
 export const metadata = {
@@ -37,18 +37,22 @@ export default async function OdalarPage() {
       <section className="section section--tight">
         <div className="container">
           <div className={styles.grid}>
-            {rooms.map((room, i) => (
-              <RoomCard
-                key={room.id}
-                index={room.badge}
-                name={room.title}
-                text={room.description}
-                tags={room.tags}
-                image={room.image_path}
-                imageAlt={room.image_alt}
-                delay={(i % 4) + 1}
-              />
-            ))}
+            {rooms.map((room, i) => {
+              const cover = getRoomCover(room);
+              return (
+                <RoomCard
+                  key={room.id}
+                  index={room.badge}
+                  name={room.title}
+                  text={room.description}
+                  tags={room.tags}
+                  image={cover?.url}
+                  imageAlt={cover?.alt}
+                  href={room.slug ? `/odalar/${room.slug}` : "/odalar"}
+                  delay={(i % 4) + 1}
+                />
+              );
+            })}
           </div>
         </div>
       </section>
