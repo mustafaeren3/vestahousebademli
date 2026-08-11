@@ -22,7 +22,7 @@ export default function Hero({ section }) {
         </Reveal>
         <Reveal delay={1}>
           <h1 className={styles.title}>
-            {section.title}
+            {section.title}{" "}
             <span className={`${styles.titleSub} italic-display`}>{section.subtitle}</span>
           </h1>
         </Reveal>
