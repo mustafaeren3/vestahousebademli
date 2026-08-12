@@ -7,6 +7,10 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
+import { getPageSection } from "@/lib/pages/queries";
+import { getInteriorPage } from "@/lib/pages/staticPages";
+
+const FALLBACK = getInteriorPage("bademli").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("bademli");
@@ -20,16 +24,20 @@ export async function generateMetadata() {
   });
 }
 
-export default function BademliPage() {
+export default async function BademliPage() {
+  const hero = await getPageSection("bademli", "hero");
+
   return (
     <>
-      <PageHero
-        eyebrow="Bademli, Dikili"
-        title="Ege'nin Sakin Köşesi"
-        subtitle="İzmir'in Dikili ilçesine bağlı, zeytin ağaçları ve dar taş sokaklarıyla bilinen küçük bir köy."
-        image="/images/hero-tas-ev-aksam.jpg"
-        imageAlt="Bademli'nin dar sokağında Vesta House'un taş cephesi"
-      />
+      {hero?.enabled !== false && (
+        <PageHero
+          eyebrow={hero?.eyebrow || FALLBACK.eyebrow}
+          title={hero?.title || FALLBACK.title}
+          subtitle={hero?.subtitle || FALLBACK.subtitle}
+          image={hero?.image_path || FALLBACK.image_path}
+          imageAlt={hero?.image_alt || FALLBACK.image_alt}
+        />
+      )}
 
       <Breadcrumbs items={[{ label: "Bademli", href: "/bademli" }]} />
 

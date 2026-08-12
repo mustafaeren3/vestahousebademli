@@ -5,7 +5,11 @@ import { IconPhone, IconMail } from "@/components/icons";
 import { siteConfig } from "@/lib/site";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
+import { getPageSection } from "@/lib/pages/queries";
+import { getInteriorPage } from "@/lib/pages/staticPages";
 import styles from "./page.module.css";
+
+const FALLBACK = getInteriorPage("iletisim").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("iletisim");
@@ -19,17 +23,21 @@ export async function generateMetadata() {
   });
 }
 
-export default function IletisimPage() {
+export default async function IletisimPage() {
+  const hero = await getPageSection("iletisim", "hero");
+
   return (
     <>
-      <PageHero
-        eyebrow="İletişim"
-        title="Bize Ulaşın"
-        subtitle="Bademli'ye hoş geldiniz. Sorularınız için doğrudan yazabilir ya da arayabilirsiniz."
-        image="/images/oyma-kapi-detay.jpg"
-        imageAlt="Vesta House Bademli'nin oyma ahşap kapısı"
-        height="46vh"
-      />
+      {hero?.enabled !== false && (
+        <PageHero
+          eyebrow={hero?.eyebrow || FALLBACK.eyebrow}
+          title={hero?.title || FALLBACK.title}
+          subtitle={hero?.subtitle || FALLBACK.subtitle}
+          image={hero?.image_path || FALLBACK.image_path}
+          imageAlt={hero?.image_alt || FALLBACK.image_alt}
+          height="46vh"
+        />
+      )}
 
       <Breadcrumbs items={[{ label: "İletişim", href: "/iletisim" }]} />
 

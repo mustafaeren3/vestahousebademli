@@ -6,6 +6,10 @@ import { siteConfig } from "@/lib/site";
 import { getSiteSettings } from "@/lib/settings/queries";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
+import { getPageSection } from "@/lib/pages/queries";
+import { getInteriorPage } from "@/lib/pages/staticPages";
+
+const FALLBACK = getInteriorPage("liman-meyhanesi").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("liman-meyhanesi");
@@ -20,7 +24,10 @@ export async function generateMetadata() {
 }
 
 export default async function LimanMeyhanesiPage() {
-  const settings = await getSiteSettings();
+  const [settings, hero] = await Promise.all([
+    getSiteSettings(),
+    getPageSection("liman-meyhanesi", "hero"),
+  ]);
 
   // Real data only: name/address/phone come from site_settings (the same
   // source the rest of the site already uses), servesCuisine is quoted from
@@ -54,13 +61,15 @@ export default async function LimanMeyhanesiPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantJsonLd) }}
       />
 
-      <PageHero
-        eyebrow="Alt Marka"
-        title="Liman Meyhanesi"
-        subtitle="Gün batımıyla birlikte, Vesta House'un taş avlusu bir meyhaneye dönüşür."
-        image="/images/avlu-hasir-koltuk.jpg"
-        imageAlt="Vesta House Bademli'nin zeytin ağacı gölgesindeki avlusu"
-      />
+      {hero?.enabled !== false && (
+        <PageHero
+          eyebrow={hero?.eyebrow || FALLBACK.eyebrow}
+          title={hero?.title || FALLBACK.title}
+          subtitle={hero?.subtitle || FALLBACK.subtitle}
+          image={hero?.image_path || FALLBACK.image_path}
+          imageAlt={hero?.image_alt || FALLBACK.image_alt}
+        />
+      )}
 
       <Breadcrumbs items={[{ label: "Liman Meyhanesi", href: "/liman-meyhanesi" }]} />
 

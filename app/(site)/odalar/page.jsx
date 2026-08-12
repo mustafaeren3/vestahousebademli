@@ -6,7 +6,11 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { getRooms, getRoomCover } from "@/lib/rooms/queries";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
+import { getPageSection } from "@/lib/pages/queries";
+import { getInteriorPage } from "@/lib/pages/staticPages";
 import styles from "@/components/RoomsGrid.module.css";
+
+const FALLBACK = getInteriorPage("odalar").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("odalar");
@@ -21,17 +25,19 @@ export async function generateMetadata() {
 }
 
 export default async function OdalarPage() {
-  const rooms = await getRooms();
+  const [rooms, hero] = await Promise.all([getRooms(), getPageSection("odalar", "hero")]);
 
   return (
     <>
-      <PageHero
-        eyebrow="Odalar"
-        title="Sade Odalar"
-        subtitle="Taş evin farklı köşelerinde, kendine özgü üç oda."
-        image="/images/oda-yatak-detay.jpg"
-        imageAlt="Vesta House Bademli'de bir odanın taş duvarı ve beyaz keten yatağı"
-      />
+      {hero?.enabled !== false && (
+        <PageHero
+          eyebrow={hero?.eyebrow || FALLBACK.eyebrow}
+          title={hero?.title || FALLBACK.title}
+          subtitle={hero?.subtitle || FALLBACK.subtitle}
+          image={hero?.image_path || FALLBACK.image_path}
+          imageAlt={hero?.image_alt || FALLBACK.image_alt}
+        />
+      )}
 
       <Breadcrumbs items={[{ label: "Odalar", href: "/odalar" }]} />
 

@@ -4,7 +4,11 @@ import Gallery from "@/components/Gallery";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
+import { getPageSection } from "@/lib/pages/queries";
+import { getInteriorPage } from "@/lib/pages/staticPages";
 import { GALERI_IMAGES } from "@/lib/galeriImages";
+
+const FALLBACK = getInteriorPage("galeri").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("galeri");
@@ -18,17 +22,21 @@ export async function generateMetadata() {
   });
 }
 
-export default function GaleriPage() {
+export default async function GaleriPage() {
+  const hero = await getPageSection("galeri", "hero");
+
   return (
     <>
-      <PageHero
-        eyebrow="Galeri"
-        title="Karelerle Vesta House"
-        subtitle="Taş, ahşap ve zeytin — evin kendi diliyle anlattıkları."
-        image="/images/oda-kilim-sandalye.jpg"
-        imageAlt="Vesta House Bademli'de kilim ve ahşap sandalyelerin bulunduğu bir oda köşesi"
-        height="46vh"
-      />
+      {hero?.enabled !== false && (
+        <PageHero
+          eyebrow={hero?.eyebrow || FALLBACK.eyebrow}
+          title={hero?.title || FALLBACK.title}
+          subtitle={hero?.subtitle || FALLBACK.subtitle}
+          image={hero?.image_path || FALLBACK.image_path}
+          imageAlt={hero?.image_alt || FALLBACK.image_alt}
+          height="46vh"
+        />
+      )}
 
       <Breadcrumbs items={[{ label: "Galeri", href: "/galeri" }]} />
 

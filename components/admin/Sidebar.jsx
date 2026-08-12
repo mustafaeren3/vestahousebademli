@@ -8,6 +8,7 @@ const LINKS = [
   { href: "/admin", label: "Panel", exact: true },
   { href: "/admin/menu", label: "Menü Yönetimi" },
   { href: "/admin/homepage", label: "Anasayfa" },
+  { href: "/admin/pages", label: "Sayfalar" },
   { href: "/admin/rooms", label: "Odalar" },
   { href: "/admin/blog", label: "Blog" },
   { href: "/admin/seo", label: "SEO" },

@@ -5,7 +5,11 @@ import Reveal from "@/components/Reveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
+import { getPageSection } from "@/lib/pages/queries";
+import { getInteriorPage } from "@/lib/pages/staticPages";
 import styles from "./page.module.css";
+
+const FALLBACK = getInteriorPage("kahvalti").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("kahvalti");
@@ -68,16 +72,20 @@ const sogukIcecekler = [
   { name: "Su", price: "60 ₺" },
 ];
 
-export default function KahvaltiPage() {
+export default async function KahvaltiPage() {
+  const hero = await getPageSection("kahvalti", "hero");
+
   return (
     <>
-      <PageHero
-        eyebrow="Kahvaltı"
-        title="Serpme Köy Kahvaltısı"
-        subtitle="Zeytin ağacının gölgesinde bir Ege kahvaltısı."
-        image="/images/avlu-hasir-koltuk.jpg"
-        imageAlt="Vesta House Bademli'nin kahvaltı servisi yapılan avlusu"
-      />
+      {hero?.enabled !== false && (
+        <PageHero
+          eyebrow={hero?.eyebrow || FALLBACK.eyebrow}
+          title={hero?.title || FALLBACK.title}
+          subtitle={hero?.subtitle || FALLBACK.subtitle}
+          image={hero?.image_path || FALLBACK.image_path}
+          imageAlt={hero?.image_alt || FALLBACK.image_alt}
+        />
+      )}
 
       <Breadcrumbs items={[{ label: "Kahvaltı", href: "/kahvalti" }]} />
 

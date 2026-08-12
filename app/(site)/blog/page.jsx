@@ -4,6 +4,10 @@ import BlogSearch from "@/components/blog/BlogSearch";
 import { getAllPosts, getAllCategories, getAllTags } from "@/lib/blog";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
+import { getPageSection } from "@/lib/pages/queries";
+import { getInteriorPage } from "@/lib/pages/staticPages";
+
+const FALLBACK = getInteriorPage("blog").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("blog");
@@ -18,23 +22,26 @@ export async function generateMetadata() {
 }
 
 export default async function BlogPage() {
-  const [allPosts, categories, tags] = await Promise.all([
+  const [allPosts, categories, tags, hero] = await Promise.all([
     getAllPosts(),
     getAllCategories(),
     getAllTags(),
+    getPageSection("blog", "hero"),
   ]);
   const posts = allPosts.map(({ html, faq, seoTitle, seoDescription, ...rest }) => rest);
 
   return (
     <>
-      <PageHero
-        eyebrow="Blog"
-        title="Taş Evin Günlüğü"
-        subtitle="Dikili ve Bademli üzerine yazılar: gezi notları, Ege mutfağı ve Vesta House'un günlük ritmi."
-        image="/images/tas-duvar-oyma-pencere.jpg"
-        imageAlt="Vesta House Bademli'nin taş duvar ve oyma ahşap pencere detayı"
-        height="46vh"
-      />
+      {hero?.enabled !== false && (
+        <PageHero
+          eyebrow={hero?.eyebrow || FALLBACK.eyebrow}
+          title={hero?.title || FALLBACK.title}
+          subtitle={hero?.subtitle || FALLBACK.subtitle}
+          image={hero?.image_path || FALLBACK.image_path}
+          imageAlt={hero?.image_alt || FALLBACK.image_alt}
+          height="46vh"
+        />
+      )}
 
       <Breadcrumbs items={[{ label: "Blog", href: "/blog" }]} />
 

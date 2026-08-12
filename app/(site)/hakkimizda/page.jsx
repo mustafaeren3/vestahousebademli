@@ -6,7 +6,11 @@ import Reveal from "@/components/Reveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
+import { getPageSection } from "@/lib/pages/queries";
+import { getInteriorPage } from "@/lib/pages/staticPages";
 import styles from "./page.module.css";
+
+const FALLBACK = getInteriorPage("hakkimizda").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("hakkimizda");
@@ -20,16 +24,20 @@ export async function generateMetadata() {
   });
 }
 
-export default function HakkimizdaPage() {
+export default async function HakkimizdaPage() {
+  const hero = await getPageSection("hakkimizda", "hero");
+
   return (
     <>
-      <PageHero
-        eyebrow="Hakkımızda"
-        title="Evin Hikâyesi"
-        subtitle="Bademli'de bir taş evin, aslına sadık kalınarak yeniden kullanılabilir hâle getirilme hikâyesi."
-        image="/images/oyma-kapi-detay.jpg"
-        imageAlt="Vesta House Bademli'nin oyma ahşap giriş kapısı"
-      />
+      {hero?.enabled !== false && (
+        <PageHero
+          eyebrow={hero?.eyebrow || FALLBACK.eyebrow}
+          title={hero?.title || FALLBACK.title}
+          subtitle={hero?.subtitle || FALLBACK.subtitle}
+          image={hero?.image_path || FALLBACK.image_path}
+          imageAlt={hero?.image_alt || FALLBACK.image_alt}
+        />
+      )}
 
       <Breadcrumbs items={[{ label: "Hakkımızda", href: "/hakkimizda" }]} />
 
