@@ -14,6 +14,9 @@ export default function SectionForm({ section, config }) {
   const [enabled, setEnabled] = useState(section.enabled);
   const [reverse, setReverse] = useState(section.reverse);
   const [tone, setTone] = useState(section.tone);
+  const [ctaIsExternal, setCtaIsExternal] = useState(section.cta_is_external);
+  const [ctaTargetBlank, setCtaTargetBlank] = useState(section.cta_target_blank);
+  const [ctaActive, setCtaActive] = useState(section.cta_active);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -27,6 +30,11 @@ export default function SectionForm({ section, config }) {
     if (config.layout) {
       fields.reverse = reverse;
       fields.tone = tone;
+    }
+    if (config.cta) {
+      fields.cta_is_external = ctaIsExternal;
+      fields.cta_target_blank = ctaTargetBlank;
+      fields.cta_active = ctaActive;
     }
 
     try {
@@ -147,26 +155,85 @@ export default function SectionForm({ section, config }) {
       )}
 
       {config.cta && (
-        <div className={styles.row}>
+        <>
+          <div className={styles.row}>
+            <div className="admin-field">
+              <label htmlFor={`${section.key}-cta_label`}>Buton Metni</label>
+              <input
+                id={`${section.key}-cta_label`}
+                name="cta_label"
+                type="text"
+                defaultValue={section.cta_label}
+              />
+            </div>
+            <div className="admin-field">
+              <label htmlFor={`${section.key}-cta_href`}>Buton Bağlantısı</label>
+              <input
+                id={`${section.key}-cta_href`}
+                name="cta_href"
+                type="text"
+                placeholder="/odalar veya https://..."
+                defaultValue={section.cta_href}
+              />
+            </div>
+          </div>
+
           <div className="admin-field">
-            <label htmlFor={`${section.key}-cta_label`}>Buton Metni</label>
+            <label htmlFor={`${section.key}-cta_aria_label`}>
+              Erişilebilirlik Etiketi (aria-label, opsiyonel)
+            </label>
             <input
-              id={`${section.key}-cta_label`}
-              name="cta_label"
+              id={`${section.key}-cta_aria_label`}
+              name="cta_aria_label"
               type="text"
-              defaultValue={section.cta_label}
+              placeholder="Boş bırakılırsa buton metni kullanılır"
+              defaultValue={section.cta_aria_label}
             />
           </div>
-          <div className="admin-field">
-            <label htmlFor={`${section.key}-cta_href`}>Buton Bağlantısı</label>
-            <input
-              id={`${section.key}-cta_href`}
-              name="cta_href"
-              type="text"
-              defaultValue={section.cta_href}
-            />
+
+          <div className={styles.row}>
+            <div className={styles.toggleRow}>
+              <button
+                type="button"
+                className="admin-toggle"
+                data-on={ctaIsExternal}
+                onClick={() => setCtaIsExternal((v) => !v)}
+                aria-pressed={ctaIsExternal}
+              >
+                <span />
+              </button>
+              <span className={styles.toggleLabel}>Harici bağlantı (site dışı)</span>
+            </div>
+
+            <div className={styles.toggleRow}>
+              <button
+                type="button"
+                className="admin-toggle"
+                data-on={ctaTargetBlank}
+                onClick={() => setCtaTargetBlank((v) => !v)}
+                aria-pressed={ctaTargetBlank}
+              >
+                <span />
+              </button>
+              <span className={styles.toggleLabel}>Yeni sekmede aç</span>
+            </div>
+
+            <div className={styles.toggleRow}>
+              <button
+                type="button"
+                className="admin-toggle"
+                data-on={ctaActive}
+                onClick={() => setCtaActive((v) => !v)}
+                aria-pressed={ctaActive}
+              >
+                <span />
+              </button>
+              <span className={styles.toggleLabel}>
+                {ctaActive ? "Buton aktif" : "Buton gizli"}
+              </span>
+            </div>
           </div>
-        </div>
+        </>
       )}
 
       {config.layout && (

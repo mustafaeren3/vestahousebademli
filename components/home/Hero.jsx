@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import SectionCta, { sectionCtaVisible } from "@/components/SectionCta";
 import styles from "./Hero.module.css";
 
 export default function Hero({ section }) {
@@ -29,11 +29,18 @@ export default function Hero({ section }) {
         <Reveal delay={2}>
           <p className={styles.tagline}>{section.body}</p>
         </Reveal>
-        {section.cta_label && section.cta_href && (
+        {sectionCtaVisible(section) && (
           <Reveal delay={3}>
-            <Link href={section.cta_href} className="btn btn--on-dark" style={{ marginTop: 8 }}>
-              {section.cta_label}
-            </Link>
+            <SectionCta
+              href={section.cta_href}
+              label={section.cta_label}
+              ariaLabel={section.cta_aria_label}
+              isExternal={section.cta_is_external}
+              targetBlank={section.cta_target_blank}
+              active={section.cta_active}
+              className="btn btn--on-dark"
+              style={{ marginTop: 8 }}
+            />
           </Reveal>
         )}
       </div>

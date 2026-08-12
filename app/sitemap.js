@@ -23,21 +23,27 @@ export default async function sitemap() {
     priority: route === "" ? 1 : 0.7,
   }));
 
-  const postEntries = getAllPosts().map((post) => ({
+  const [allPosts, categories, tags] = await Promise.all([
+    getAllPosts(),
+    getAllCategories(),
+    getAllTags(),
+  ]);
+
+  const postEntries = allPosts.map((post) => ({
     url: `${siteConfig.url}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: "monthly",
     priority: 0.6,
   }));
 
-  const categoryEntries = getAllCategories().map((c) => ({
+  const categoryEntries = categories.map((c) => ({
     url: `${siteConfig.url}/blog/kategori/${c.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.5,
   }));
 
-  const tagEntries = getAllTags().map((t) => ({
+  const tagEntries = tags.map((t) => ({
     url: `${siteConfig.url}/blog/etiket/${t.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",

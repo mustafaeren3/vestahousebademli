@@ -16,12 +16,13 @@ import {
 import { siteConfig } from "@/lib/site";
 import styles from "./page.module.css";
 
-export function generateStaticParams() {
-  return getAllPosts().map((post) => ({ slug: post.slug }));
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
-export function generateMetadata({ params }) {
-  const post = getPostBySlug(params.slug);
+export async function generateMetadata({ params }) {
+  const post = await getPostBySlug(params.slug);
   if (!post) return {};
 
   const url = `${siteConfig.url}/blog/${post.slug}`;
@@ -48,11 +49,11 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function BlogPostPage({ params }) {
-  const post = getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }) {
+  const post = await getPostBySlug(params.slug);
   if (!post) notFound();
 
-  const related = getRelatedPosts(post, 3);
+  const related = await getRelatedPosts(post, 3);
   const date = new Date(post.date).toLocaleDateString("tr-TR", {
     day: "numeric",
     month: "long",

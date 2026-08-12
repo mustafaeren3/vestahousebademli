@@ -5,12 +5,14 @@ import PostGrid from "@/components/blog/PostGrid";
 import { getAllCategories, getPostsByCategory } from "@/lib/blog";
 import { siteConfig } from "@/lib/site";
 
-export function generateStaticParams() {
-  return getAllCategories().map((c) => ({ category: c.slug }));
+export async function generateStaticParams() {
+  const categories = await getAllCategories();
+  return categories.map((c) => ({ category: c.slug }));
 }
 
-export function generateMetadata({ params }) {
-  const category = getAllCategories().find((c) => c.slug === params.category);
+export async function generateMetadata({ params }) {
+  const categories = await getAllCategories();
+  const category = categories.find((c) => c.slug === params.category);
   if (!category) return {};
 
   return {
@@ -20,13 +22,13 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function CategoryPage({ params }) {
-  const category = getAllCategories().find((c) => c.slug === params.category);
+export default async function CategoryPage({ params }) {
+  const categories = await getAllCategories();
+  const category = categories.find((c) => c.slug === params.category);
   if (!category) notFound();
 
-  const posts = getPostsByCategory(params.category).map(
-    ({ html, faq, seoTitle, seoDescription, ...rest }) => rest
-  );
+  const categoryPosts = await getPostsByCategory(params.category);
+  const posts = categoryPosts.map(({ html, faq, seoTitle, seoDescription, ...rest }) => rest);
 
   return (
     <>

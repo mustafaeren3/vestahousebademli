@@ -1,11 +1,12 @@
-import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import PostGrid from "@/components/blog/PostGrid";
+import SectionCta, { sectionCtaVisible } from "@/components/SectionCta";
 import { getAllPosts } from "@/lib/blog";
 import styles from "./BlogTeaser.module.css";
 
-export default function BlogTeaser({ section }) {
-  const posts = getAllPosts()
+export default async function BlogTeaser({ section }) {
+  const allPosts = await getAllPosts();
+  const posts = allPosts
     .slice(0, 3)
     .map(({ html, faq, seoTitle, seoDescription, ...rest }) => rest);
 
@@ -21,11 +22,19 @@ export default function BlogTeaser({ section }) {
               {section.title}
             </h2>
           </Reveal>
-          <Reveal delay={1}>
-            <Link href={section.cta_href} className="btn btn--ghost">
-              {section.cta_label}
-            </Link>
-          </Reveal>
+          {sectionCtaVisible(section) && (
+            <Reveal delay={1}>
+              <SectionCta
+                href={section.cta_href}
+                label={section.cta_label}
+                ariaLabel={section.cta_aria_label}
+                isExternal={section.cta_is_external}
+                targetBlank={section.cta_target_blank}
+                active={section.cta_active}
+                className="btn btn--ghost"
+              />
+            </Reveal>
+          )}
         </div>
 
         <div className={styles.grid}>

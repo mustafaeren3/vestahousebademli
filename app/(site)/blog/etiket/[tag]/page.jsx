@@ -5,12 +5,14 @@ import PostGrid from "@/components/blog/PostGrid";
 import { getAllTags, getPostsByTag } from "@/lib/blog";
 import { siteConfig } from "@/lib/site";
 
-export function generateStaticParams() {
-  return getAllTags().map((t) => ({ tag: t.slug }));
+export async function generateStaticParams() {
+  const tags = await getAllTags();
+  return tags.map((t) => ({ tag: t.slug }));
 }
 
-export function generateMetadata({ params }) {
-  const tag = getAllTags().find((t) => t.slug === params.tag);
+export async function generateMetadata({ params }) {
+  const tags = await getAllTags();
+  const tag = tags.find((t) => t.slug === params.tag);
   if (!tag) return {};
 
   return {
@@ -20,13 +22,13 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function TagPage({ params }) {
-  const tag = getAllTags().find((t) => t.slug === params.tag);
+export default async function TagPage({ params }) {
+  const tags = await getAllTags();
+  const tag = tags.find((t) => t.slug === params.tag);
   if (!tag) notFound();
 
-  const posts = getPostsByTag(params.tag).map(
-    ({ html, faq, seoTitle, seoDescription, ...rest }) => rest
-  );
+  const tagPosts = await getPostsByTag(params.tag);
+  const posts = tagPosts.map(({ html, faq, seoTitle, seoDescription, ...rest }) => rest);
 
   return (
     <>

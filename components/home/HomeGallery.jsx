@@ -1,6 +1,6 @@
-import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import Gallery from "@/components/Gallery";
+import SectionCta, { sectionCtaVisible } from "@/components/SectionCta";
 import styles from "./HomeGallery.module.css";
 
 export default function HomeGallery({ section, images }) {
@@ -16,11 +16,19 @@ export default function HomeGallery({ section, images }) {
               {section.title}
             </h2>
           </Reveal>
-          <Reveal delay={1}>
-            <Link href={section.cta_href} className="btn btn--ghost">
-              {section.cta_label}
-            </Link>
-          </Reveal>
+          {sectionCtaVisible(section) && (
+            <Reveal delay={1}>
+              <SectionCta
+                href={section.cta_href}
+                label={section.cta_label}
+                ariaLabel={section.cta_aria_label}
+                isExternal={section.cta_is_external}
+                targetBlank={section.cta_target_blank}
+                active={section.cta_active}
+                className="btn btn--ghost"
+              />
+            </Reveal>
+          )}
         </div>
 
         <div className={styles.grid}>

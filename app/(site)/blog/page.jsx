@@ -11,10 +11,13 @@ export const metadata = {
   alternates: { canonical: `${siteConfig.url}/blog` },
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts().map(({ html, faq, seoTitle, seoDescription, ...rest }) => rest);
-  const categories = getAllCategories();
-  const tags = getAllTags();
+export default async function BlogPage() {
+  const [allPosts, categories, tags] = await Promise.all([
+    getAllPosts(),
+    getAllCategories(),
+    getAllTags(),
+  ]);
+  const posts = allPosts.map(({ html, faq, seoTitle, seoDescription, ...rest }) => rest);
 
   return (
     <>

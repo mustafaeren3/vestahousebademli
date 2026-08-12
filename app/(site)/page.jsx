@@ -28,6 +28,10 @@ export default async function HomePage() {
           text={sections.rooms.body}
           ctaHref={sections.rooms.cta_href}
           ctaLabel={sections.rooms.cta_label}
+          ctaAriaLabel={sections.rooms.cta_aria_label}
+          ctaIsExternal={sections.rooms.cta_is_external}
+          ctaTargetBlank={sections.rooms.cta_target_blank}
+          ctaActive={sections.rooms.cta_active}
           image={sections.rooms.image_path}
           imageAlt={sections.rooms.image_alt}
           reverse={sections.rooms.reverse}
@@ -41,6 +45,10 @@ export default async function HomePage() {
           text={sections.breakfast.body}
           ctaHref={sections.breakfast.cta_href}
           ctaLabel={sections.breakfast.cta_label}
+          ctaAriaLabel={sections.breakfast.cta_aria_label}
+          ctaIsExternal={sections.breakfast.cta_is_external}
+          ctaTargetBlank={sections.breakfast.cta_target_blank}
+          ctaActive={sections.breakfast.cta_active}
           image={sections.breakfast.image_path}
           imageAlt={sections.breakfast.image_alt}
           reverse={sections.breakfast.reverse}
@@ -54,6 +62,10 @@ export default async function HomePage() {
           text={sections.meyhanesi.body}
           ctaHref={sections.meyhanesi.cta_href}
           ctaLabel={sections.meyhanesi.cta_label}
+          ctaAriaLabel={sections.meyhanesi.cta_aria_label}
+          ctaIsExternal={sections.meyhanesi.cta_is_external}
+          ctaTargetBlank={sections.meyhanesi.cta_target_blank}
+          ctaActive={sections.meyhanesi.cta_active}
           image={sections.meyhanesi.image_path}
           imageAlt={sections.meyhanesi.image_alt}
           reverse={sections.meyhanesi.reverse}
