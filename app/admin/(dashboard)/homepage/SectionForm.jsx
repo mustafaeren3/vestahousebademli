@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { updateSection, uploadSectionImage, deleteSectionImage } from "@/lib/home/actions";
+import { SECTION_ALT_FALLBACKS } from "@/lib/home/altSuggestions";
 import ImageUploader from "@/components/admin/ImageUploader";
 import styles from "./SectionForm.module.css";
 
@@ -150,6 +151,7 @@ export default function SectionForm({ section, config }) {
             name="image_alt"
             type="text"
             defaultValue={section.image_alt}
+            placeholder={SECTION_ALT_FALLBACKS[section.key] || "Vesta House Bademli fotoğrafı"}
           />
         </div>
       )}

@@ -12,8 +12,8 @@ const TABS = [
   { key: "rooms", label: "Odalar", config: { title: true, body: true, cta: true, image: true, layout: true } },
   { key: "breakfast", label: "Kahvaltı", config: { title: true, body: true, cta: true, image: true, layout: true } },
   { key: "meyhanesi", label: "Liman Meyhanesi", config: { title: true, body: true, cta: true, image: true, layout: true } },
-  { key: "gallery_head", label: "Galeri", config: { title: true, cta: true } },
-  { key: "blog_teaser", label: "Blog", config: { title: true, cta: true } },
+  { key: "gallery_head", label: "Galeri", config: { title: true, body: true, cta: true } },
+  { key: "blog_teaser", label: "Blog", config: { title: true, body: true, cta: true } },
   { key: "closing_cta", label: "Kapanış", config: { body: true, cta: true, image: true } },
 ];
 

@@ -57,6 +57,7 @@
 }
 
 .uploadCard {
+  position: relative;
   aspect-ratio: 4 / 3;
   display: flex;
   align-items: center;
@@ -68,4 +69,20 @@
   font-size: 0.8rem;
   text-align: center;
   padding: 12px;
+  overflow: hidden;
+}
+
+.uploadPreviewImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.uploadPreviewLabel {
+  position: relative;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 4px 10px;
+  border-radius: 4px;
 }

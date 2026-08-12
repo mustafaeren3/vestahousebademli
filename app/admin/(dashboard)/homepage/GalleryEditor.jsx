@@ -25,6 +25,7 @@ import {
 } from "@/lib/home/actions";
 import ConfirmDialog from "@/components/admin/ConfirmDialog";
 import { optimizePhoto, PhotoOptimizeError } from "@/lib/uploads/optimizePhoto";
+import { GALLERY_ALT_FALLBACK } from "@/lib/home/altSuggestions";
 import styles from "./GalleryEditor.module.css";
 
 function readImageDimensions(file) {
@@ -93,7 +94,7 @@ function GalleryItem({ image, onDelete }) {
           value={alt}
           onChange={(e) => setAlt(e.target.value)}
           onBlur={handleBlur}
-          placeholder="Görsel açıklaması"
+          placeholder={GALLERY_ALT_FALLBACK}
         />
       </div>
     </div>
@@ -108,7 +109,15 @@ export default function GalleryEditor({ images: initialImages }) {
   const [confirmPending, setConfirmPending] = useState(false);
   const [stage, setStage] = useState("idle"); // idle | preparing | uploading
   const [error, setError] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
   const uploading = stage !== "idle";
+
+  function clearPreview() {
+    setPreviewUrl((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return null;
+    });
+  }
 
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
 
@@ -128,6 +137,7 @@ export default function GalleryEditor({ images: initialImages }) {
     if (!file) return;
 
     setError(null);
+    setPreviewUrl(URL.createObjectURL(file));
     setStage("preparing");
     let optimized;
     try {
@@ -135,6 +145,7 @@ export default function GalleryEditor({ images: initialImages }) {
     } catch (err) {
       setError(err instanceof PhotoOptimizeError ? err.message : "Görsel hazırlanamadı.");
       setStage("idle");
+      clearPreview();
       if (inputRef.current) inputRef.current.value = "";
       return;
     }
@@ -153,6 +164,7 @@ export default function GalleryEditor({ images: initialImages }) {
       setError("Görsel yüklenemedi.");
     } finally {
       setStage("idle");
+      clearPreview();
       if (inputRef.current) inputRef.current.value = "";
     }
   }
@@ -185,11 +197,20 @@ export default function GalleryEditor({ images: initialImages }) {
             ))}
 
             <label className={styles.uploadCard}>
-              {stage === "preparing"
-                ? "Görsel hazırlanıyor…"
-                : stage === "uploading"
-                  ? "Yükleniyor…"
-                  : "+ Görsel Ekle"}
+              {previewUrl && (
+                // Local blob: preview of the file just picked, shown while it's
+                // being optimized/uploaded -- plain <img> since next/image
+                // can't handle a blob: URL.
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={previewUrl} alt="" className={styles.uploadPreviewImg} />
+              )}
+              <span className={previewUrl ? styles.uploadPreviewLabel : undefined}>
+                {stage === "preparing"
+                  ? "Görsel hazırlanıyor…"
+                  : stage === "uploading"
+                    ? "Yükleniyor…"
+                    : "+ Görsel Ekle"}
+              </span>
               <input
                 ref={inputRef}
                 type="file"

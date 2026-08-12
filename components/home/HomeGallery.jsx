@@ -15,6 +15,11 @@ export default function HomeGallery({ section, images }) {
             <h2 className="heading-lg" style={{ marginTop: 18 }}>
               {section.title}
             </h2>
+            {section.body && (
+              <p className="body-lg" style={{ marginTop: 14, maxWidth: 640 }}>
+                {section.body}
+              </p>
+            )}
           </Reveal>
           {sectionCtaVisible(section) && (
             <Reveal delay={1}>
