@@ -1,0 +1,124 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.rowMain {
+  flex: 1;
+  min-width: 0;
+}
+
+.rowHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.url {
+  margin-top: 2px;
+  font-size: 0.74rem;
+  color: var(--color-ink-soft);
+}
+
+.healthBadge {
+  display: inline-flex;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.health_iyi {
+  background: #eef0e5;
+  color: var(--color-olive-dark);
+}
+
+.health_iyilestirilebilir {
+  background: #f2ecdd;
+  color: #9a6b1f;
+}
+
+.health_eksik {
+  background: #f6e3e0;
+  color: #b3432b;
+}
+
+.draftBadge {
+  display: inline-flex;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: #ececec;
+  color: var(--color-ink-soft);
+}
+
+.fieldsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.fieldLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+.fieldValue {
+  font-size: 0.82rem;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.charCount {
+  font-size: 0.7rem;
+  color: var(--color-ink-soft);
+  margin-top: 2px;
+}
+
+.findings {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  font-size: 0.78rem;
+}
+
+.issueItem {
+  color: #b3432b;
+}
+
+.suggestionItem {
+  color: #9a6b1f;
+}
+
+.actions {
+  flex-shrink: 0;
+}

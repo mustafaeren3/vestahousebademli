@@ -139,3 +139,41 @@
     display: flex;
   }
 }
+
+.railWrap {
+  margin-top: 14px;
+}
+
+.railLabel {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  margin-bottom: 8px;
+}
+
+.rail {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rail::-webkit-scrollbar {
+  display: none;
+}
+
+.railThumb {
+  position: relative;
+  flex: 0 0 96px;
+  height: 72px;
+  border-radius: 2px;
+  overflow: hidden;
+  border: none;
+  padding: 0;
+  cursor: zoom-in;
+  background: var(--color-cream-deep);
+}

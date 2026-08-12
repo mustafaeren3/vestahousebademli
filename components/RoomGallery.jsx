@@ -49,6 +49,42 @@ function MobileStrip({ images, roomTitle, onOpen }) {
   );
 }
 
+// Always-visible (no display:none at any viewport, no sr-only trick) strip
+// covering every gallery photo -- the mosaic above only ever puts 5 photos
+// (cover + 4 tiles) in view, and the rest previously only existed inside
+// the click-triggered Lightbox, which a crawler won't open. This renders
+// as a real, useful "browse all photos" rail so every photo is both a
+// genuine on-page feature and a real <Image> present in server-rendered
+// HTML regardless of viewport.
+function ThumbnailRail({ images, roomTitle, onOpen }) {
+  if (images.length <= 5) return null;
+
+  return (
+    <div className={styles.railWrap}>
+      <span className={styles.railLabel}>Tüm Fotoğraflar ({images.length})</span>
+      <div className={styles.rail}>
+        {images.map((img, i) => (
+          <button
+            key={img.id}
+            type="button"
+            className={styles.railThumb}
+            onClick={() => onOpen(i)}
+            aria-label={`${roomTitle} - fotoğraf ${i + 1}'i büyüt`}
+          >
+            <Image
+              src={img.image_url}
+              alt={img.alt_text || roomTitle}
+              fill
+              sizes="120px"
+              style={{ objectFit: "cover" }}
+            />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function RoomGallery({ images, roomTitle }) {
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
@@ -115,6 +151,8 @@ export default function RoomGallery({ images, roomTitle }) {
             Tüm Fotoğrafları Göster ({images.length})
           </button>
         )}
+
+        <ThumbnailRail images={images} roomTitle={roomTitle} onOpen={setLightboxIndex} />
       </div>
 
       <AnimatePresence>

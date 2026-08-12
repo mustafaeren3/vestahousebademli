@@ -44,6 +44,13 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],
+    // Explicit copy of Next 14.2.35's own defaults (verified against
+    // node_modules/next/dist/shared/lib/image-config.js) -- not a
+    // behavior change. Written out so seoImageUrl()'s fixed w=1920 (used
+    // for OG tags and the image sitemap) can't silently start 400ing if
+    // this list is ever customized without remembering that dependency.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: supabaseHostname
       ? [
           {

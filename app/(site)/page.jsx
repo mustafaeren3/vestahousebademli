@@ -6,6 +6,24 @@ import HomeGallery from "@/components/home/HomeGallery";
 import BlogTeaser from "@/components/home/BlogTeaser";
 import ClosingCta from "@/components/home/ClosingCta";
 import { getHomeSections, getHomePillars, getHomeGalleryImages } from "@/lib/home/queries";
+import { getSeoPage } from "@/lib/seo/queries";
+import { buildPageMetadata } from "@/lib/seo/buildMetadata";
+import { getSiteSettings } from "@/lib/settings/queries";
+import { siteConfig } from "@/lib/site";
+
+export async function generateMetadata() {
+  const [seoRow, settings] = await Promise.all([getSeoPage("home"), getSiteSettings()]);
+  return buildPageMetadata({
+    seoRow,
+    path: "/",
+    // Matches the root layout's own pre-Faz-5 title exactly, so this is the
+    // fallback whenever no seo_pages row/override exists.
+    fallbackTitle: `${settings.name} | ${settings.tagline}`,
+    fallbackDescription: siteConfig.description,
+    fallbackImage: "/images/hero-tas-ev-aksam.jpg",
+    titleMode: "absolute",
+  });
+}
 
 export default async function HomePage() {
   const [sections, pillars, galleryImages] = await Promise.all([

@@ -3,16 +3,22 @@ import ProseBlock from "@/components/ProseBlock";
 import RoomCard from "@/components/RoomCard";
 import FeatureSplit from "@/components/FeatureSplit";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { siteConfig } from "@/lib/site";
 import { getRooms, getRoomCover } from "@/lib/rooms/queries";
+import { getSeoPage } from "@/lib/seo/queries";
+import { buildPageMetadata } from "@/lib/seo/buildMetadata";
 import styles from "@/components/RoomsGrid.module.css";
 
-export const metadata = {
-  title: "Odalar",
-  description:
-    "Vesta House Bademli'de taş duvarlı üç oda: Taş Oda, Zeytin Odası ve Avlu Odası. Toplam 3 oda, 6 yatak kapasiteli butik bir taş ev.",
-  alternates: { canonical: `${siteConfig.url}/odalar` },
-};
+export async function generateMetadata() {
+  const seoRow = await getSeoPage("odalar");
+  return buildPageMetadata({
+    seoRow,
+    path: "/odalar",
+    fallbackTitle: "Odalar",
+    fallbackDescription:
+      "Vesta House Bademli'de taş duvarlı üç oda: Taş Oda, Zeytin Odası ve Avlu Odası. Toplam 3 oda, 6 yatak kapasiteli butik bir taş ev.",
+    fallbackImage: "/images/oda-yatak-detay.jpg",
+  });
+}
 
 export default async function OdalarPage() {
   const rooms = await getRooms();

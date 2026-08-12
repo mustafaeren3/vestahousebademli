@@ -3,17 +3,57 @@ import ProseBlock from "@/components/ProseBlock";
 import FeatureSplit from "@/components/FeatureSplit";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings/queries";
+import { getSeoPage } from "@/lib/seo/queries";
+import { buildPageMetadata } from "@/lib/seo/buildMetadata";
 
-export const metadata = {
-  title: "Liman Meyhanesi",
-  description:
-    "Liman Meyhanesi, Vesta House Bademli'nin taş avlusunda akşamları açılan Ege meyhanesi. Günün balığı, mezeler ve uzun bir akşam sofrası.",
-  alternates: { canonical: `${siteConfig.url}/liman-meyhanesi` },
-};
+export async function generateMetadata() {
+  const seoRow = await getSeoPage("liman-meyhanesi");
+  return buildPageMetadata({
+    seoRow,
+    path: "/liman-meyhanesi",
+    fallbackTitle: "Liman Meyhanesi",
+    fallbackDescription:
+      "Liman Meyhanesi, Vesta House Bademli'nin taş avlusunda akşamları açılan Ege meyhanesi. Günün balığı, mezeler ve uzun bir akşam sofrası.",
+    fallbackImage: "/images/avlu-hasir-koltuk.jpg",
+  });
+}
 
-export default function LimanMeyhanesiPage() {
+export default async function LimanMeyhanesiPage() {
+  const settings = await getSiteSettings();
+
+  // Real data only: name/address/phone come from site_settings (the same
+  // source the rest of the site already uses), servesCuisine is quoted from
+  // this page's own real copy ("Ege mezeleri, günün balığı" below). No
+  // rating, price range, or menu items are asserted here -- there's no
+  // single verified source for those yet, and schema.org doesn't require
+  // them.
+  const restaurantJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    name: siteConfig.subBrand,
+    description:
+      "Vesta House Bademli'nin taş avlusunda akşamları açılan Ege meyhanesi.",
+    url: `${siteConfig.url}/liman-meyhanesi`,
+    image: `${siteConfig.url}/images/vesta-house-tabela.jpg`,
+    servesCuisine: "Ege Mutfağı",
+    telephone: settings.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: settings.address_line1,
+      addressLocality: "Dikili",
+      addressRegion: "İzmir",
+      addressCountry: "TR",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantJsonLd) }}
+      />
+
       <PageHero
         eyebrow="Alt Marka"
         title="Liman Meyhanesi"

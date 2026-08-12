@@ -4,15 +4,21 @@ import ProseBlock from "@/components/ProseBlock";
 import FeatureSplit from "@/components/FeatureSplit";
 import Reveal from "@/components/Reveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { siteConfig } from "@/lib/site";
+import { getSeoPage } from "@/lib/seo/queries";
+import { buildPageMetadata } from "@/lib/seo/buildMetadata";
 import styles from "./page.module.css";
 
-export const metadata = {
-  title: "Hakkımızda",
-  description:
-    "Vesta House Bademli'nin hikâyesi: Bademli'de bir taş evin, aslına sadık kalınarak onarılması.",
-  alternates: { canonical: `${siteConfig.url}/hakkimizda` },
-};
+export async function generateMetadata() {
+  const seoRow = await getSeoPage("hakkimizda");
+  return buildPageMetadata({
+    seoRow,
+    path: "/hakkimizda",
+    fallbackTitle: "Hakkımızda",
+    fallbackDescription:
+      "Vesta House Bademli'nin hikâyesi: Bademli'de bir taş evin, aslına sadık kalınarak onarılması.",
+    fallbackImage: "/images/oyma-kapi-detay.jpg",
+  });
+}
 
 export default function HakkimizdaPage() {
   return (

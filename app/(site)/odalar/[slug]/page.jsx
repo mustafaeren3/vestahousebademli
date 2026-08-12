@@ -5,12 +5,9 @@ import RoomGallery from "@/components/RoomGallery";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
 import { getRooms, getRoomBySlug, getRoomGallery, getRoomCover } from "@/lib/rooms/queries";
+import { seoImageUrl } from "@/lib/seo/imageUrl";
+import { withBrandSuffix } from "@/lib/seo/suggest";
 import styles from "./page.module.css";
-
-function absoluteUrl(url) {
-  if (!url) return null;
-  return url.startsWith("http") ? url : `${siteConfig.url}${url}`;
-}
 
 export async function generateStaticParams() {
   const rooms = await getRooms();
@@ -23,23 +20,28 @@ export async function generateMetadata({ params }) {
 
   const cover = getRoomCover(room);
   const url = `${siteConfig.url}/odalar/${room.slug}`;
-  const description = room.description || siteConfig.description;
-  const imageUrl = absoluteUrl(cover?.url);
+  const title = room.seo_title || room.title;
+  const description = room.seo_description || room.description || siteConfig.description;
+  // seoImageUrl proxies the raw Supabase Storage URL through this site's own
+  // /_next/image endpoint -- the raw URL carries an x-robots-tag: none
+  // header (confirmed via curl against production Storage), which tells
+  // Google not to index it; the proxy doesn't forward that header.
+  const imageUrl = seoImageUrl(cover?.url);
 
   return {
-    title: room.title,
+    title,
     description,
     alternates: { canonical: url },
     openGraph: {
       type: "website",
       url,
-      title: room.title,
+      title: withBrandSuffix(title),
       description,
       images: imageUrl ? [{ url: imageUrl, alt: cover.alt }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: room.title,
+      title: withBrandSuffix(title),
       description,
       images: imageUrl ? [imageUrl] : undefined,
     },
@@ -59,7 +61,16 @@ export default async function RoomDetailPage({ params }) {
     name: room.title,
     description: room.description,
     url,
-    image: gallery.map((img) => absoluteUrl(img.image_url)),
+    // Full ImageObject entries (not bare URL strings) so each gallery photo
+    // carries its real alt text as a caption -- helps Google associate the
+    // right description with the right room photo. Uses the proxied URL
+    // (see seoImageUrl) so the listed image isn't the x-robots-tag-blocked
+    // raw Storage URL.
+    image: gallery.map((img) => ({
+      "@type": "ImageObject",
+      contentUrl: seoImageUrl(img.image_url),
+      caption: img.alt_text || room.title,
+    })),
   };
 
   return (

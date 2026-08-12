@@ -3,15 +3,21 @@ import ProseBlock from "@/components/ProseBlock";
 import MenuSection from "@/components/MenuSection";
 import Reveal from "@/components/Reveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { siteConfig } from "@/lib/site";
+import { getSeoPage } from "@/lib/seo/queries";
+import { buildPageMetadata } from "@/lib/seo/buildMetadata";
 import styles from "./page.module.css";
 
-export const metadata = {
-  title: "Kahvaltı",
-  description:
-    "Vesta House Bademli'de serpme köy kahvaltısı: yöresel peynirler, ev yapımı reçeller ve zeytin ağacının gölgesinde uzun bir sabah.",
-  alternates: { canonical: `${siteConfig.url}/kahvalti` },
-};
+export async function generateMetadata() {
+  const seoRow = await getSeoPage("kahvalti");
+  return buildPageMetadata({
+    seoRow,
+    path: "/kahvalti",
+    fallbackTitle: "Kahvaltı",
+    fallbackDescription:
+      "Vesta House Bademli'de serpme köy kahvaltısı: yöresel peynirler, ev yapımı reçeller ve zeytin ağacının gölgesinde uzun bir sabah.",
+    fallbackImage: "/images/avlu-hasir-koltuk.jpg",
+  });
+}
 
 const inclusions = [
   {

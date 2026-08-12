@@ -10,6 +10,7 @@ const LINKS = [
   { href: "/admin/homepage", label: "Anasayfa" },
   { href: "/admin/rooms", label: "Odalar" },
   { href: "/admin/blog", label: "Blog" },
+  { href: "/admin/seo", label: "SEO" },
   { href: "/admin/media", label: "Medya Kütüphanesi" },
   { href: "/admin/site-settings", label: "Site Ayarları" },
   { href: "/admin/preview", label: "Canlı Önizleme" },

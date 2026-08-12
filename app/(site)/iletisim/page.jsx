@@ -3,14 +3,21 @@ import Reveal from "@/components/Reveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { IconPhone, IconMail } from "@/components/icons";
 import { siteConfig } from "@/lib/site";
+import { getSeoPage } from "@/lib/seo/queries";
+import { buildPageMetadata } from "@/lib/seo/buildMetadata";
 import styles from "./page.module.css";
 
-export const metadata = {
-  title: "İletişim",
-  description:
-    "Vesta House Bademli'ye ulaşın: Bademli Mahallesi, Dikili / İzmir. Telefon, e-posta, WhatsApp ve Instagram üzerinden bize yazabilirsiniz.",
-  alternates: { canonical: `${siteConfig.url}/iletisim` },
-};
+export async function generateMetadata() {
+  const seoRow = await getSeoPage("iletisim");
+  return buildPageMetadata({
+    seoRow,
+    path: "/iletisim",
+    fallbackTitle: "İletişim",
+    fallbackDescription:
+      "Vesta House Bademli'ye ulaşın: Bademli Mahallesi, Dikili / İzmir. Telefon, e-posta, WhatsApp ve Instagram üzerinden bize yazabilirsiniz.",
+    fallbackImage: "/images/oyma-kapi-detay.jpg",
+  });
+}
 
 export default function IletisimPage() {
   return (

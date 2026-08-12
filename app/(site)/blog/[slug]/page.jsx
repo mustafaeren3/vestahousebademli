@@ -14,6 +14,8 @@ import {
   tagSlug,
 } from "@/lib/blog";
 import { siteConfig } from "@/lib/site";
+import { seoImageUrl } from "@/lib/seo/imageUrl";
+import { withBrandSuffix } from "@/lib/seo/suggest";
 import styles from "./page.module.css";
 
 export async function generateStaticParams() {
@@ -26,7 +28,14 @@ export async function generateMetadata({ params }) {
   if (!post) return {};
 
   const url = `${siteConfig.url}/blog/${post.slug}`;
-  const imageUrl = `${siteConfig.url}${post.coverImage}`;
+  // seoImageUrl handles both post.coverImage shapes correctly: a relative
+  // /images/... path (the 6 posts migrated from markdown) and a full
+  // Supabase Storage URL (any cover uploaded via the admin editor) --
+  // the old `${siteConfig.url}${post.coverImage}` would silently produce a
+  // broken double-prefixed URL for the latter, since post.coverImage is
+  // already absolute in that case. It also proxies Supabase URLs around
+  // their x-robots-tag: none header (see lib/seo/imageUrl.js).
+  const imageUrl = seoImageUrl(post.coverImage);
 
   return {
     title: post.seoTitle,
@@ -35,16 +44,16 @@ export async function generateMetadata({ params }) {
     openGraph: {
       type: "article",
       url,
-      title: post.seoTitle,
+      title: withBrandSuffix(post.seoTitle),
       description: post.seoDescription,
       publishedTime: post.date,
-      images: [{ url: imageUrl, width: 1200, height: 800, alt: post.coverImageAlt }],
+      images: imageUrl ? [{ url: imageUrl, width: 1200, height: 800, alt: post.coverImageAlt }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: post.seoTitle,
+      title: withBrandSuffix(post.seoTitle),
       description: post.seoDescription,
-      images: [imageUrl],
+      images: imageUrl ? [imageUrl] : undefined,
     },
   };
 }
@@ -66,9 +75,9 @@ export default async function BlogPostPage({ params }) {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
-    image: `${siteConfig.url}${post.coverImage}`,
+    image: seoImageUrl(post.coverImage),
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: post.updatedAt,
     author: { "@type": "Organization", name: siteConfig.name },
     publisher: {
       "@type": "Organization",

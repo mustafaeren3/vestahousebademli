@@ -5,13 +5,20 @@ import FeatureSplit from "@/components/FeatureSplit";
 import Reveal from "@/components/Reveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
+import { getSeoPage } from "@/lib/seo/queries";
+import { buildPageMetadata } from "@/lib/seo/buildMetadata";
 
-export const metadata = {
-  title: "Bademli",
-  description:
-    "Bademli: İzmir'in Dikili ilçesine bağlı, zeytin ağaçları ve sakin sokaklarıyla bilinen küçük bir Ege köyü.",
-  alternates: { canonical: `${siteConfig.url}/bademli` },
-};
+export async function generateMetadata() {
+  const seoRow = await getSeoPage("bademli");
+  return buildPageMetadata({
+    seoRow,
+    path: "/bademli",
+    fallbackTitle: "Bademli",
+    fallbackDescription:
+      "Bademli: İzmir'in Dikili ilçesine bağlı, zeytin ağaçları ve sakin sokaklarıyla bilinen küçük bir Ege köyü.",
+    fallbackImage: "/images/hero-tas-ev-aksam.jpg",
+  });
+}
 
 export default function BademliPage() {
   return (

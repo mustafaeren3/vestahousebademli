@@ -2,14 +2,20 @@ import PageHero from "@/components/PageHero";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import BlogSearch from "@/components/blog/BlogSearch";
 import { getAllPosts, getAllCategories, getAllTags } from "@/lib/blog";
-import { siteConfig } from "@/lib/site";
+import { getSeoPage } from "@/lib/seo/queries";
+import { buildPageMetadata } from "@/lib/seo/buildMetadata";
 
-export const metadata = {
-  title: "Blog",
-  description:
-    "Dikili ve Bademli üzerine yazılar: gezi rehberleri, Ege mutfağı, zeytin hasadı ve Vesta House Bademli'den notlar.",
-  alternates: { canonical: `${siteConfig.url}/blog` },
-};
+export async function generateMetadata() {
+  const seoRow = await getSeoPage("blog");
+  return buildPageMetadata({
+    seoRow,
+    path: "/blog",
+    fallbackTitle: "Blog",
+    fallbackDescription:
+      "Dikili ve Bademli üzerine yazılar: gezi rehberleri, Ege mutfağı, zeytin hasadı ve Vesta House Bademli'den notlar.",
+    fallbackImage: "/images/tas-duvar-oyma-pencere.jpg",
+  });
+}
 
 export default async function BlogPage() {
   const [allPosts, categories, tags] = await Promise.all([

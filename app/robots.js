@@ -7,6 +7,6 @@ export default function robots() {
       allow: "/",
       disallow: ["/admin", "/admin/"],
     },
-    sitemap: `${siteConfig.url}/sitemap.xml`,
+    sitemap: [`${siteConfig.url}/sitemap.xml`, `${siteConfig.url}/image-sitemap.xml`],
   };
 }
