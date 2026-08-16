@@ -6,10 +6,15 @@ import { siteConfig } from "@/lib/site";
 import { getSiteSettings } from "@/lib/settings/queries";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
-import { getPageSection } from "@/lib/pages/queries";
-import { getInteriorPage } from "@/lib/pages/staticPages";
+import { getPageSection, getPageSections } from "@/lib/pages/queries";
+import { getInteriorPage, getPageBodySection } from "@/lib/pages/staticPages";
 
-const FALLBACK = getInteriorPage("liman-meyhanesi").fallback;
+const PAGE_KEY = "liman-meyhanesi";
+const FALLBACK = getInteriorPage(PAGE_KEY).fallback;
+const F_INTRO = getPageBodySection(PAGE_KEY, "intro").fallback;
+const F_SOFRA = getPageBodySection(PAGE_KEY, "feature_sofra").fallback;
+const F_MEKAN = getPageBodySection(PAGE_KEY, "feature_mekan").fallback;
+const F_CLOSING = getPageBodySection(PAGE_KEY, "closing").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("liman-meyhanesi");
@@ -24,10 +29,15 @@ export async function generateMetadata() {
 }
 
 export default async function LimanMeyhanesiPage() {
-  const [settings, hero] = await Promise.all([
+  const [settings, hero, sections] = await Promise.all([
     getSiteSettings(),
-    getPageSection("liman-meyhanesi", "hero"),
+    getPageSection(PAGE_KEY, "hero"),
+    getPageSections(PAGE_KEY),
   ]);
+  const intro = sections.intro;
+  const sofra = sections.feature_sofra;
+  const mekan = sections.feature_mekan;
+  const closing = sections.closing;
 
   // Real data only: name/address/phone come from site_settings (the same
   // source the rest of the site already uses), servesCuisine is quoted from
@@ -74,33 +84,33 @@ export default async function LimanMeyhanesiPage() {
       <Breadcrumbs items={[{ label: "Liman Meyhanesi", href: "/liman-meyhanesi" }]} />
 
       <ProseBlock
-        eyebrow="Akşam Ritüeli"
-        lead="Vesta House'un misafiri olmasanız da, Liman Meyhanesi'nin kapısı size açık."
-        body="Günün balığı, Ege usulü mezeler ve ızgaradan sofraya taşınanlar — Liman Meyhanesi, uzun bir akşam yemeği anlayışıyla kuruldu. Menü mevsime göre değişir."
+        eyebrow={intro?.eyebrow || F_INTRO.eyebrow}
+        lead={intro?.subtitle || F_INTRO.subtitle}
+        body={intro?.body || F_INTRO.body}
       />
 
       <FeatureSplit
-        eyebrow="Sofra"
-        title="Ege mezeleri, günün balığı"
-        text="Zeytinyağlılar, deniz ürünleri ve ızgaradan gelen sıcaklar — Liman Meyhanesi'nin sofrası, mevsimine göre şekillenen sade bir Ege mutfağını takip eder. Rakı eşliğinde, uzayan bir akşam için."
-        image="/images/vesta-house-tabela.jpg"
-        imageAlt="Vesta House'un taş duvarında akşam ışığında parlayan tabelası"
+        eyebrow={sofra?.eyebrow || F_SOFRA.eyebrow}
+        title={sofra?.title || F_SOFRA.title}
+        text={sofra?.body || F_SOFRA.body}
+        image={sofra?.image_path || F_SOFRA.image_path}
+        imageAlt={sofra?.image_alt || F_SOFRA.image_alt}
       />
 
       <FeatureSplit
-        eyebrow="Mekân"
-        title="Taş duvarlar arasında bir avlu sofrası"
-        text="Masalar, evin taş cephesine ve zeytin ağacına bakar. Gündüz sakin bir avlu, akşamları bir meyhane."
-        image="/images/hero-tas-ev-aksam.jpg"
-        imageAlt="Vesta House Bademli'nin akşam ışığında taş cephesi"
-        reverse
-        tone="dark"
+        eyebrow={mekan?.eyebrow || F_MEKAN.eyebrow}
+        title={mekan?.title || F_MEKAN.title}
+        text={mekan?.body || F_MEKAN.body}
+        image={mekan?.image_path || F_MEKAN.image_path}
+        imageAlt={mekan?.image_alt || F_MEKAN.image_alt}
+        reverse={mekan ? mekan.reverse : F_MEKAN.reverse}
+        tone={mekan?.tone || F_MEKAN.tone}
       />
 
       <ProseBlock
-        eyebrow="Bademli, Dikili"
-        lead="Rezervasyon için doğrudan ulaşabilirsiniz."
-        body="Liman Meyhanesi'nde masa sayısı sınırlıdır. Kalabalık akşamlarda yer ayırtmak için iletişim bilgilerimizden bize ulaşmanız yeterli."
+        eyebrow={closing?.eyebrow || F_CLOSING.eyebrow}
+        lead={closing?.subtitle || F_CLOSING.subtitle}
+        body={closing?.body || F_CLOSING.body}
       />
     </>
   );

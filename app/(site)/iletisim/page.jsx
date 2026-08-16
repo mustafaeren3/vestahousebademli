@@ -2,14 +2,16 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { IconPhone, IconMail } from "@/components/icons";
-import { siteConfig } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings/queries";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
-import { getPageSection } from "@/lib/pages/queries";
-import { getInteriorPage } from "@/lib/pages/staticPages";
+import { getPageSection, getPageSections } from "@/lib/pages/queries";
+import { getInteriorPage, getPageBodySection } from "@/lib/pages/staticPages";
 import styles from "./page.module.css";
 
-const FALLBACK = getInteriorPage("iletisim").fallback;
+const PAGE_KEY = "iletisim";
+const FALLBACK = getInteriorPage(PAGE_KEY).fallback;
+const F_INTRO = getPageBodySection(PAGE_KEY, "intro").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("iletisim");
@@ -24,7 +26,12 @@ export async function generateMetadata() {
 }
 
 export default async function IletisimPage() {
-  const hero = await getPageSection("iletisim", "hero");
+  const [settings, hero, sections] = await Promise.all([
+    getSiteSettings(),
+    getPageSection(PAGE_KEY, "hero"),
+    getPageSections(PAGE_KEY),
+  ]);
+  const intro = sections.intro;
 
   return (
     <>
@@ -45,19 +52,18 @@ export default async function IletisimPage() {
         <div className="container">
           <div className={styles.location}>
             <Reveal>
-              <span className="eyebrow">Konum</span>
+              <span className="eyebrow">{intro?.eyebrow || F_INTRO.eyebrow}</span>
               <p className={`body-lg ${styles.locationText}`}>
-                Vesta House Bademli, Bademli Mahallesi&apos;nde; denize, koylara ve
-                köy merkezine kısa mesafede yer alır.
+                {intro?.body || F_INTRO.body}
               </p>
             </Reveal>
 
             <Reveal delay={1}>
               <div className="divider divider--center" />
               <p className={styles.address}>
-                {siteConfig.address.line1}
+                {settings.address_line1}
                 <br />
-                {siteConfig.address.district}
+                {settings.address_district}
               </p>
             </Reveal>
           </div>
@@ -77,8 +83,8 @@ export default async function IletisimPage() {
                 <div>
                   <div className={styles.infoLabel}>Telefon</div>
                   <div className={styles.infoValue}>
-                    <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}>
-                      {siteConfig.contact.phone}
+                    <a href={`tel:${settings.phone.replace(/\s/g, "")}`}>
+                      {settings.phone}
                     </a>
                   </div>
                 </div>
@@ -89,8 +95,8 @@ export default async function IletisimPage() {
                 <div>
                   <div className={styles.infoLabel}>E-posta</div>
                   <div className={styles.infoValue}>
-                    <a href={`mailto:${siteConfig.contact.email}`}>
-                      {siteConfig.contact.email}
+                    <a href={`mailto:${settings.email}`}>
+                      {settings.email}
                     </a>
                   </div>
                 </div>
@@ -99,10 +105,10 @@ export default async function IletisimPage() {
 
             <Reveal delay={3}>
               <div className={styles.socials}>
-                <a href={siteConfig.contact.whatsapp} target="_blank" rel="noreferrer noopener" className="btn btn--ghost">
+                <a href={settings.whatsapp} target="_blank" rel="noreferrer noopener" className="btn btn--ghost">
                   WhatsApp
                 </a>
-                <a href={siteConfig.contact.instagram} target="_blank" rel="noreferrer noopener" className="btn btn--ghost">
+                <a href={settings.instagram} target="_blank" rel="noreferrer noopener" className="btn btn--ghost">
                   Instagram
                 </a>
               </div>

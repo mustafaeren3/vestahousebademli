@@ -6,11 +6,14 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { getRooms, getRoomCover } from "@/lib/rooms/queries";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
-import { getPageSection } from "@/lib/pages/queries";
-import { getInteriorPage } from "@/lib/pages/staticPages";
+import { getPageSection, getPageSections } from "@/lib/pages/queries";
+import { getInteriorPage, getPageBodySection } from "@/lib/pages/staticPages";
 import styles from "@/components/RoomsGrid.module.css";
 
-const FALLBACK = getInteriorPage("odalar").fallback;
+const PAGE_KEY = "odalar";
+const FALLBACK = getInteriorPage(PAGE_KEY).fallback;
+const F_INTRO = getPageBodySection(PAGE_KEY, "intro").fallback;
+const F_AVLU = getPageBodySection(PAGE_KEY, "feature_avlu").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("odalar");
@@ -25,7 +28,13 @@ export async function generateMetadata() {
 }
 
 export default async function OdalarPage() {
-  const [rooms, hero] = await Promise.all([getRooms(), getPageSection("odalar", "hero")]);
+  const [rooms, hero, sections] = await Promise.all([
+    getRooms(),
+    getPageSection(PAGE_KEY, "hero"),
+    getPageSections(PAGE_KEY),
+  ]);
+  const intro = sections.intro;
+  const avlu = sections.feature_avlu;
 
   return (
     <>
@@ -42,8 +51,8 @@ export default async function OdalarPage() {
       <Breadcrumbs items={[{ label: "Odalar", href: "/odalar" }]} />
 
       <ProseBlock
-        lead="Her odanın kendine özgü bir görünümü vardır."
-        body="Odalar birbirinin aynısı değildir; taş duvarlar, sade bir döşeme ve dışarıdan gelen zeytin ve deniz kokusu ortaktır."
+        lead={intro?.subtitle || F_INTRO.subtitle}
+        body={intro?.body || F_INTRO.body}
       />
 
       <section className="section section--tight">
@@ -70,13 +79,13 @@ export default async function OdalarPage() {
       </section>
 
       <FeatureSplit
-        eyebrow="Ortak Alan"
-        title="Zeytin ağacının altında bir avlu"
-        text="Odaların dışında bir avlu var: hasır koltuklar, taş zemin ve günün her saatinde değişen bir gölge. Kahvaltı da, akşamüstü sohbeti de burada, ağacın altında geçer."
-        image="/images/avlu-hasir-koltuk.jpg"
-        imageAlt="Vesta House Bademli'nin zeytin ağacı gölgesindeki hasır koltuklu avlusu"
-        reverse
-        tone="dark"
+        eyebrow={avlu?.eyebrow || F_AVLU.eyebrow}
+        title={avlu?.title || F_AVLU.title}
+        text={avlu?.body || F_AVLU.body}
+        image={avlu?.image_path || F_AVLU.image_path}
+        imageAlt={avlu?.image_alt || F_AVLU.image_alt}
+        reverse={avlu ? avlu.reverse : F_AVLU.reverse}
+        tone={avlu?.tone || F_AVLU.tone}
       />
     </>
   );

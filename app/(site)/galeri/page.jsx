@@ -4,11 +4,13 @@ import Gallery from "@/components/Gallery";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
-import { getPageSection } from "@/lib/pages/queries";
-import { getInteriorPage } from "@/lib/pages/staticPages";
+import { getPageSection, getPageSections, getPageGalleryImages } from "@/lib/pages/queries";
+import { getInteriorPage, getPageBodySection } from "@/lib/pages/staticPages";
 import { GALERI_IMAGES } from "@/lib/galeriImages";
 
-const FALLBACK = getInteriorPage("galeri").fallback;
+const PAGE_KEY = "galeri";
+const FALLBACK = getInteriorPage(PAGE_KEY).fallback;
+const F_INTRO = getPageBodySection(PAGE_KEY, "intro").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("galeri");
@@ -23,7 +25,16 @@ export async function generateMetadata() {
 }
 
 export default async function GaleriPage() {
-  const hero = await getPageSection("galeri", "hero");
+  const [hero, sections, dbImages] = await Promise.all([
+    getPageSection(PAGE_KEY, "hero"),
+    getPageSections(PAGE_KEY),
+    getPageGalleryImages(PAGE_KEY),
+  ]);
+  const intro = sections.intro;
+  const images =
+    dbImages.length > 0
+      ? dbImages.map((img) => ({ src: img.image_path, alt: img.alt, width: img.width, height: img.height }))
+      : GALERI_IMAGES;
 
   return (
     <>
@@ -40,14 +51,11 @@ export default async function GaleriPage() {
 
       <Breadcrumbs items={[{ label: "Galeri", href: "/galeri" }]} />
 
-      <ProseBlock
-        body="Aşağıdaki kareler, stüdyo ışığı olmadan, evin kendi gerçek hâliyle çekildi. Herhangi bir görsele tıklayarak büyütebilirsiniz."
-        tight
-      />
+      <ProseBlock body={intro?.body || F_INTRO.body} tight />
 
       <section className="section section--tight">
         <div className="container">
-          <Gallery images={GALERI_IMAGES} />
+          <Gallery images={images} />
         </div>
       </section>
     </>

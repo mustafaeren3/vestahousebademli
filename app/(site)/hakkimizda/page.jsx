@@ -6,11 +6,16 @@ import Reveal from "@/components/Reveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
-import { getPageSection } from "@/lib/pages/queries";
-import { getInteriorPage } from "@/lib/pages/staticPages";
+import { getPageSection, getPageSections } from "@/lib/pages/queries";
+import { getInteriorPage, getPageBodySection } from "@/lib/pages/staticPages";
 import styles from "./page.module.css";
 
-const FALLBACK = getInteriorPage("hakkimizda").fallback;
+const PAGE_KEY = "hakkimizda";
+const FALLBACK = getInteriorPage(PAGE_KEY).fallback;
+const F_INTRO = getPageBodySection(PAGE_KEY, "intro").fallback;
+const F_YENIDEN = getPageBodySection(PAGE_KEY, "feature_yeniden_dogus").fallback;
+const F_KARAKTER = getPageBodySection(PAGE_KEY, "feature_karakter").fallback;
+const F_CLOSING = getPageBodySection(PAGE_KEY, "closing").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("hakkimizda");
@@ -25,7 +30,14 @@ export async function generateMetadata() {
 }
 
 export default async function HakkimizdaPage() {
-  const hero = await getPageSection("hakkimizda", "hero");
+  const [hero, sections] = await Promise.all([
+    getPageSection(PAGE_KEY, "hero"),
+    getPageSections(PAGE_KEY),
+  ]);
+  const intro = sections.intro;
+  const yenidenDogus = sections.feature_yeniden_dogus;
+  const karakter = sections.feature_karakter;
+  const closing = sections.closing;
 
   return (
     <>
@@ -42,26 +54,26 @@ export default async function HakkimizdaPage() {
       <Breadcrumbs items={[{ label: "Hakkımızda", href: "/hakkimizda" }]} />
 
       <ProseBlock
-        lead="Bu ev yıkılıp yeniden yapılmadı; olduğu gibi korunarak onarıldı."
-        body="Bademli'nin köy içinde, dar bir sokakta duran bu taş ev, aslına en az müdahaleyle bugünkü hâline getirildi. Taş duvarlar sıvanmadı, yalnızca temizlendi. Ahşap kapılar değiştirilmedi, yalnızca onarıldı."
+        lead={intro?.subtitle || F_INTRO.subtitle}
+        body={intro?.body || F_INTRO.body}
       />
 
       <FeatureSplit
-        eyebrow="Yeniden Doğuş"
-        title="Aslına Sadık Kalarak"
-        text="Yeni eklenen aydınlatma, mobilya ve tekstil, evin genel görünümüyle uyumlu seçildi. Amaç, evin özgün hâlini korumaktı."
-        image="/images/avlu-hasir-koltuk.jpg"
-        imageAlt="Vesta House Bademli'nin zeytin ağacı gölgesindeki avlusu"
+        eyebrow={yenidenDogus?.eyebrow || F_YENIDEN.eyebrow}
+        title={yenidenDogus?.title || F_YENIDEN.title}
+        text={yenidenDogus?.body || F_YENIDEN.body}
+        image={yenidenDogus?.image_path || F_YENIDEN.image_path}
+        imageAlt={yenidenDogus?.image_alt || F_YENIDEN.image_alt}
       />
 
       <FeatureSplit
-        eyebrow="Evin Karakteri"
-        title="Taş, ahşap ve sadelik"
-        text="Taş duvarlar, ahşap kapılar ve sade bir avlu. Vesta House Bademli, küçük ölçekli ve gösterişsiz bir yapıdır."
-        image="/images/oda-kilim-sandalye.jpg"
-        imageAlt="Vesta House Bademli'de kilim ve ahşap sandalyelerin bulunduğu bir oda köşesi"
-        reverse
-        tone="dark"
+        eyebrow={karakter?.eyebrow || F_KARAKTER.eyebrow}
+        title={karakter?.title || F_KARAKTER.title}
+        text={karakter?.body || F_KARAKTER.body}
+        image={karakter?.image_path || F_KARAKTER.image_path}
+        imageAlt={karakter?.image_alt || F_KARAKTER.image_alt}
+        reverse={karakter ? karakter.reverse : F_KARAKTER.reverse}
+        tone={karakter?.tone || F_KARAKTER.tone}
       />
 
       <section className="section">
@@ -91,9 +103,9 @@ export default async function HakkimizdaPage() {
       </section>
 
       <ProseBlock
-        eyebrow="Bugün"
-        lead="Vesta House Bademli, bugün misafirlerini bu taş evde ağırlıyor."
-        body="Ev sahibi değişti, evin karakteri aynı kaldı. Her konuk, kısa bir süre için de olsa bu evin bir parçası oluyor."
+        eyebrow={closing?.eyebrow || F_CLOSING.eyebrow}
+        lead={closing?.subtitle || F_CLOSING.subtitle}
+        body={closing?.body || F_CLOSING.body}
       />
     </>
   );

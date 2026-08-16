@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import RoomGallery from "@/components/RoomGallery";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings/queries";
 import { getRooms, getRoomBySlug, getRoomGallery, getRoomCover } from "@/lib/rooms/queries";
 import { seoImageUrl } from "@/lib/seo/imageUrl";
 import { withBrandSuffix } from "@/lib/seo/suggest";
@@ -49,7 +50,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function RoomDetailPage({ params }) {
-  const room = await getRoomBySlug(params.slug);
+  const [room, settings] = await Promise.all([getRoomBySlug(params.slug), getSiteSettings()]);
   if (!room) notFound();
 
   const gallery = getRoomGallery(room);
@@ -118,7 +119,7 @@ export default async function RoomDetailPage({ params }) {
 
           <Reveal delay={4} className={styles.ctaRow}>
             <a
-              href={siteConfig.contact.whatsapp}
+              href={settings.whatsapp}
               target="_blank"
               rel="noreferrer noopener"
               className="btn btn--primary"

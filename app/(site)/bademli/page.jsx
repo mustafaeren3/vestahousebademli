@@ -4,13 +4,17 @@ import ProseBlock from "@/components/ProseBlock";
 import FeatureSplit from "@/components/FeatureSplit";
 import Reveal from "@/components/Reveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { siteConfig } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings/queries";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
-import { getPageSection } from "@/lib/pages/queries";
-import { getInteriorPage } from "@/lib/pages/staticPages";
+import { getPageSection, getPageSections } from "@/lib/pages/queries";
+import { getInteriorPage, getPageBodySection } from "@/lib/pages/staticPages";
 
-const FALLBACK = getInteriorPage("bademli").fallback;
+const PAGE_KEY = "bademli";
+const FALLBACK = getInteriorPage(PAGE_KEY).fallback;
+const F_INTRO = getPageBodySection(PAGE_KEY, "intro").fallback;
+const F_ZEYTIN = getPageBodySection(PAGE_KEY, "feature_zeytin").fallback;
+const F_KONUM = getPageBodySection(PAGE_KEY, "feature_konum").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("bademli");
@@ -25,7 +29,14 @@ export async function generateMetadata() {
 }
 
 export default async function BademliPage() {
-  const hero = await getPageSection("bademli", "hero");
+  const [settings, hero, sections] = await Promise.all([
+    getSiteSettings(),
+    getPageSection(PAGE_KEY, "hero"),
+    getPageSections(PAGE_KEY),
+  ]);
+  const intro = sections.intro;
+  const zeytin = sections.feature_zeytin;
+  const konum = sections.feature_konum;
 
   return (
     <>
@@ -42,26 +53,26 @@ export default async function BademliPage() {
       <Breadcrumbs items={[{ label: "Bademli", href: "/bademli" }]} />
 
       <ProseBlock
-        lead="Bademli, kalabalık turizm rotalarının dışında kalan sakin bir köydür."
-        body="Zeytinlikleri, dar taş sokakları ve komşuluk kültürüyle bilinir. Vesta House, köyün bu dokusuna sadık kalarak var oldu."
+        lead={intro?.subtitle || F_INTRO.subtitle}
+        body={intro?.body || F_INTRO.body}
       />
 
       <FeatureSplit
-        eyebrow="Zeytin ve Toprak"
-        title="Bir zeytin köyünün ritmi"
-        text="Bademli'nin ekonomisi ve günlük hayatı, yüzyıllardır zeytin üzerine kurulu. Köyün çevresini saran zeytinlikler, hem manzaranın hem sofranın değişmeyen unsuru. Hasat mevsiminde köy, kendi sakin temposunda hareketlenir."
-        image="/images/avlu-hasir-koltuk.jpg"
-        imageAlt="Vesta House Bademli'nin zeytin ağacı gölgesindeki avlusu"
+        eyebrow={zeytin?.eyebrow || F_ZEYTIN.eyebrow}
+        title={zeytin?.title || F_ZEYTIN.title}
+        text={zeytin?.body || F_ZEYTIN.body}
+        image={zeytin?.image_path || F_ZEYTIN.image_path}
+        imageAlt={zeytin?.image_alt || F_ZEYTIN.image_alt}
       />
 
       <FeatureSplit
-        eyebrow="Konum"
-        title="Dikili ve çevresi"
-        text="Bademli, İzmir'in Dikili ilçesine bağlıdır. Bölge; antik Pergamon kentiyle bilinen Bergama'ya ve komşu sahil kasabası Ayvalık'a yakınlığıyla da tanınır — sakin bir üsten, Ege'nin tarihini ve kıyısını keşfetmek isteyenler için uygun bir konum sunar."
-        image="/images/oyma-kapi-detay.jpg"
-        imageAlt="Vesta House Bademli'nin oyma ahşap giriş kapısı"
-        reverse
-        tone="dark"
+        eyebrow={konum?.eyebrow || F_KONUM.eyebrow}
+        title={konum?.title || F_KONUM.title}
+        text={konum?.body || F_KONUM.body}
+        image={konum?.image_path || F_KONUM.image_path}
+        imageAlt={konum?.image_alt || F_KONUM.image_alt}
+        reverse={konum ? konum.reverse : F_KONUM.reverse}
+        tone={konum?.tone || F_KONUM.tone}
       />
 
       <section className="section">
@@ -69,10 +80,10 @@ export default async function BademliPage() {
           <Reveal>
             <span className="eyebrow">Adres</span>
             <h2 className="heading-lg" style={{ marginTop: 18 }}>
-              {siteConfig.address.line1}
+              {settings.address_line1}
             </h2>
             <p className="body-lg" style={{ marginTop: 10 }}>
-              {siteConfig.address.district}
+              {settings.address_district}
             </p>
           </Reveal>
           <Reveal delay={1}>

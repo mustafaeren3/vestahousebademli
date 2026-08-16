@@ -5,11 +5,14 @@ import Reveal from "@/components/Reveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
-import { getPageSection } from "@/lib/pages/queries";
-import { getInteriorPage } from "@/lib/pages/staticPages";
+import { getPageSection, getPageSections, getPageListItems } from "@/lib/pages/queries";
+import { getInteriorPage, getPageBodySection } from "@/lib/pages/staticPages";
 import styles from "./page.module.css";
 
-const FALLBACK = getInteriorPage("kahvalti").fallback;
+const PAGE_KEY = "kahvalti";
+const FALLBACK = getInteriorPage(PAGE_KEY).fallback;
+const F_INTRO = getPageBodySection(PAGE_KEY, "intro").fallback;
+const F_PRICING = getPageBodySection(PAGE_KEY, "pricing_head").fallback;
 
 export async function generateMetadata() {
   const seoRow = await getSeoPage("kahvalti");
@@ -23,7 +26,11 @@ export async function generateMetadata() {
   });
 }
 
-const inclusions = [
+// Bu 4 dizi, page_list_items tablosunda ilgili group_key için hiç satır
+// yoksa (sorgu hatası ya da migration henüz uygulanmadıysa) kullanılan
+// yedek içerik -- admin panelinden "Kahvaltı > Fiyat Listesi" sekmesinde
+// düzenlenen asıl veri page_list_items'tan gelir.
+const FALLBACK_INCLUSIONS = [
   {
     name: "Peynir Tabağı",
     note: "Beyaz peynir, Bergama peyniri, çeçil peynir",
@@ -49,19 +56,19 @@ const inclusions = [
   },
 ];
 
-const extras = [
+const FALLBACK_EXTRAS = [
   { name: "Menemen", price: "300 ₺" },
   { name: "Sucuklu Yumurta", price: "250 ₺" },
 ];
 
-const sicakIcecekler = [
+const FALLBACK_SICAK = [
   { name: "Espresso", price: "200 ₺" },
   { name: "Americano", price: "250 ₺" },
   { name: "Türk Kahvesi", price: "150 ₺" },
   { name: "Çay", price: "70 ₺" },
 ];
 
-const sogukIcecekler = [
+const FALLBACK_SOGUK = [
   { name: "Coca-Cola", price: "200 ₺" },
   { name: "Fanta", price: "200 ₺" },
   { name: "Sprite", price: "200 ₺" },
@@ -73,7 +80,26 @@ const sogukIcecekler = [
 ];
 
 export default async function KahvaltiPage() {
-  const hero = await getPageSection("kahvalti", "hero");
+  const [hero, sections, listItems] = await Promise.all([
+    getPageSection(PAGE_KEY, "hero"),
+    getPageSections(PAGE_KEY),
+    getPageListItems(PAGE_KEY),
+  ]);
+  const intro = sections.intro;
+  const pricing = sections.pricing_head;
+
+  const inclusions = listItems.inclusions?.length
+    ? listItems.inclusions.map((i) => ({ name: i.name, note: i.detail }))
+    : FALLBACK_INCLUSIONS;
+  const extras = listItems.extras?.length
+    ? listItems.extras.map((i) => ({ name: i.name, price: i.detail }))
+    : FALLBACK_EXTRAS;
+  const sicakIcecekler = listItems.sicak_icecekler?.length
+    ? listItems.sicak_icecekler.map((i) => ({ name: i.name, price: i.detail }))
+    : FALLBACK_SICAK;
+  const sogukIcecekler = listItems.soguk_icecekler?.length
+    ? listItems.soguk_icecekler.map((i) => ({ name: i.name, price: i.detail }))
+    : FALLBACK_SOGUK;
 
   return (
     <>
@@ -90,16 +116,16 @@ export default async function KahvaltiPage() {
       <Breadcrumbs items={[{ label: "Kahvaltı", href: "/kahvalti" }]} />
 
       <ProseBlock
-        lead="Sabahlar, avluda serpme bir sofrayla başlar."
-        body="Kahvaltı en az iki kişilik hazırlanır. İçerik mevsime göre değişebilir."
+        lead={intro?.subtitle || F_INTRO.subtitle}
+        body={intro?.body || F_INTRO.body}
       />
 
       <section className="section section--tight">
         <div className="container">
           <Reveal>
-            <span className="eyebrow">Sofra</span>
+            <span className="eyebrow">{pricing?.eyebrow || F_PRICING.eyebrow}</span>
             <h2 className="heading-lg" style={{ marginTop: 18, marginBottom: 8 }}>
-              Kişi Başı 750 ₺
+              {pricing?.title || F_PRICING.title}
             </h2>
           </Reveal>
 
@@ -112,10 +138,7 @@ export default async function KahvaltiPage() {
             ))}
           </div>
 
-          <p className={styles.footnote}>
-            Serpme köy kahvaltısı en az iki kişilik servis edilir. İçerik mevsime göre
-            değişiklik gösterebilir.
-          </p>
+          <p className={styles.footnote}>{pricing?.body || F_PRICING.body}</p>
         </div>
       </section>
 

@@ -1,0 +1,88 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.item {
+  border: 1px solid var(--color-line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.thumbWrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--color-cream-deep);
+}
+
+.thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.dragHandle {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  cursor: grab;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.9rem;
+  touch-action: none;
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+}
+
+.itemBody {
+  padding: 8px;
+}
+
+.itemBody input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  font-size: 0.78rem;
+}
+
+.uploadCard {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--color-line);
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--color-ink-soft);
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.uploadPreviewImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.uploadPreviewLabel {
+  position: relative;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 4px 10px;
+  border-radius: 4px;
+}

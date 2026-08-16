@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import { getPageSection } from "@/lib/pages/queries";
+import { getPageSection, getPageSections, getPageGalleryImages, getPageListItems } from "@/lib/pages/queries";
 import { getInteriorPage } from "@/lib/pages/staticPages";
 import { getMediaLibrary } from "@/lib/media/queries";
-import PageHeroEditor from "@/components/admin/pages/PageHeroEditor";
+import PageManager from "@/components/admin/pages/PageManager";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Sayfa Düzenle" };
@@ -11,9 +11,12 @@ export default async function AdminPageEditPage({ params }) {
   const page = getInteriorPage(params.pageKey);
   if (!page) notFound();
 
-  const [hero, mediaLibrary] = await Promise.all([
+  const [hero, sections, mediaLibrary, galleryImages, listItems] = await Promise.all([
     getPageSection(page.pageKey, "hero"),
+    getPageSections(page.pageKey),
     getMediaLibrary().catch(() => []),
+    page.gallery ? getPageGalleryImages(page.pageKey) : Promise.resolve([]),
+    page.listItemGroups ? getPageListItems(page.pageKey) : Promise.resolve({}),
   ]);
 
   return (
@@ -21,7 +24,14 @@ export default async function AdminPageEditPage({ params }) {
       <h2 style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem", marginBottom: 20 }}>
         Sayfalar — {page.label}
       </h2>
-      <PageHeroEditor page={page} hero={hero} mediaLibrary={mediaLibrary} />
+      <PageManager
+        page={page}
+        hero={hero}
+        sections={sections}
+        mediaLibrary={mediaLibrary}
+        galleryImages={galleryImages}
+        listItems={listItems}
+      />
     </div>
   );
 }

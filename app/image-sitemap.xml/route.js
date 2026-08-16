@@ -1,6 +1,7 @@
 import { getRooms } from "@/lib/rooms/queries";
 import { getAllPosts } from "@/lib/blog";
 import { getHomeSections, getHomeGalleryImages } from "@/lib/home/queries";
+import { getPageGalleryImages } from "@/lib/pages/queries";
 import { GALERI_IMAGES } from "@/lib/galeriImages";
 import { seoImageUrl } from "@/lib/seo/imageUrl";
 import { siteConfig } from "@/lib/site";
@@ -50,11 +51,12 @@ function urlBlock(loc, images) {
 }
 
 export async function GET() {
-  const [rooms, posts, homeSections, homeGalleryImages] = await Promise.all([
+  const [rooms, posts, homeSections, homeGalleryImages, galeriImages] = await Promise.all([
     getRooms(),
     getAllPosts(),
     getHomeSections().catch(() => null),
     getHomeGalleryImages().catch(() => []),
+    getPageGalleryImages("galeri"),
   ]);
 
   const blocks = [];
@@ -99,13 +101,14 @@ export async function GET() {
     blocks.push(urlBlock(`${siteConfig.url}/odalar/${room.slug}`, images));
   }
 
-  // /galeri showcase images.
-  blocks.push(
-    urlBlock(
-      `${siteConfig.url}/galeri`,
-      GALERI_IMAGES.map((img) => ({ url: seoImageUrl(img.src), caption: img.alt }))
-    )
-  );
+  // /galeri showcase images -- admin-managed (page_gallery_images), falls
+  // back to the original hardcoded list if that table is empty/unreachable
+  // (same fallback rule as app/(site)/galeri/page.jsx).
+  const galeriSitemapImages =
+    galeriImages.length > 0
+      ? galeriImages.map((img) => ({ url: seoImageUrl(img.image_path), caption: img.alt }))
+      : GALERI_IMAGES.map((img) => ({ url: seoImageUrl(img.src), caption: img.alt }));
+  blocks.push(urlBlock(`${siteConfig.url}/galeri`, galeriSitemapImages));
 
   // Published blog posts: cover image only (not every inline content
   // image -- those aren't tracked as structured data anywhere yet).
