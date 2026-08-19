@@ -100,7 +100,8 @@ export default async function RootLayout({ children }) {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: settings.name,
-    url: siteConfig.url,
+    alternateName: siteConfig.shortName,
+    url: `${siteConfig.url}/`,
   };
 
   return (
