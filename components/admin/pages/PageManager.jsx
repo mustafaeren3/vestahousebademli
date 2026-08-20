@@ -5,13 +5,14 @@ import PageHeroEditor from "./PageHeroEditor";
 import PageSectionForm from "./PageSectionForm";
 import PageGalleryEditor from "./PageGalleryEditor";
 import PageListItemsEditor from "./PageListItemsEditor";
+import PageActiveToggle from "./PageActiveToggle";
 
 // Faz 7: tabbed editor for one interior page -- Hero (Faz 6, unchanged)
 // plus every body section declared in that page's staticPages.js config,
 // plus a Galeri tab (pages with `gallery: true`) and a Fiyat Listesi tab
 // (pages with `listItemGroups`). Mirrors
 // app/admin/(dashboard)/homepage/HomeManager.jsx's tab-switching shape.
-export default function PageManager({ page, hero, sections, mediaLibrary, galleryImages, listItems }) {
+export default function PageManager({ page, hero, sections, mediaLibrary, galleryImages, listItems, isActive }) {
   const tabs = [
     { key: "hero", label: "Üst Alan (Hero)" },
     ...page.sections.map((s) => ({ key: s.key, label: s.label })),
@@ -23,6 +24,8 @@ export default function PageManager({ page, hero, sections, mediaLibrary, galler
 
   return (
     <div>
+      {page.pageActiveToggle && <PageActiveToggle pageKey={page.pageKey} isActive={isActive} />}
+
       <div className="admin-tabs">
         {tabs.map((tab) => (
           <button

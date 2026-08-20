@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { siteConfig } from "@/lib/site";
 import { getSiteSettings } from "@/lib/settings/queries";
+import { getPageIsActive } from "@/lib/pages/queries";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -75,7 +76,17 @@ export async function generateMetadata() {
 }
 
 export default async function RootLayout({ children }) {
-  const settings = await getSiteSettings();
+  const [settings, kahvaltiActive] = await Promise.all([
+    getSiteSettings(),
+    getPageIsActive("kahvalti"),
+  ]);
+  // Nav/mobil menü/footer üçü de aynı statik siteConfig.nav dizisini
+  // paylaşıyor (bkz. lib/site.js) -- Kahvaltı pasifken tek bir yerde
+  // filtrelenip Navbar/Footer'a prop olarak geçiriliyor, böylece üçü de
+  // aynı anda güncelleniyor.
+  const navItems = kahvaltiActive
+    ? siteConfig.nav
+    : siteConfig.nav.filter((item) => item.href !== "/kahvalti");
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -119,9 +130,9 @@ export default async function RootLayout({ children }) {
           Ana içeriğe geç
         </a>
         <MotionConfig reducedMotion="user">
-          <Navbar settings={settings} />
+          <Navbar settings={settings} navItems={navItems} />
           <main id="main-content">{children}</main>
-          <Footer settings={settings} />
+          <Footer settings={settings} navItems={navItems} />
         </MotionConfig>
       </body>
     </html>

@@ -1,5 +1,11 @@
 import { notFound } from "next/navigation";
-import { getPageSection, getPageSections, getPageGalleryImages, getPageListItems } from "@/lib/pages/queries";
+import {
+  getPageSection,
+  getPageSections,
+  getPageGalleryImages,
+  getPageListItems,
+  getPageIsActive,
+} from "@/lib/pages/queries";
 import { getInteriorPage } from "@/lib/pages/staticPages";
 import { getMediaLibrary } from "@/lib/media/queries";
 import PageManager from "@/components/admin/pages/PageManager";
@@ -11,12 +17,13 @@ export default async function AdminPageEditPage({ params }) {
   const page = getInteriorPage(params.pageKey);
   if (!page) notFound();
 
-  const [hero, sections, mediaLibrary, galleryImages, listItems] = await Promise.all([
+  const [hero, sections, mediaLibrary, galleryImages, listItems, isActive] = await Promise.all([
     getPageSection(page.pageKey, "hero"),
     getPageSections(page.pageKey),
     getMediaLibrary().catch(() => []),
     page.gallery ? getPageGalleryImages(page.pageKey) : Promise.resolve([]),
     page.listItemGroups ? getPageListItems(page.pageKey) : Promise.resolve({}),
+    page.pageActiveToggle ? getPageIsActive(page.pageKey) : Promise.resolve(true),
   ]);
 
   return (
@@ -31,6 +38,7 @@ export default async function AdminPageEditPage({ params }) {
         mediaLibrary={mediaLibrary}
         galleryImages={galleryImages}
         listItems={listItems}
+        isActive={isActive}
       />
     </div>
   );

@@ -9,6 +9,7 @@ import { getHomeSections, getHomePillars, getHomeGalleryImages } from "@/lib/hom
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
 import { getSiteSettings } from "@/lib/settings/queries";
+import { getPageIsActive } from "@/lib/pages/queries";
 import { siteConfig } from "@/lib/site";
 
 export async function generateMetadata() {
@@ -26,11 +27,24 @@ export async function generateMetadata() {
 }
 
 export default async function HomePage() {
-  const [sections, pillars, galleryImages] = await Promise.all([
+  const [sections, pillars, galleryImages, kahvaltiActive] = await Promise.all([
     getHomeSections(),
     getHomePillars(),
     getHomeGalleryImages(),
+    getPageIsActive("kahvalti"),
   ]);
+
+  // Kahvaltı pasifken, hangi home_sections satırında olursa olsun /kahvalti'ye
+  // giden herhangi bir CTA butonunu gizle -- sadece "breakfast" bölümünün
+  // kendi CTA'sı değil, bir admin ileride başka bir bölümün (rooms,
+  // meyhanesi, closing_cta, ...) CTA'sını da /kahvalti'ye yönlendirebilir.
+  if (!kahvaltiActive) {
+    for (const key of Object.keys(sections)) {
+      if (sections[key]?.cta_href === "/kahvalti") {
+        sections[key] = { ...sections[key], cta_active: false };
+      }
+    }
+  }
 
   return (
     <>
@@ -56,7 +70,7 @@ export default async function HomePage() {
           tone={sections.rooms.tone}
         />
       )}
-      {sections.breakfast.enabled && (
+      {sections.breakfast.enabled && kahvaltiActive && (
         <FeatureSplit
           eyebrow={sections.breakfast.eyebrow}
           title={sections.breakfast.title}

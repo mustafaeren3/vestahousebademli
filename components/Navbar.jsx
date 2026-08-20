@@ -10,7 +10,7 @@ import styles from "./Navbar.module.css";
 
 const EASE = [0.22, 1, 0.36, 1];
 
-export default function Navbar({ settings }) {
+export default function Navbar({ settings, navItems = siteConfig.nav }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -49,7 +49,7 @@ export default function Navbar({ settings }) {
         </Link>
 
         <nav className={styles.links} aria-label="Ana menü">
-          {siteConfig.nav.map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -87,7 +87,7 @@ export default function Navbar({ settings }) {
               transition={{ duration: 0.6, ease: EASE }}
             />
             <nav className={styles.mobileNav} aria-label="Mobil menü">
-              {siteConfig.nav.map((item, i) => (
+              {navItems.map((item, i) => (
                 <motion.div
                   key={item.href}
                   initial={{ opacity: 0, y: 24 }}

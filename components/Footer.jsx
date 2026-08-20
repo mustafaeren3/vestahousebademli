@@ -3,7 +3,7 @@ import Image from "next/image";
 import { siteConfig } from "@/lib/site";
 import styles from "./Footer.module.css";
 
-export default function Footer({ settings }) {
+export default function Footer({ settings, navItems = siteConfig.nav }) {
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
@@ -20,7 +20,7 @@ export default function Footer({ settings }) {
 
         <nav className={styles.navCol} aria-label="Alt menü">
           <span className={styles.heading}>Sayfalar</span>
-          {siteConfig.nav.map((item) => (
+          {navItems.map((item) => (
             <Link key={item.href} href={item.href} className={styles.link}>
               {item.label}
             </Link>

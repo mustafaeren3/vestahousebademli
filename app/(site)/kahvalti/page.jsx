@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import PageHero from "@/components/PageHero";
 import ProseBlock from "@/components/ProseBlock";
 import MenuSection from "@/components/MenuSection";
@@ -5,7 +6,7 @@ import Reveal from "@/components/Reveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { getSeoPage } from "@/lib/seo/queries";
 import { buildPageMetadata } from "@/lib/seo/buildMetadata";
-import { getPageSection, getPageSections, getPageListItems } from "@/lib/pages/queries";
+import { getPageSection, getPageSections, getPageListItems, getPageIsActive } from "@/lib/pages/queries";
 import { getInteriorPage, getPageBodySection } from "@/lib/pages/staticPages";
 import styles from "./page.module.css";
 
@@ -15,6 +16,14 @@ const F_INTRO = getPageBodySection(PAGE_KEY, "intro").fallback;
 const F_PRICING = getPageBodySection(PAGE_KEY, "pricing_head").fallback;
 
 export async function generateMetadata() {
+  // Sayfa pasifken generateMetadata içinde de notFound() çağırmak gerekiyor
+  // -- aksi halde Next.js önce bu fonksiyonun döndürdüğü title/OG/robots
+  // etiketlerini <head>'e yazar, sonra component notFound() çağırınca gövde
+  // 404 olur; sonuç, "başlık Kahvaltı ama gövde 404" gibi çelişkili bir
+  // sayfa olurdu.
+  const isActive = await getPageIsActive(PAGE_KEY);
+  if (!isActive) notFound();
+
   const seoRow = await getSeoPage("kahvalti");
   return buildPageMetadata({
     seoRow,
@@ -80,6 +89,9 @@ const FALLBACK_SOGUK = [
 ];
 
 export default async function KahvaltiPage() {
+  const isActive = await getPageIsActive(PAGE_KEY);
+  if (!isActive) notFound();
+
   const [hero, sections, listItems] = await Promise.all([
     getPageSection(PAGE_KEY, "hero"),
     getPageSections(PAGE_KEY),

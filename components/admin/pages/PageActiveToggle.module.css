@@ -1,0 +1,23 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 24px;
+  margin-bottom: 20px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hint {
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+}
+
+.error {
+  font-size: 0.78rem;
+  color: var(--color-danger, #b3261e);
+}

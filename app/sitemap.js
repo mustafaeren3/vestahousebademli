@@ -1,6 +1,7 @@
 import { getAllPosts, getAllCategories, getAllTags } from "@/lib/blog";
 import { getRooms } from "@/lib/rooms/queries";
 import { getAllSeoPages } from "@/lib/seo/queries";
+import { getPageIsActive } from "@/lib/pages/queries";
 import { siteConfig } from "@/lib/site";
 
 // Static pages that don't have their own tracked "last changed" timestamp
@@ -18,12 +19,13 @@ const STATIC_ROUTES = [
 ];
 
 export default async function sitemap() {
-  const [allPosts, categories, tags, rooms, seoPages] = await Promise.all([
+  const [allPosts, categories, tags, rooms, seoPages, kahvaltiActive] = await Promise.all([
     getAllPosts(),
     getAllCategories(),
     getAllTags(),
     getRooms(),
     getAllSeoPages(),
+    getPageIsActive("kahvalti"),
   ]);
 
   const seoByRouteKey = {};
@@ -59,15 +61,17 @@ export default async function sitemap() {
     priority: 0.7,
   };
 
-  const staticEntries = STATIC_ROUTES.map(({ routeKey, path }) => {
-    const row = seoByRouteKey[routeKey];
-    return {
-      url: `${siteConfig.url}${path}`,
-      lastModified: row?.updated_at ? new Date(row.updated_at) : undefined,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    };
-  });
+  const staticEntries = STATIC_ROUTES.filter(({ routeKey }) => routeKey !== "kahvalti" || kahvaltiActive).map(
+    ({ routeKey, path }) => {
+      const row = seoByRouteKey[routeKey];
+      return {
+        url: `${siteConfig.url}${path}`,
+        lastModified: row?.updated_at ? new Date(row.updated_at) : undefined,
+        changeFrequency: "monthly",
+        priority: 0.7,
+      };
+    }
+  );
 
   const postEntries = allPosts.map((post) => ({
     url: `${siteConfig.url}/blog/${post.slug}`,
